@@ -1,5 +1,4 @@
 //
-//  ContentView.swift
 //  Cookbook
 //
 //  Created by Alex on 2022-07-26.
@@ -9,9 +8,9 @@ import SwiftUI
 
 struct LoginView: View {
     var firebaseViewModel: FirebaseViewModel
-    @State private var email: String = ""
-    @State private var passoword: String = ""
-    var message: String = ""
+    @ObservedObject var viewRouter: ViewRouter
+    @State private var email: String = "test@t.com"
+    @State private var passoword: String = "test12"
 
     
     var body: some View {
@@ -26,7 +25,7 @@ struct LoginView: View {
             ).border(.black)
             Button(
                 "Login",
-                action: {firebaseViewModel.logIn(email, passoword)}//firebaseViewModel.logIn(email, passoword)
+                action: {firebaseViewModel.logIn(email, passoword, viewRouter)}
             )
         }
         .padding(.horizontal)
@@ -76,6 +75,7 @@ struct LoginView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let firebase = FirebaseViewModel()
-        LoginView(firebaseViewModel: firebase)
+        let viewRouter = ViewRouter()
+        LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
     }
 }

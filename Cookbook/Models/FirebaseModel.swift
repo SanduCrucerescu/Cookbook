@@ -11,8 +11,7 @@ import FirebaseAuth
 class FirebaseModel {
     private(set) var isLogedIn: Bool?
     
-    
-    func signIn(_ email: String, _ passwordProvided: String) {
+    func signIn(_ email: String, _ passwordProvided: String, _ viewRouter: ViewRouter) {
         Auth.auth().signIn(withEmail: email, password: passwordProvided) { result, error in
             guard result != nil, error == nil else {
                 self.isLogedIn = false
@@ -21,7 +20,7 @@ class FirebaseModel {
             }
                 self.isLogedIn = true
                 print("true")
-            
+                viewRouter.page = .MainPage
         }
     }
 }

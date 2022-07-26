@@ -10,13 +10,13 @@ import Firebase
 
 @main
 struct CookbookApp: App {
+    @ObservedObject var viewRouter = ViewRouter()
     init() {
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
-            let firebase = FirebaseViewModel()
-            LoginView(firebaseViewModel: firebase)
+            MotherView(viewRouter: viewRouter)
         }
     }
 }

@@ -15,8 +15,8 @@ class FirebaseViewModel {
         FirebaseModel()
     }
     
-    func logIn(_ email: String, _ password: String) {
-        firebaseModel.signIn(email, password)
+    func logIn(_ email: String, _ password: String,  _ viewRouter: ViewRouter) {
+        firebaseModel.signIn(email, password, viewRouter)
     }
     
 }
