@@ -9,33 +9,39 @@
 /* Begin PBXBuildFile section */
 		FA1E01BB28905F8000EFCCF1 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01BA28905F8000EFCCF1 /* FirebaseModel.swift */; };
 		FA1E01BD2890604100EFCCF1 /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01BC2890604100EFCCF1 /* FirebaseViewModel.swift */; };
-		FA1E01BF289070AD00EFCCF1 /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01BE289070AD00EFCCF1 /* MotherView.swift */; };
-		FA1E01C1289074F800EFCCF1 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C0289074F800EFCCF1 /* Helper.swift */; };
 		FA1E01C42890765A00EFCCF1 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C32890765A00EFCCF1 /* ViewRouter.swift */; };
 		FA1E01C6289077E000EFCCF1 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C5289077E000EFCCF1 /* MainPage.swift */; };
+		FA1E01CA28907C2200EFCCF1 /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C728907C2100EFCCF1 /* MotherView.swift */; };
+		FA1E01CB28907C2200EFCCF1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C828907C2100EFCCF1 /* LoginView.swift */; };
+		FA1E01CC28907C2200EFCCF1 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E01C928907C2200EFCCF1 /* Helper.swift */; };
 		FA5CAED328900EF600757760 /* CookbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CAED228900EF600757760 /* CookbookApp.swift */; };
-		FA5CAED528900EF600757760 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CAED428900EF600757760 /* LoginView.swift */; };
 		FA5CAED728900EF900757760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAED628900EF900757760 /* Assets.xcassets */; };
 		FA5CAEDA28900EF900757760 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAED928900EF900757760 /* Preview Assets.xcassets */; };
 		FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAEE02890299700757760 /* GoogleService-Info.plist */; };
 		FA5CAEE428902D5B00757760 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE328902D5B00757760 /* FirebaseAuth */; };
 		FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE528902D5B00757760 /* FirebaseFirestore */; };
+		FAC93C5F2890843A00F317FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C5E2890843A00F317FF /* TextField.swift */; };
+		FAC93C612890892700F317FF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C602890892700F317FF /* CustomButton.swift */; };
+		FAC93C632890988600F317FF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C622890988600F317FF /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FA1E01BA28905F8000EFCCF1 /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseModel.swift; path = Models/FirebaseModel.swift; sourceTree = "<group>"; };
 		FA1E01BC2890604100EFCCF1 /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseViewModel.swift; path = ViewModels/FirebaseViewModel.swift; sourceTree = "<group>"; };
-		FA1E01BE289070AD00EFCCF1 /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
-		FA1E01C0289074F800EFCCF1 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FA1E01C22890752F00EFCCF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA1E01C32890765A00EFCCF1 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewRouter.swift; path = Models/ViewRouter.swift; sourceTree = "<group>"; };
 		FA1E01C5289077E000EFCCF1 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainPage.swift; path = Views/MainPage.swift; sourceTree = "<group>"; };
+		FA1E01C728907C2100EFCCF1 /* MotherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotherView.swift; path = Views/MotherView.swift; sourceTree = "<group>"; };
+		FA1E01C828907C2100EFCCF1 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Views/LoginView.swift; sourceTree = "<group>"; };
+		FA1E01C928907C2200EFCCF1 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = Views/Helper.swift; sourceTree = "<group>"; };
 		FA5CAECF28900EF600757760 /* Cookbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5CAED228900EF600757760 /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
-		FA5CAED428900EF600757760 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA5CAED628900EF900757760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FAC93C5E2890843A00F317FF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = ViewModifiers/TextField.swift; sourceTree = "<group>"; };
+		FAC93C602890892700F317FF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = ViewModifiers/CustomButton.swift; sourceTree = "<group>"; };
+		FAC93C622890988600F317FF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,11 +77,14 @@
 		FA5CAED128900EF600757760 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
-				FA1E01BE289070AD00EFCCF1 /* MotherView.swift */,
+				FAC93C5E2890843A00F317FF /* TextField.swift */,
+				FAC93C602890892700F317FF /* CustomButton.swift */,
+				FAC93C622890988600F317FF /* Extensions.swift */,
+				FA1E01C928907C2200EFCCF1 /* Helper.swift */,
+				FA1E01C828907C2100EFCCF1 /* LoginView.swift */,
 				FA1E01C32890765A00EFCCF1 /* ViewRouter.swift */,
-				FA1E01C0289074F800EFCCF1 /* Helper.swift */,
 				FA5CAED228900EF600757760 /* CookbookApp.swift */,
-				FA5CAED428900EF600757760 /* LoginView.swift */,
+				FA1E01C728907C2100EFCCF1 /* MotherView.swift */,
 				FA1E01BA28905F8000EFCCF1 /* FirebaseModel.swift */,
 				FA1E01C5289077E000EFCCF1 /* MainPage.swift */,
 				FA1E01BC2890604100EFCCF1 /* FirebaseViewModel.swift */,
@@ -172,14 +181,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1E01CC28907C2200EFCCF1 /* Helper.swift in Sources */,
 				FA1E01BB28905F8000EFCCF1 /* FirebaseModel.swift in Sources */,
 				FA1E01C42890765A00EFCCF1 /* ViewRouter.swift in Sources */,
-				FA5CAED528900EF600757760 /* LoginView.swift in Sources */,
 				FA1E01C6289077E000EFCCF1 /* MainPage.swift in Sources */,
+				FAC93C612890892700F317FF /* CustomButton.swift in Sources */,
+				FA1E01CA28907C2200EFCCF1 /* MotherView.swift in Sources */,
 				FA5CAED328900EF600757760 /* CookbookApp.swift in Sources */,
+				FAC93C5F2890843A00F317FF /* TextField.swift in Sources */,
 				FA1E01BD2890604100EFCCF1 /* FirebaseViewModel.swift in Sources */,
-				FA1E01BF289070AD00EFCCF1 /* MotherView.swift in Sources */,
-				FA1E01C1289074F800EFCCF1 /* Helper.swift in Sources */,
+				FAC93C632890988600F317FF /* Extensions.swift in Sources */,
+				FA1E01CB28907C2200EFCCF1 /* LoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
