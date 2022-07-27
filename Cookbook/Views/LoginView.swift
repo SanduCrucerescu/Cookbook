@@ -26,16 +26,16 @@ struct LoginView: View {
     
     var body: some View {
         ZStack{
-            Text("Login")
+            Text("Sign In")
                 .font(.system(size: DrawingConstants.fontSize, weight: .regular, design: .default))
                 .padding(.bottom, DrawingConstants.upperTextPadding)
             CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
                 .padding(.all, DrawingConstants.paddingAll)
                 .padding(.vertical, DrawingConstants.paddingVerical)
-            BottomText()
+            BottomText(viewRouter: viewRouter)
                 .padding(.top, DrawingConstants.bottomTextPadding)
         }
-           // TODO: Adding background
+        .background(Image("LoginRegisterBackground").renderingMode(.original))
     }
     
     // MARK: - Center square
@@ -62,7 +62,7 @@ struct LoginView: View {
                     ).textFieldStyle(TextFieldDesign(image: "key"))
                     Button(
                         "Login",
-                        action: {firebaseViewModel.logIn(email, passoword, viewRouter)}
+                        action: {firebaseViewModel.signIn(email, passoword, viewRouter)}
                     )
                         .buttonStyle(CustomButton())
                 }
@@ -74,6 +74,8 @@ struct LoginView: View {
     // MARK: - Bottom Text
     
     struct BottomText: View {
+        @ObservedObject var viewRouter: ViewRouter
+        
         var body: some View {
             HStack{
                 Text("Don't have an account!")
@@ -83,12 +85,12 @@ struct LoginView: View {
                                 weight: .light,
                                 design: .default))
                     
-                Button("Sign Up", action: {})
+                Button(action: {viewRouter.page = .Register}) {Text("Register").underline()}
                         .font(
                             .system(
                                 size: DrawingConstants.bottomTextFont,
                                 weight: .semibold,
-                                design: .default)) // TODO: add underline text
+                                design: .default))
                         .foregroundColor(.black)
             }
         }

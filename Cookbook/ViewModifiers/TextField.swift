@@ -29,6 +29,7 @@ struct TextFieldDesign: TextFieldStyle {
                     .padding(.leading, DrawingConstants.imagePading)
                 configuration
                     .font(.system(size: DrawingConstants.fontSize, weight: .light, design: .default))
+                    .padding(.trailing, 5)
             }
         }
     }

@@ -14,9 +14,10 @@ struct MotherView: View {
         switch viewRouter.page {
             case .Login:
                 LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
-        
             case .MainPage:
                 MainPage()
+            case .Register:
+                Register()
         }
     }
 }

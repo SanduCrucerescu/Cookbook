@@ -23,6 +23,7 @@
 		FAC93C5F2890843A00F317FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C5E2890843A00F317FF /* TextField.swift */; };
 		FAC93C612890892700F317FF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C602890892700F317FF /* CustomButton.swift */; };
 		FAC93C632890988600F317FF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C622890988600F317FF /* Extensions.swift */; };
+		FAC93C6528915EEB00F317FF /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C6428915EEB00F317FF /* Register.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FAC93C5E2890843A00F317FF /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = ViewModifiers/TextField.swift; sourceTree = "<group>"; };
 		FAC93C602890892700F317FF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButton.swift; path = ViewModifiers/CustomButton.swift; sourceTree = "<group>"; };
 		FAC93C622890988600F317FF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FAC93C6428915EEB00F317FF /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Register.swift; path = Views/Register.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				FA1E01C32890765A00EFCCF1 /* ViewRouter.swift */,
 				FA5CAED228900EF600757760 /* CookbookApp.swift */,
 				FA1E01C728907C2100EFCCF1 /* MotherView.swift */,
+				FAC93C6428915EEB00F317FF /* Register.swift */,
 				FA1E01BA28905F8000EFCCF1 /* FirebaseModel.swift */,
 				FA1E01C5289077E000EFCCF1 /* MainPage.swift */,
 				FA1E01BC2890604100EFCCF1 /* FirebaseViewModel.swift */,
@@ -187,6 +190,7 @@
 				FA1E01C6289077E000EFCCF1 /* MainPage.swift in Sources */,
 				FAC93C612890892700F317FF /* CustomButton.swift in Sources */,
 				FA1E01CA28907C2200EFCCF1 /* MotherView.swift in Sources */,
+				FAC93C6528915EEB00F317FF /* Register.swift in Sources */,
 				FA5CAED328900EF600757760 /* CookbookApp.swift in Sources */,
 				FAC93C5F2890843A00F317FF /* TextField.swift in Sources */,
 				FA1E01BD2890604100EFCCF1 /* FirebaseViewModel.swift in Sources */,
