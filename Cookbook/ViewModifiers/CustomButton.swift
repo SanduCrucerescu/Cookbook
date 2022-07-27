@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabeled
     
-    private struct DrawingConstants{
+    private struct DrawingConstants {
         static let cornerRadius: CGFloat = 10
         static let frameHeight: CGFloat = 60
         static let padding: CGFloat = 60

@@ -11,7 +11,7 @@ struct Register: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var firebaseViewModel: FirebaseViewModel
     
-    private struct DrawingConstants{
+    private struct DrawingConstants {
         static let backButtonIconFrameWidth: CGFloat = 20
         static let backButtonIconFrameHeight: CGFloat = 30
         static let backButtonPaddingButtom: CGFloat = 700

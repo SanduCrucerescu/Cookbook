@@ -25,6 +25,8 @@
 		FAC93C8D2891EDC100F317FF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C822891EDC100F317FF /* Helper.swift */; };
 		FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */; };
 		FAC93C922891EF1200F317FF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C912891EF1200F317FF /* Extensions.swift */; };
+		FAC93C942891F38800F317FF /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C932891F38800F317FF /* MenuItems.swift */; };
+		FAC93C962891F3C600F317FF /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C952891F3C600F317FF /* SideMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		FAC93C822891EDC100F317FF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		FAC93C912891EF1200F317FF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FAC93C932891F38800F317FF /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
+		FAC93C952891F3C600F317FF /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				FAC93C7E2891EDC100F317FF /* MainPage.swift */,
+				FAC93C932891F38800F317FF /* MenuItems.swift */,
+				FAC93C952891F3C600F317FF /* SideMenu.swift */,
 				FAC93C7F2891EDC100F317FF /* LoginView.swift */,
 				FAC93C802891EDC100F317FF /* Register.swift */,
 				FAC93C812891EDC100F317FF /* MotherView.swift */,
@@ -231,9 +237,11 @@
 				FAC93C872891EDC100F317FF /* CustomButton.swift in Sources */,
 				FAC93C8A2891EDC100F317FF /* LoginView.swift in Sources */,
 				FAC93C862891EDC100F317FF /* ViewRouter.swift in Sources */,
+				FAC93C962891F3C600F317FF /* SideMenu.swift in Sources */,
 				FAC93C852891EDC100F317FF /* FirebaseModel.swift in Sources */,
 				FAC93C8C2891EDC100F317FF /* MotherView.swift in Sources */,
 				FAC93C882891EDC100F317FF /* TextField.swift in Sources */,
+				FAC93C942891F38800F317FF /* MenuItems.swift in Sources */,
 				FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,

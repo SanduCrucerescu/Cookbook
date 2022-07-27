@@ -53,8 +53,7 @@ class FirebaseViewModel: ObservableObject {
              self.isLogedIn = true
                 print("true")
                 viewRouter.page = .MainPage
-        }
-        
+        }        
     }
 
     
