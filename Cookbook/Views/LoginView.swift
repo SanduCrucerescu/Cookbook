@@ -27,7 +27,10 @@ struct LoginView: View {
     var body: some View {
         ZStack{
             Text("Sign In")
-                .font(.system(size: DrawingConstants.fontSize, weight: .regular, design: .default))
+                .font(.system(
+                    size: DrawingConstants.fontSize,
+                    weight: .regular,
+                    design: .default))
                 .padding(.bottom, DrawingConstants.upperTextPadding)
             CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
                 .padding(.all, DrawingConstants.paddingAll)
