@@ -14,6 +14,7 @@ struct CustomButton: ButtonStyle {
         static let cornerRadius: CGFloat = 10
         static let frameHeight: CGFloat = 60
         static let padding: CGFloat = 60
+        static let textSize: CGFloat = 20
     }
     
     
@@ -26,7 +27,7 @@ struct CustomButton: ButtonStyle {
             configuration
                 .label
                 .foregroundColor(.black)
-                .font(.system(size: 20, weight: .regular, design: .default))
+                .font(.system(size: DrawingConstants.textSize, weight: .regular, design: .default))
         }
     }
 }
