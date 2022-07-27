@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TextFieldDesign: TextFieldStyle {
     let image: String
+    var error: Bool
     
     private struct DrawingConstants {
         static let frameHeight: CGFloat = 50
@@ -16,6 +17,7 @@ struct TextFieldDesign: TextFieldStyle {
         static let fontSize: CGFloat = 20
         static let imagePading: CGFloat = 8
         static let cornerRadius: CGFloat = 10
+        static let textPadding: CGFloat = 5
     }
     
     func _body(configuration: TextField<Self._Label>) -> some View {
@@ -23,13 +25,13 @@ struct TextFieldDesign: TextFieldStyle {
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(.white)
                 .frame(height: DrawingConstants.frameHeight)
-                .shadow(radius: DrawingConstants.shadow)
+                .shadow(color: error ? .red : .gray, radius: DrawingConstants.shadow)
             HStack{
                 Image(systemName: image)
                     .padding(.leading, DrawingConstants.imagePading)
                 configuration
                     .font(.system(size: DrawingConstants.fontSize, weight: .light, design: .default))
-                    .padding(.trailing, 5)
+                    .padding(.trailing, DrawingConstants.textPadding)
             }
         }
     }

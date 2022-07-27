@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Register: View {
     @ObservedObject var viewRouter: ViewRouter
-    var firebaseViewModel: FirebaseViewModel
+    @ObservedObject var firebaseViewModel: FirebaseViewModel
     
     private struct DrawingConstants{
         static let backButtonIconFrameWidth: CGFloat = 20
@@ -69,35 +69,36 @@ struct Register: View {
     struct CenterRectangle: View{
         @State private var email: String = ""
         @State private var username: String = ""
-        @State private var password: String = ""
-        @State private var passwordConfirm: String = ""
-        var firebaseViewModel: FirebaseViewModel
+        @State private var password1: String = ""
+        @State private var password2: String = ""
+        @ObservedObject var firebaseViewModel: FirebaseViewModel
+        @State var va = false
         
         var body: some View {
             ZStack{
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
                     .fill(.white)
                     .shadow(radius: DrawingConstants.rectangleShadow)
-                VStack(spacing: DrawingConstants.VStackSpacing){
+                VStack(spacing: DrawingConstants.VStackSpacing) {
                     TextField(
                         "Email",
                         text: $email)
-                    .textFieldStyle(TextFieldDesign(image: "mail"))
+                    .textFieldStyle(TextFieldDesign(image: "mail", error: false))
                     TextField(
                         "Username",
                         text: $username)
-                    .textFieldStyle(TextFieldDesign(image: "person"))
+                    .textFieldStyle(TextFieldDesign(image: "person", error: false))
                     TextField(
                         "Password",
-                        text: $password)
-                    .textFieldStyle(TextFieldDesign(image: "key"))
+                        text: $password1)
+                    .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
                     TextField(
                         "Confirm Password",
-                        text: $passwordConfirm)
-                    .textFieldStyle(TextFieldDesign(image: "key"))
+                        text: $password2)
+                    .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
                     Button(
                         "Register",
-                        action: {firebaseViewModel.register(email, password)})
+                        action: {firebaseViewModel.register(email, password1, password2, username)})
                     .buttonStyle(CustomButton())
                 }
                 .padding(.horizontal)

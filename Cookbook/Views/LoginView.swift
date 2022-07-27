@@ -58,11 +58,11 @@ struct LoginView: View {
                     TextField(
                         "Email",
                         text: $email
-                    ).textFieldStyle(TextFieldDesign(image: "mail"))
+                    ).textFieldStyle(TextFieldDesign(image: "mail", error: false))
                     TextField(
                         "Password",
                         text: $passoword
-                    ).textFieldStyle(TextFieldDesign(image: "key"))
+                    ).textFieldStyle(TextFieldDesign(image: "key", error: false))
                     Button(
                         "Login",
                         action: {firebaseViewModel.signIn(email, passoword, viewRouter)}
