@@ -19,4 +19,8 @@ class FirebaseViewModel {
         firebaseModel.signIn(email, password, viewRouter)
     }
     
+    func register(_ email: String, _ password: String) {
+        firebaseModel.register(email, password)
+    }
+    
 }

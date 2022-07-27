@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class FirebaseModel {
     private(set) var isLogedIn: Bool?
+    private(set) var registerSuccessfull: Bool?
     
     // MARK: - SignIn
     
@@ -23,6 +24,20 @@ class FirebaseModel {
                 self.isLogedIn = true
                 print("true")
                 viewRouter.page = .MainPage
+        }
+    }
+    
+    // MARK: - Register
+    
+    func register(_ email: String, _ password: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            guard result != nil, error == nil else {
+                self.registerSuccessfull = false
+                print("false")
+                return
+            }
+            self.registerSuccessfull = true
+            print("true")
         }
     }
 }

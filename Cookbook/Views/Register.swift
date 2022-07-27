@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Register: View {
     @ObservedObject var viewRouter: ViewRouter
+    var firebaseViewModel: FirebaseViewModel
     
     private struct DrawingConstants{
         static let backButtonIconFrameWidth: CGFloat = 20
@@ -29,7 +30,7 @@ struct Register: View {
     var body: some View {
         ZStack{
             TopPart(viewRouter: viewRouter)
-           CenterRectangle()
+            CenterRectangle(firebaseViewModel: firebaseViewModel)
             .padding(.horizontal, DrawingConstants.ZStackPaddingHorizontal)
             .padding(.vertical, DrawingConstants.ZstackPaddingVertical)
             
@@ -70,6 +71,7 @@ struct Register: View {
         @State private var username: String = ""
         @State private var password: String = ""
         @State private var passwordConfirm: String = ""
+        var firebaseViewModel: FirebaseViewModel
         
         var body: some View {
             ZStack{
@@ -95,7 +97,7 @@ struct Register: View {
                     .textFieldStyle(TextFieldDesign(image: "key"))
                     Button(
                         "Register",
-                        action: {})
+                        action: {firebaseViewModel.register(email, password)})
                     .buttonStyle(CustomButton())
                 }
                 .padding(.horizontal)
@@ -124,6 +126,7 @@ struct Register: View {
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         let viewRouter = ViewRouter()
-        Register(viewRouter: viewRouter)
+        let firebaseViewModel = FirebaseViewModel()
+        Register(viewRouter: viewRouter, firebaseViewModel: firebaseViewModel)
     }
 }
