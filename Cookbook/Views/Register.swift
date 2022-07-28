@@ -10,6 +10,8 @@ import SwiftUI
 struct Register: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var firebaseViewModel: FirebaseViewModel
+    let height = UIScreen.main.bounds.height
+    var width = UIScreen.main.bounds.width
     
     private struct DrawingConstants {
         static let backButtonIconFrameWidth: CGFloat = 20
@@ -21,8 +23,8 @@ struct Register: View {
         static let rectangleCornerRadius: CGFloat = 15
         static let rectangleShadow: CGFloat = 5
         static let VStackSpacing: CGFloat = 20
-        static let ZStackPaddingHorizontal: CGFloat = 37
-        static let ZstackPaddingVertical: CGFloat = 180
+        static let centerRectangleWidthMltiplier: CGFloat = 0.8
+        static let centerRectangleHeight: CGFloat = 400
     }
     
     
@@ -31,8 +33,9 @@ struct Register: View {
         ZStack{
             TopPart(viewRouter: viewRouter)
             CenterRectangle(firebaseViewModel: firebaseViewModel)
-            .padding(.horizontal, DrawingConstants.ZStackPaddingHorizontal)
-            .padding(.vertical, DrawingConstants.ZstackPaddingVertical)
+                .frame(
+                    width: width * DrawingConstants.centerRectangleWidthMltiplier,
+                    height: DrawingConstants.centerRectangleHeight)
             
         }
         .background(Image("LoginRegisterBackground"))
@@ -41,7 +44,9 @@ struct Register: View {
     // MARK: - Top part of the register view
     
     struct TopPart: View {
+        let height = UIScreen.main.bounds.height
         @ObservedObject var viewRouter: ViewRouter
+        
         var body: some View {
             Button(
                 action: {viewRouter.page = .Login}) {
@@ -52,7 +57,7 @@ struct Register: View {
                             width: DrawingConstants.backButtonIconFrameWidth,
                             height: DrawingConstants.backButtonIconFrameHeight)
                 }
-                .padding(.bottom, DrawingConstants.backButtonPaddingButtom)
+                .padding(.bottom, height < 700 ? 620 : 700)
                 .padding(.trailing, DrawingConstants.backButtonPaddingTrailing)
             Text("Register")
                 .font(

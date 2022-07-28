@@ -37,14 +37,29 @@ class FirebaseViewModel: ObservableObject {
     @Published private(set) var isLogedIn: Bool?
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var areEqual: Bool = false
+    @Published private(set) var isEmail:Bool = true
 
     private var auth = Auth.auth()
     private var firestore = Firestore.firestore()
     
     
+    //MARK: - Checks if it is a valid email
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
     // MARK: - SignIn
     
     func signIn(_ email: String, _ passwordProvided: String, _ viewRouter: ViewRouter) {
+        guard isValidEmail(email) else {
+            self.isEmail = false
+            print("false email")
+            return
+        }
          auth.signIn(withEmail: email, password: passwordProvided) { result, error in
             guard result != nil, error == nil else {
                 print("false")

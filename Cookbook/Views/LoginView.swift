@@ -11,46 +11,58 @@ import SwiftUI
 struct LoginView: View {
     var firebaseViewModel: FirebaseViewModel
     @ObservedObject var viewRouter: ViewRouter
-
+    let height = UIScreen.main.bounds.height
+    var width = UIScreen.main.bounds.width
+    
     private struct DrawingConstants{
         static let rectangleCornerRadius: CGFloat = 15
         static let shadow: CGFloat = 10
         static let VStackSpacing: CGFloat = 38
         static let paddingAll: CGFloat = 37
-        static let paddingVerical: CGFloat = 190
+        static let paddingVerical: CGFloat = 4.8
         static let fontSize: CGFloat = 33
         static let upperTextPadding: CGFloat = 400
         static let bottomTextFont: CGFloat = 15
         static let bottomTextPadding: CGFloat = 350
+        static let screenSize: CGFloat = 700
+        static let centerWidthMultiplier: CGFloat = 0.8
+        static let centerHeightIphone8: CGFloat = 290
+        static let centerHeightIphone13: CGFloat = 280
+        
     }
     
     var body: some View {
-        ZStack{
-            Text("Sign In")
-                .font(.system(
-                    size: DrawingConstants.fontSize,
-                    weight: .regular,
-                    design: .default))
-                .padding(.bottom, DrawingConstants.upperTextPadding)
-            CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
-                .padding(.all, DrawingConstants.paddingAll)
-                .padding(.vertical, DrawingConstants.paddingVerical)
-            BottomText(viewRouter: viewRouter)
-                .padding(.top, DrawingConstants.bottomTextPadding)
-        }
-        .background(Image("LoginRegisterBackground").renderingMode(.original))
+            ZStack{
+                Text("Sign In")
+                    .font(.system(
+                        size: DrawingConstants.fontSize,
+                        weight: .regular,
+                        design: .default))
+                    .padding(.bottom, DrawingConstants.upperTextPadding)
+                Spacer()
+                CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
+                    .frame(
+                        width: width * DrawingConstants.centerWidthMultiplier,
+                        height: height < DrawingConstants.screenSize
+                                        ? DrawingConstants.centerHeightIphone8
+                                        : DrawingConstants.centerHeightIphone13)
+                Spacer()
+                BottomText(viewRouter: viewRouter)
+                    .padding(.top, DrawingConstants.bottomTextPadding)
+            }.frame( maxWidth: .infinity, maxHeight: .infinity)
+            .background(Image("LoginRegisterBackground").renderingMode(.original))
     }
     
     // MARK: - Center square
     
     struct CenterSquare: View {
-        var firebaseViewModel: FirebaseViewModel
+        @ObservedObject var firebaseViewModel: FirebaseViewModel
         @ObservedObject var viewRouter: ViewRouter
         @State private var email: String = "test@t.com"
         @State private var passoword: String = "test12"
         
         var body: some View {
-            ZStack{
+            ZStack(alignment: .center){
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
                     .fill(.white)
                     .shadow(radius: DrawingConstants.shadow)
@@ -58,7 +70,8 @@ struct LoginView: View {
                     TextField(
                         "Email",
                         text: $email
-                    ).textFieldStyle(TextFieldDesign(image: "mail", error: false))
+                    )
+                    .emailTextField(image: "mail", firebaseViewModel: firebaseViewModel)
                     TextField(
                         "Password",
                         text: $passoword
@@ -146,6 +159,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let firebase = FirebaseViewModel()
         let viewRouter = ViewRouter()
-        LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
+        Group {
+            LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
+            LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
+        }
     }
 }
