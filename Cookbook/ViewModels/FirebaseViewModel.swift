@@ -5,29 +5,6 @@
 //  Created by Alex on 2022-07-26.
 //
 
-// MARK: - This was supposed to be the ViewModels but dosent work as it should
-
-//import Foundation
-//
-//
-//class FirebaseViewModel: ObservableObject {
-//    @Published private(set) var firebaseModel:FirebaseModel = createFirebaseModel()
-//
-//
-//    private static func createFirebaseModel() -> FirebaseModel {
-//        FirebaseModel()
-//    }
-//
-//    func signIn(_ email: String, _ password: String,  _ viewRouter: ViewRouter) {
-//        firebaseModel.signIn(email, password, viewRouter)
-//    }
-//
-//    func register(_ email: String, _ password1: String, _ password2: String, _ username: String) {
-//        firebaseModel.register(email, password1, password2, username)
-//    }
-//
-//}
-
 import Foundation
 import FirebaseAuth
 import Firebase

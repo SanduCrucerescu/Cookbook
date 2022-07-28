@@ -96,21 +96,22 @@ struct Register: View {
                             .foregroundColor(.red)
                     }
                     VStack(spacing: DrawingConstants.VStackSpacing) {
-                        TextField(
-                            "Email",
-                            text: $email)
-                            .emailTextFields(image: "mail", firebaseViewModel: firebaseViewModel)
-                        TextField(
-                            "Username",
-                            text: $username)
-                        .textFieldStyle(TextFieldDesign(image: "person", error: false))
-                        
-                        Text("The password needs to be at least 6 characters long")
-                            .font(
-                                .system(
-                                    size: DrawingConstants.passwordInformation,
-                                    weight: .light))
-                            .foregroundColor(.gray)
+                        Group {
+                            TextField(
+                                "Email",
+                                text: $email)
+                            .textFieldStyle(TextFieldDesign(image: "mail", error: !firebaseViewModel.isEmail))
+                            TextField(
+                                "Username",
+                                text: $username)
+                            .textFieldStyle(TextFieldDesign(image: "person", error: false))
+                            Text("The password needs to be at least 6 characters long")
+                                .font(
+                                    .system(
+                                        size: DrawingConstants.passwordInformation,
+                                        weight: .light))
+                                .foregroundColor(.gray)
+                        }
                     }
                         .padding(.horizontal)
                     if firebaseViewModel.passwordsAreNotEqual {
@@ -118,21 +119,20 @@ struct Register: View {
                             .foregroundColor(.red)
                     }
                     VStack(spacing: DrawingConstants.VStackSpacing){
-                        TextField(
-                            "Password",
-                            text: $password1)
-                        //.passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
-                        .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
-                        .modifier(ShakeEffect(shakes: va ? 1 : 0))
-                        .animation(Animation.default, value: firebaseViewModel.passwordsAreNotEqual)
-                        TextField(
-                            "Confirm Password",
-                            text: $password2)
-                        .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
-                        Button(
-                            "Register",
-                            action: {firebaseViewModel.register(email, password1, password2, username)})
-                        .buttonStyle(CustomButton())
+                        Group {
+                            TextField(
+                                "Password",
+                                text: $password1)
+                                .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
+                            TextField(
+                                "Confirm Password",
+                                text: $password2)
+                                .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
+                            Button(
+                                "Register",
+                                action: {firebaseViewModel.register(email, password1, password2, username)})
+                            .buttonStyle(CustomButton())
+                        }
                     }
                     .padding(.horizontal)
                 }
