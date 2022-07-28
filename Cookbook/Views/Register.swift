@@ -16,15 +16,19 @@ struct Register: View {
     private struct DrawingConstants {
         static let backButtonIconFrameWidth: CGFloat = 20
         static let backButtonIconFrameHeight: CGFloat = 30
+        static let backButtonHeightIphone8: CGFloat = 620
+        static let backButtonHeightIphoneXS: CGFloat = 700
         static let backButtonPaddingButtom: CGFloat = 700
         static let backButtonPaddingTrailing: CGFloat = 330
         static let textFont: CGFloat = 33
         static let textPaddingBottom: CGFloat = 530
         static let rectangleCornerRadius: CGFloat = 15
         static let rectangleShadow: CGFloat = 5
-        static let VStackSpacing: CGFloat = 20
+        static let VStackSpacing: CGFloat = 15
         static let centerRectangleWidthMltiplier: CGFloat = 0.8
-        static let centerRectangleHeight: CGFloat = 400
+        static let centerRectangleHeight: CGFloat = 450
+        static let passwordInformation: CGFloat = 16
+
     }
     
     
@@ -57,7 +61,9 @@ struct Register: View {
                             width: DrawingConstants.backButtonIconFrameWidth,
                             height: DrawingConstants.backButtonIconFrameHeight)
                 }
-                .padding(.bottom, height < 700 ? 620 : 700)
+                .padding(.bottom, height < 700
+                         ? DrawingConstants.backButtonHeightIphone8
+                         : DrawingConstants.backButtonHeightIphoneXS)
                 .padding(.trailing, DrawingConstants.backButtonPaddingTrailing)
             Text("Register")
                 .font(
@@ -84,29 +90,52 @@ struct Register: View {
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
                     .fill(.white)
                     .shadow(radius: DrawingConstants.rectangleShadow)
-                VStack(spacing: DrawingConstants.VStackSpacing) {
-                    TextField(
-                        "Email",
-                        text: $email)
-                    .textFieldStyle(TextFieldDesign(image: "mail", error: false))
-                    TextField(
-                        "Username",
-                        text: $username)
-                    .textFieldStyle(TextFieldDesign(image: "person", error: false))
-                    TextField(
-                        "Password",
-                        text: $password1)
-                    .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
-                    TextField(
-                        "Confirm Password",
-                        text: $password2)
-                    .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
-                    Button(
-                        "Register",
-                        action: {firebaseViewModel.register(email, password1, password2, username)})
-                    .buttonStyle(CustomButton())
+                VStack{
+                    if !firebaseViewModel.isEmail {
+                        Text("Not a valid email address")
+                            .foregroundColor(.red)
+                    }
+                    VStack(spacing: DrawingConstants.VStackSpacing) {
+                        TextField(
+                            "Email",
+                            text: $email)
+                            .emailTextFields(image: "mail", firebaseViewModel: firebaseViewModel)
+                        TextField(
+                            "Username",
+                            text: $username)
+                        .textFieldStyle(TextFieldDesign(image: "person", error: false))
+                        
+                        Text("The password needs to be at least 6 characters long")
+                            .font(
+                                .system(
+                                    size: DrawingConstants.passwordInformation,
+                                    weight: .light))
+                            .foregroundColor(.gray)
+                    }
+                        .padding(.horizontal)
+                    if firebaseViewModel.passwordsAreNotEqual {
+                        Text("Passwords are not equal")
+                            .foregroundColor(.red)
+                    }
+                    VStack(spacing: DrawingConstants.VStackSpacing){
+                        TextField(
+                            "Password",
+                            text: $password1)
+                        //.passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
+                        .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
+                        .modifier(ShakeEffect(shakes: va ? 1 : 0))
+                        .animation(Animation.default, value: firebaseViewModel.passwordsAreNotEqual)
+                        TextField(
+                            "Confirm Password",
+                            text: $password2)
+                        .passwordTextField(image: "key", firebaseViewModel: firebaseViewModel)
+                        Button(
+                            "Register",
+                            action: {firebaseViewModel.register(email, password1, password2, username)})
+                        .buttonStyle(CustomButton())
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
         }
     }

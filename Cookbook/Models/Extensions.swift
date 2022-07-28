@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ShakeEffect: GeometryEffect {
        func effectValue(size: CGSize) -> ProjectionTransform {
-           return ProjectionTransform(CGAffineTransform(translationX: -20 * sin(position * 2 * .pi), y: 0))
+           return ProjectionTransform(CGAffineTransform(translationX: -10 * sin(position * 2 * .pi), y: 0))
        }
        
        init(shakes: Int) {
@@ -33,11 +33,26 @@ struct PasswordTextFiels: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .textFieldStyle(TextFieldDesign(image: image, error: firebaseViewModel.areEqual))
-            .modifier(ShakeEffect(shakes: firebaseViewModel.areEqual ? 2 : 0))
-            .animation(Animation.linear.repeatCount(3).speed(5), value: firebaseViewModel.areEqual)
+            .textFieldStyle(TextFieldDesign(image: image, error: firebaseViewModel.passwordsAreNotEqual))
+            .modifier(ShakeEffect(shakes: !firebaseViewModel.passwordsAreNotEqual ? 2 : 0))
+            .animation(Animation.linear, value: firebaseViewModel.passwordsAreNotEqual)
     }
 }
+
+//MARK: - struct for the login validation
+
+struct LoginTextFiels: ViewModifier {
+    let image: String
+    @ObservedObject var firebaseViewModel: FirebaseViewModel
+    
+    func body(content: Content) -> some View {
+        content
+            .textFieldStyle(TextFieldDesign(image: image, error: !firebaseViewModel.isLogedIn))
+            .modifier(ShakeEffect(shakes: !firebaseViewModel.isLogedIn ? 2 : 0))
+            .animation(Animation.linear, value: !firebaseViewModel.isLogedIn)
+    }
+}
+
 
 //MARK: - struct for the email validation
 
@@ -49,10 +64,9 @@ struct EmailTextFiels: ViewModifier {
         content
             .textFieldStyle(TextFieldDesign(image: image, error: !firebaseViewModel.isEmail))
             .modifier(ShakeEffect(shakes: !firebaseViewModel.isEmail ? 2 : 0))
-            .animation(Animation.linear.repeatCount(3).speed(5), value: !firebaseViewModel.isEmail)
+            .animation(Animation.linear, value: !firebaseViewModel.isEmail)
     }
 }
-
 
 
 
@@ -62,7 +76,11 @@ extension TextField {
         self.modifier(PasswordTextFiels(image: image, firebaseViewModel: firebaseViewModel))
     }
     
-    func emailTextField(image: String, firebaseViewModel: FirebaseViewModel) -> some View {
+    func loginTextFields(image: String, firebaseViewModel: FirebaseViewModel) -> some View {
+        self.modifier(LoginTextFiels(image: image, firebaseViewModel: firebaseViewModel))
+    }
+    
+    func emailTextFields(image: String, firebaseViewModel: FirebaseViewModel) -> some View {
         self.modifier(EmailTextFiels(image: image, firebaseViewModel: firebaseViewModel))
     }
 }

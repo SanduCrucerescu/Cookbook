@@ -36,7 +36,7 @@ import FirebaseFirestoreSwift
 class FirebaseViewModel: ObservableObject {
     @Published private(set) var isLogedIn: Bool = true
     @Published private(set) var registerSuccessfull: Bool?
-    @Published private(set) var areEqual: Bool = false
+    @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
 
     private var auth = Auth.auth()
@@ -55,11 +55,6 @@ class FirebaseViewModel: ObservableObject {
     // MARK: - SignIn
     
     func signIn(_ email: String, _ passwordProvided: String, _ viewRouter: ViewRouter) {
-        guard isValidEmail(email) else {
-            self.isEmail = false
-            print("false email")
-            return
-        }
          auth.signIn(withEmail: email, password: passwordProvided) { result, error in
             guard result != nil, error == nil else {
                 self.isLogedIn = false
@@ -76,11 +71,22 @@ class FirebaseViewModel: ObservableObject {
     // MARK: - Register
     
     func register(_ email: String, _ password1: String, _ password2: String, _ username: String) {
+//        guard isValidEmail(email) else {
+//            self.isEmail.toggle()
+//            print("false email")
+//            return
+//        }
+        if isValidEmail(email){
+            self.isEmail = true
+        } else {
+            self.isEmail = false
+        }
         guard passwordsCheck(password1, password2) else {
-            self.areEqual.toggle()
-            print(self.areEqual)
+            self.passwordsAreNotEqual = true
+            print(self.passwordsAreNotEqual)
             return
         }
+        self.passwordsAreNotEqual = false
         auth.createUser(withEmail: email, password: password1) { (result, error) in
             guard result != nil, error == nil else {
                 self.registerSuccessfull = false

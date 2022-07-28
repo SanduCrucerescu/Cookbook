@@ -11,9 +11,9 @@ struct CustomButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabeled
     
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 10
+        static let cornerRadius: CGFloat = 15
         static let frameHeight: CGFloat = 60
-        static let padding: CGFloat = 60
+        static let buttonWidth: CGFloat = 200
         static let textSize: CGFloat = 20
     }
     
@@ -23,7 +23,7 @@ struct CustomButton: ButtonStyle {
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(Color.mustardYellow)
                 .frame(height: DrawingConstants.frameHeight)
-                .padding(.horizontal, DrawingConstants.padding)
+                .frame(width: DrawingConstants.buttonWidth)
             configuration
                 .label
                 .foregroundColor(.black)

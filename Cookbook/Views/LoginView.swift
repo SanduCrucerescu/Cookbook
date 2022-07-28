@@ -74,17 +74,15 @@ struct LoginView: View {
                     VStack(spacing: DrawingConstants.VStackSpacing) {
                         TextField(
                             "Email",
-                            text: $email
-                        )
-                        .emailTextField(image: "mail", firebaseViewModel: firebaseViewModel)
+                            text: $email)
+                            .loginTextFields(image: "mail", firebaseViewModel: firebaseViewModel)
                         TextField(
                             "Password",
-                            text: $passoword
-                        ).textFieldStyle(TextFieldDesign(image: "key", error: false))
+                            text: $passoword)
+                            .loginTextFields(image: "key", firebaseViewModel: firebaseViewModel)
                         Button(
                             "Login",
-                            action: {firebaseViewModel.signIn(email, passoword, viewRouter)}
-                        )
+                            action: {firebaseViewModel.signIn(email, passoword, viewRouter)})
                             .buttonStyle(CustomButton())
                     }
                     .padding(.horizontal)
@@ -107,7 +105,11 @@ struct LoginView: View {
                                 weight: .light,
                                 design: .default))
                     
-                Button(action: {viewRouter.page = .Register}) {Text("Register").underline()}
+                Button(
+                    action: {
+                        viewRouter.page = .Register})
+                        {Text("Register Now")
+                            .underline()}
                         .font(
                             .system(
                                 size: DrawingConstants.bottomTextFont,
