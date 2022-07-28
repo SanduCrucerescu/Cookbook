@@ -17,7 +17,7 @@ struct LoginView: View {
     private struct DrawingConstants{
         static let rectangleCornerRadius: CGFloat = 15
         static let shadow: CGFloat = 10
-        static let VStackSpacing: CGFloat = 38
+        static let VStackSpacing: CGFloat = 28
         static let paddingAll: CGFloat = 37
         static let paddingVerical: CGFloat = 4.8
         static let fontSize: CGFloat = 33
@@ -66,23 +66,29 @@ struct LoginView: View {
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
                     .fill(.white)
                     .shadow(radius: DrawingConstants.shadow)
-                VStack(spacing: DrawingConstants.VStackSpacing) {
-                    TextField(
-                        "Email",
-                        text: $email
-                    )
-                    .emailTextField(image: "mail", firebaseViewModel: firebaseViewModel)
-                    TextField(
-                        "Password",
-                        text: $passoword
-                    ).textFieldStyle(TextFieldDesign(image: "key", error: false))
-                    Button(
-                        "Login",
-                        action: {firebaseViewModel.signIn(email, passoword, viewRouter)}
-                    )
-                        .buttonStyle(CustomButton())
+                VStack {
+                    if !firebaseViewModel.isLogedIn {
+                        Text("Email or password incorect. Try again")
+                            .foregroundColor(.red)
+                    }
+                    VStack(spacing: DrawingConstants.VStackSpacing) {
+                        TextField(
+                            "Email",
+                            text: $email
+                        )
+                        .emailTextField(image: "mail", firebaseViewModel: firebaseViewModel)
+                        TextField(
+                            "Password",
+                            text: $passoword
+                        ).textFieldStyle(TextFieldDesign(image: "key", error: false))
+                        Button(
+                            "Login",
+                            action: {firebaseViewModel.signIn(email, passoword, viewRouter)}
+                        )
+                            .buttonStyle(CustomButton())
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
         }
     }

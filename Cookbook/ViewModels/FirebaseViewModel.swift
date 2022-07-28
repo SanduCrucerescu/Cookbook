@@ -34,7 +34,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class FirebaseViewModel: ObservableObject {
-    @Published private(set) var isLogedIn: Bool?
+    @Published private(set) var isLogedIn: Bool = true
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var areEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
@@ -62,6 +62,7 @@ class FirebaseViewModel: ObservableObject {
         }
          auth.signIn(withEmail: email, password: passwordProvided) { result, error in
             guard result != nil, error == nil else {
+                self.isLogedIn = false
                 print("false")
                 return
             }
