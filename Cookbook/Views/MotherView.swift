@@ -10,6 +10,7 @@ import SwiftUI
 struct MotherView: View {
     @ObservedObject var viewRouter: ViewRouter
     let firebase = FirebaseViewModel()
+    
     var body: some View {
         switch viewRouter.page {
             case .Login:
