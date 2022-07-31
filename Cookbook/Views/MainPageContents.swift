@@ -9,15 +9,12 @@ import SwiftUI
 
 struct MainPageContents: View {
     @Binding var showMenu: Bool
+    @State private var search: String = ""
     
     var body: some View {
-        Button(
-            action: {
-                withAnimation{
-                    self.showMenu = true
-                }
-            }){
-            Text("Show Menu")
+        VStack {
+            TopBar()
+            Spacer()
         }
     }
 }

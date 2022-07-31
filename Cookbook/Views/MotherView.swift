@@ -16,7 +16,7 @@ struct MotherView: View {
             case .Login:
                 LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
             case .MainPage:
-                MainPage()
+                MainPage(viewRouter: viewRouter)
             case .Register:
                 Register(viewRouter: viewRouter, firebaseViewModel: firebase)
         }

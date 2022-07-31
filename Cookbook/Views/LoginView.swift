@@ -32,25 +32,25 @@ struct LoginView: View {
     }
     
     var body: some View {
-            ZStack{
-                Text("Sign In")
-                    .font(.system(
-                        size: DrawingConstants.fontSize,
-                        weight: .regular,
-                        design: .default))
-                    .padding(.bottom, DrawingConstants.upperTextPadding)
-                Spacer()
-                CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
-                    .frame(
-                        width: width * DrawingConstants.centerWidthMultiplier,
-                        height: height < DrawingConstants.screenSize
-                                        ? DrawingConstants.centerHeightIphone8
-                                        : DrawingConstants.centerHeightIphone13)
-                Spacer()
-                BottomText(viewRouter: viewRouter)
-                    .padding(.top, DrawingConstants.bottomTextPadding)
-            }.frame( maxWidth: .infinity, maxHeight: .infinity)
-            .background(Image("LoginRegisterBackground").renderingMode(.original))
+        ZStack{
+            Text("Sign In")
+                .font(.system(
+                    size: DrawingConstants.fontSize,
+                    weight: .regular,
+                    design: .default))
+                .padding(.bottom, DrawingConstants.upperTextPadding)
+            Spacer()
+            CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
+                .frame(
+                    width: width * DrawingConstants.centerWidthMultiplier,
+                    height: height < DrawingConstants.screenSize
+                                    ? DrawingConstants.centerHeightIphone8
+                                    : DrawingConstants.centerHeightIphone13)
+            Spacer()
+            BottomText(viewRouter: viewRouter)
+                .padding(.top, DrawingConstants.bottomTextPadding)
+        }.frame( maxWidth: .infinity, maxHeight: .infinity)
+        .background(Image("LoginRegisterBackground").renderingMode(.original))
     }
     
     // MARK: - Center square
@@ -75,11 +75,17 @@ struct LoginView: View {
                         TextField(
                             "Email",
                             text: $email)
-                            .textFieldStyle(TextFieldDesign(image: "mail", error: !firebaseViewModel.isLogedIn))
+                        .textFieldStyle(
+                            TextFieldDesign(
+                                image: "mail",
+                                error: !firebaseViewModel.isLogedIn))
                         TextField(
                             "Password",
                             text: $passoword)
-                            .textFieldStyle(TextFieldDesign(image: "key", error: !firebaseViewModel.isLogedIn))
+                        .textFieldStyle(
+                            TextFieldDesign(
+                                image: "key",
+                                error: !firebaseViewModel.isLogedIn))
                         Button(
                             "Login",
                             action: {firebaseViewModel.signIn(email, passoword, viewRouter)})

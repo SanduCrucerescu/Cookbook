@@ -13,6 +13,7 @@
 		FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAEE02890299700757760 /* GoogleService-Info.plist */; };
 		FA5CAEE428902D5B00757760 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE328902D5B00757760 /* FirebaseAuth */; };
 		FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE528902D5B00757760 /* FirebaseFirestore */; };
+		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
 		FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C742891EBAF00F317FF /* CookbookApp.swift */; };
 		FAC93C852891EDC100F317FF /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C782891EDC100F317FF /* FirebaseModel.swift */; };
@@ -36,6 +37,7 @@
 		FA5CAED628900EF900757760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
 		FAC93C782891EDC100F317FF /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		FAC93C792891EDC100F317FF /* ViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				FAC93C7E2891EDC100F317FF /* MainPage.swift */,
 				FA3F4A012895974D00C5DBC6 /* MainPageContents.swift */,
+				FAC335E52896D914009AE5A2 /* TopBar.swift */,
 				FAC93C952891F3C600F317FF /* MenuItemsView.swift */,
 				FAC93C7F2891EDC100F317FF /* LoginView.swift */,
 				FAC93C802891EDC100F317FF /* Register.swift */,
@@ -241,6 +244,7 @@
 				FAC93C962891F3C600F317FF /* MenuItemsView.swift in Sources */,
 				FAC93C852891EDC100F317FF /* FirebaseModel.swift in Sources */,
 				FAC93C8C2891EDC100F317FF /* MotherView.swift in Sources */,
+				FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */,
 				FAC93C882891EDC100F317FF /* TextField.swift in Sources */,
 				FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
