@@ -8,18 +8,28 @@
 import SwiftUI
 
 struct MenuItemsView: View {
+    
+    private struct DrawingConstants {
+        static let imageSize: CGFloat = 80
+        static let imageHeight: CGFloat = 110
+        static let imageWidth: CGFloat = 110
+        static let itemsTopPadding: CGFloat = 30
+        static let itemsLeadingPadding: CGFloat = 30
+    }
+    
+    
+    
+    
     @ObservedObject var viewRouter: ViewRouter
     var body: some View {
         VStack {
             Image(systemName: "person.crop.circle")
-                .font(.system(size: 80))
-                .frame(width: 110, height: 110, alignment: .center)
+                .font(.system(size: DrawingConstants.imageSize))
+                .frame(
+                    width: DrawingConstants.imageWidth,
+                    height: DrawingConstants.imageHeight,
+                    alignment: .center)
             VStack(alignment: .leading){
-    //            Circle()
-    //                .fill("person")
-    //                .padding(.top, 10)
-    //                .frame(width: 110, height: 110, alignment: .center
-                    //.overlay(Circle().stroke(lineWidth: 3))
                 Divider()
                 HStack {
                     Image(systemName: "person.fill")
@@ -27,21 +37,21 @@ struct MenuItemsView: View {
                     Text("My profile")
                         .font(.headline)
                 }
-                .padding(.top, 30)
+                .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
                     Image(systemName: "bookmark")
                         .imageScale(.large)
                     Text("Saved")
                         .font(.headline)
                 }
-                .padding(.top, 30)
+                .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
                     Image(systemName: "gearshape")
                         .imageScale(.large)
                     Text("Settings")
                         .font(.headline)
                 }
-                .padding(.top, 30)
+                .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .imageScale(.large)
@@ -52,11 +62,11 @@ struct MenuItemsView: View {
                         }
                         .font(.headline)
                 }
-                .padding(.top, 30)
+                .padding(.top, DrawingConstants.itemsTopPadding)
                 Spacer()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 12)
+            .padding(.leading, DrawingConstants.itemsLeadingPadding)
             //.background(Color.mustardYellow)
             //.edgesIgnoringSafeArea(.all)
         }
