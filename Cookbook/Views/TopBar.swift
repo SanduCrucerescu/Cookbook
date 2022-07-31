@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct TopBar: View {
+    @Binding var showMenu: Bool
+    @State private var search: String = ""
+    
     var body: some View {
         HStack {
             Image(systemName: "line.horizontal.3")
@@ -29,6 +32,6 @@ struct TopBar: View {
 
 struct TopBar_Previews: PreviewProvider {
     static var previews: some View {
-        TopBar()
+        TopBar(showMenu: .constant(false))
     }
 }
