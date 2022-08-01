@@ -38,6 +38,48 @@ struct PasswordTextFiels: ViewModifier {
     }
 }
 
+
+//MARK: - Content view Extension
+
+struct ContentView: ViewModifier {
+    @State var showMenu = false
+    @ObservedObject var viewRouter: ViewRouter
+    
+    func body(content: Content) -> some View {
+        let drag = DragGesture()
+            .onEnded{
+                if $0.translation.width < -100 {
+                    withAnimation() {
+                        showMenu = false
+                    }
+                }
+            }
+        
+        GeometryReader{ geo in
+            ZStack(alignment: .leading) {
+                VStack {
+                    TopBar(showMenu: $showMenu)
+                    content
+                    Spacer()
+                }
+                .frame(width: geo.size.width, height: geo.size.height)
+                .offset(x: self.showMenu ? geo.size.width/2 : 0)
+                    //.disabled(self.showMenu ? true : false)
+                    
+    
+                if self.showMenu {
+                    MenuItemsView(viewRouter: viewRouter)
+                        .frame(width: geo.size.width/2)
+                        .transition(.move(edge: .leading))
+                }
+            }
+            .gesture(drag)
+        }
+    }
+}
+
+
+
 //MARK: - Extensions
 
 extension TextField {
@@ -56,4 +98,11 @@ extension TextField {
 
 extension Color {
     static let mustardYellow = Color("MustartYellow")
+}
+
+
+extension View {
+    func contentView(viewRouter: ViewRouter) -> some View{
+        self.modifier(ContentView(viewRouter: viewRouter))
+    }
 }

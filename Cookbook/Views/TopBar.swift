@@ -11,6 +11,7 @@ struct TopBar: View {
     
     private struct DrawingConstansts{
         static let imageSize: CGFloat = 30
+        static let imageLeadingPadding: CGFloat = 5
         static let textFieldTrailingPadding: CGFloat = 14
     }
     
@@ -27,6 +28,7 @@ struct TopBar: View {
                         self.showMenu.toggle()
                     }
                 }
+                .padding(.leading, DrawingConstansts.imageLeadingPadding)
             
             TextField(
                 "Search",

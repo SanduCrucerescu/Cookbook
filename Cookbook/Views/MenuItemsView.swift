@@ -17,10 +17,8 @@ struct MenuItemsView: View {
         static let itemsLeadingPadding: CGFloat = 30
     }
     
-    
-    
-    
     @ObservedObject var viewRouter: ViewRouter
+    
     var body: some View {
         VStack {
             Image(systemName: "person.crop.circle")
