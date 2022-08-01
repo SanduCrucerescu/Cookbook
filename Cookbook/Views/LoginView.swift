@@ -39,6 +39,7 @@ struct LoginView: View {
                     weight: .regular,
                     design: .default))
                 .padding(.bottom, DrawingConstants.upperTextPadding)
+                .foregroundColor(.granola)
             Spacer()
             CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
                 .frame(
@@ -89,7 +90,7 @@ struct LoginView: View {
                         Button(
                             "Login",
                             action: {firebaseViewModel.signIn(email, passoword, viewRouter)})
-                            .buttonStyle(CustomButton())
+                        .buttonStyle(CustomButton(color:.granola))
                     }
                     .padding(.horizontal)
                 }

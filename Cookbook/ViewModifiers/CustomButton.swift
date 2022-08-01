@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabeled
+    var color: Color
     
     private struct DrawingConstants {
         static let cornerRadius: CGFloat = 15
@@ -26,7 +27,7 @@ struct CustomButton: ButtonStyle {
                 .frame(width: DrawingConstants.buttonWidth)
             configuration
                 .label
-                .foregroundColor(.black)
+                .foregroundColor(color)
                 .font(.system(size: DrawingConstants.textSize, weight: .regular, design: .default))
         }
     }

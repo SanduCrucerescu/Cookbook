@@ -13,8 +13,11 @@ struct MenuItemsView: View {
         static let imageSize: CGFloat = 80
         static let imageHeight: CGFloat = 110
         static let imageWidth: CGFloat = 110
+        static let menuTopPadding: CGFloat = 40
         static let itemsTopPadding: CGFloat = 30
-        static let itemsLeadingPadding: CGFloat = 30
+        static let itemsLeadingPadding: CGFloat = 40
+        static let shadowColorOpacity: CGFloat = 0.3
+        static let shadowRadius: CGFloat = 0.05
     }
     
     @ObservedObject var viewRouter: ViewRouter
@@ -27,6 +30,7 @@ struct MenuItemsView: View {
                     width: DrawingConstants.imageWidth,
                     height: DrawingConstants.imageHeight,
                     alignment: .center)
+                .foregroundColor(.granola)
             VStack(alignment: .leading){
                 Divider()
                 HStack {
@@ -65,9 +69,14 @@ struct MenuItemsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, DrawingConstants.itemsLeadingPadding)
+            .foregroundColor(.granola)
             //.background(Color.mustardYellow)
             //.edgesIgnoringSafeArea(.all)
         }
+        .padding(.top, DrawingConstants.menuTopPadding)
         .background(Color.mustardYellow)
+        .innerShadow(
+            color: .black.opacity(DrawingConstants.shadowColorOpacity),
+            radius: DrawingConstants.shadowRadius)
     }
 }

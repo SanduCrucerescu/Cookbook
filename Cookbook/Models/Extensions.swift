@@ -41,7 +41,7 @@ struct PasswordTextFiels: ViewModifier {
 
 //MARK: - Content view Extension
 
-struct ContentView: ViewModifier {
+private struct ContentView: ViewModifier {
     @State var showMenu = false
     @ObservedObject var viewRouter: ViewRouter
     
@@ -79,6 +79,40 @@ struct ContentView: ViewModifier {
     }
 }
 
+//MARK: - Inner shadow
+
+private struct InnerShadow: ViewModifier {
+    var color: Color = .gray
+    var radius: CGFloat = 0.1
+
+    private var colors: [Color] {
+        [color.opacity(0.75), color.opacity(0.0), .clear]
+    }
+
+    func body(content: Content) -> some View {
+        GeometryReader { geo in
+            content
+//                .overlay(LinearGradient(gradient: Gradient(colors: self.colors), startPoint: .top, endPoint: .bottom)
+//                    .frame(height: self.radius * self.minSide(geo)),
+//                         alignment: .top)
+                .overlay(LinearGradient(gradient: Gradient(colors: self.colors), startPoint: .bottom, endPoint: .top)
+                    .frame(height: self.radius * self.minSide(geo)),
+                         alignment: .bottom)
+                .overlay(LinearGradient(gradient: Gradient(colors: self.colors), startPoint: .leading, endPoint: .trailing)
+                    .frame(width: self.radius * self.minSide(geo)),
+                         alignment: .leading)
+                .overlay(LinearGradient(gradient: Gradient(colors: self.colors), startPoint: .trailing, endPoint: .leading)
+                    .frame(width: self.radius * self.minSide(geo)),
+                         alignment: .trailing)
+                .edgesIgnoringSafeArea(.all)
+        }
+    }
+
+    func minSide(_ geo: GeometryProxy) -> CGFloat {
+        CGFloat(3) * min(geo.size.width, geo.size.height) / 2
+    }
+}
+
 
 
 //MARK: - Extensions
@@ -99,6 +133,8 @@ extension TextField {
 
 extension Color {
     static let mustardYellow = Color("MustartYellow")
+    
+    static let granola = Color("Granola")
 }
 
 
@@ -106,4 +142,8 @@ extension View {
     func contentView(viewRouter: ViewRouter) -> some View{
         self.modifier(ContentView(viewRouter: viewRouter))
     }
+    
+    func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {
+            modifier(InnerShadow(color: color, radius: min(max(0, radius), 1)))
+        }
 }

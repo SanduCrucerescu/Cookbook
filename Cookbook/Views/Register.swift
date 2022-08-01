@@ -131,7 +131,7 @@ struct Register: View {
                             Button(
                                 "Register",
                                 action: {firebaseViewModel.register(email, password1, password2, username)})
-                            .buttonStyle(CustomButton())
+                            .buttonStyle(CustomButton(color: .granola))
                         }
                     }
                     .padding(.horizontal)
