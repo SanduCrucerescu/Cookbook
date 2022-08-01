@@ -59,6 +59,7 @@ struct ContentView: ViewModifier {
             ZStack(alignment: .leading) {
                 VStack {
                     TopBar(showMenu: $showMenu)
+                    Spacer()
                     content
                     Spacer()
                 }

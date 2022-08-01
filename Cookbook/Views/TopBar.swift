@@ -23,6 +23,7 @@ struct TopBar: View {
         HStack {
             Image(systemName: "line.horizontal.3")
                 .font(.system(size: DrawingConstansts.imageSize))
+                .foregroundColor(.white)
                 .onTapGesture {
                     withAnimation{
                         self.showMenu.toggle()
