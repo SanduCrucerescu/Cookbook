@@ -74,19 +74,54 @@ struct MainPage: View {
                 .foregroundColor(.granola)
                 .font(.title2)
                 .padding(.horizontal)
-            LazyVStack(){
-                ForEach(0..<50) { i in
-                    RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
-                        .fill(.white)
-                        .shadow(radius: DrawingConstants.boxesShadow)
+                LazyVStack(){
+                    ForEach(0..<50) { i in
+                        ZStack(alignment: .leading){
+                            RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
+                                .fill(.white)
+                                .shadow(radius: DrawingConstants.boxesShadow)
+                            HStack(alignment: .top) {
+                                Group{
+                                    Image("köttbullar")
+                                        .resizable()
+                                        .frame(width: 120,height: 90, alignment: .leading)
+                                        .layoutPriority(-1)
+                                        .clipShape(RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius))
+                                }.padding(.leading, 10)
+                                VStack(alignment: .leading) {
+                                    Text("Köttbullar")
+                                        .font(.title3)
+                                        .foregroundColor(.darkGrey)
+                                        .bold()
+                                    Text("Added by:")
+                                        .font(.caption2)
+                                        .foregroundColor(.lightGrey)
+                                    Divider()
+                                        .frame(width: geo.size.width/3,height: 2)
+    
+                                    Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")
+                                        .font(.caption2)
+                                        .foregroundColor(.lightGrey)
+                                        .padding(.trailing, 30)
+                                }
+                                
+                                Spacer()
+                                Button(action: {})
+                                    {
+                                        Image(systemName: "heart")
+                                            .foregroundColor(.red)
+                                    }
+                            }
+                            .padding(.trailing, 10)
+                        }
                         .frame(
                             width: geo.size.width/DrawingConstants.otherBoxesWidthMultiplier ,
                             height: DrawingConstants.otherBoxesHeight)
+                    }
                 }
             }
         }
     }
-}
 
 
 

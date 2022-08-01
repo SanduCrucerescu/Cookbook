@@ -135,6 +135,10 @@ extension Color {
     static let mustardYellow = Color("MustartYellow")
     
     static let granola = Color("Granola")
+    
+    static let lightGrey = Color("LightGrey")
+    
+    static let darkGrey = Color("DarkGrey")
 }
 
 
