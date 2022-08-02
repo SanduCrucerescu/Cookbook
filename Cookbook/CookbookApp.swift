@@ -11,14 +11,14 @@ import Firebase
 @main
 struct CookbookApp: App {
     @StateObject var viewRouter = ViewRouter()
-    @StateObject var recipe = recipeViewModel()
-
+    @StateObject var recipeVieModel = RecipeViewModel()
+    
     init() {
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
-            MotherView(recipe: recipe, viewRouter: viewRouter)
+            MotherView(recipeViewModel: recipeVieModel, viewRouter: viewRouter)
         }
     }
 }

@@ -20,7 +20,7 @@ struct FirebaseModel {
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
     
-    var recipeModel: recipeViewModel
+    var recipeModel: RecipeViewModel
     
     
     //MARK: - Check if the passwords are the same

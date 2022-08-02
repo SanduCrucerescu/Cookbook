@@ -9,13 +9,13 @@ import SwiftUI
 
 struct MotherView: View {
     @ObservedObject var viewRouter: ViewRouter 
-    @ObservedObject var recipe:recipeViewModel
+    @ObservedObject var recipeViewModel:RecipeViewModel
     @ObservedObject var firebase: FirebaseViewModel
     
-    init(recipe: recipeViewModel, viewRouter: ViewRouter) {
-        self.recipe = recipe
+    init(recipeViewModel: RecipeViewModel, viewRouter: ViewRouter) {
+        self.recipeViewModel = recipeViewModel
         self.viewRouter = viewRouter
-        self.firebase = FirebaseViewModel(recipeViewModel: recipe)
+        self.firebase = FirebaseViewModel(recipeViewModel: recipeViewModel)
     }
     
     
@@ -24,7 +24,7 @@ struct MotherView: View {
             case .Login:
                 LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
             case .MainPage:
-                MainPage(viewRouter: viewRouter, recipes: recipe, firebaseViewModel: firebase)
+                MainPage(viewRouter: viewRouter, recipes: recipeViewModel, firebaseViewModel: firebase)
             case .Register:
                 Register(viewRouter: viewRouter, firebaseViewModel: firebase)
         }

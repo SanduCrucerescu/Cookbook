@@ -15,7 +15,6 @@ struct TopBar: View {
         static let textFieldTrailingPadding: CGFloat = 14
     }
     
-    
     @Binding var showMenu: Bool
     @State private var search: String = ""
     

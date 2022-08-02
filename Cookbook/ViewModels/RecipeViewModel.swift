@@ -7,15 +7,7 @@
 
 import Foundation
 
-class recipeViewModel: ObservableObject {
-    //typealias Recipe = recipeModel.Recipe
-    @Published private(set) var recipe: recipeModel = createRecipes()
-    
-    var recipes:Array<Recipe> = []
-    
-    private static func createRecipes() -> recipeModel {
-        recipeModel()
-    }
-    
+class RecipeViewModel: ObservableObject {
+    @Published var recipes:Array<Recipe> = []
     
 }

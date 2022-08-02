@@ -21,7 +21,7 @@ struct MainPage: View {
     
     
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var recipes: recipeViewModel
+    @ObservedObject var recipes: RecipeViewModel
     @ObservedObject var firebaseViewModel: FirebaseViewModel
     
     var body: some View {

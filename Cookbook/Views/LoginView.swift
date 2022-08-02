@@ -172,7 +172,7 @@ struct LoginView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let recipe = recipeViewModel()
+        let recipe = RecipeViewModel()
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
         let viewRouter = ViewRouter()
         Group {

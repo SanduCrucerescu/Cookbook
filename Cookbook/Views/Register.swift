@@ -161,7 +161,7 @@ struct Register: View {
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         let viewRouter = ViewRouter()
-        let recipe = recipeViewModel()
+        let recipe = RecipeViewModel()
         let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
         Register(viewRouter: viewRouter, firebaseViewModel: firebaseViewModel)
     }

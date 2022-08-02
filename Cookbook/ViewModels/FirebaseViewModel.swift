@@ -18,10 +18,10 @@ class FirebaseViewModel: ObservableObject {
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
-    var recipeViewModel: recipeViewModel
+    var recipeViewModel: RecipeViewModel
     
     
-    init(recipeViewModel: recipeViewModel) {
+    init(recipeViewModel: RecipeViewModel) {
         self.recipeViewModel = recipeViewModel
     }
     
@@ -100,15 +100,16 @@ class FirebaseViewModel: ObservableObject {
         db.collection("Recipes").addSnapshotListener { snapshot, error in
             if error == nil {
                 if let shapshot = snapshot {
-                    self.recipeViewModel.recipes =  snapshot?.documents.map({ data in
-                        return Recipe(id: data.documentID,
-                                      title: data["Title"] as? String ?? "",
-                                      description: data["Desctiprion"] as? String ?? "",
-                                      author: data["Author"] as? String ?? "")
-                    }) ?? []
+                    DispatchQueue.main.async {
+                        self.recipeViewModel.recipes =  snapshot?.documents.map({ data in
+                            return Recipe(id: data.documentID,
+                                          title: data["Title"] as? String ?? "",
+                                          description: data["Desctiprion"] as? String ?? "",
+                                          author: data["Author"] as? String ?? "")
+                        }) ?? []
+                        print(self.recipeViewModel.recipes)
+                    }
                 }
-                print(self.recipeViewModel.recipes)
-                
             } else {
                 print("no data")
             }

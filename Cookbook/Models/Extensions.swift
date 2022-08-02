@@ -44,7 +44,7 @@ struct PasswordTextFiels: ViewModifier {
 private struct ContentView: ViewModifier {
     @State var showMenu = false
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var recipes: recipeViewModel
+    @ObservedObject var recipes: RecipeViewModel
     
     func body(content: Content) -> some View {
         let drag = DragGesture()
@@ -144,7 +144,7 @@ extension Color {
 
 
 extension View {
-    func contentView(viewRouter: ViewRouter, recipe: recipeViewModel) -> some View{
+    func contentView(viewRouter: ViewRouter, recipe: RecipeViewModel) -> some View{
         self.modifier(ContentView(viewRouter: viewRouter, recipes: recipe))
     }
     

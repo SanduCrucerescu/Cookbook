@@ -21,7 +21,7 @@ struct MenuItemsView: View {
     }
     
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var recipe: recipeViewModel
+    @ObservedObject var recipe: RecipeViewModel
         
     var body: some View {
         VStack {
