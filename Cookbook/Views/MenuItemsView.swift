@@ -21,6 +21,8 @@ struct MenuItemsView: View {
     }
     
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var recipe: recipeViewModel
+    
     
     var body: some View {
         VStack {
@@ -38,6 +40,9 @@ struct MenuItemsView: View {
                         .imageScale(.large)
                     Text("My profile")
                         .font(.headline)
+                        .onTapGesture {
+                            print(recipe.recipes)
+                        }
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {

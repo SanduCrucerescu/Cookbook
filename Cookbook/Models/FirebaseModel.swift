@@ -18,8 +18,16 @@ struct FirebaseModel {
     private(set) var shouldShake: Bool = false
 
     private var auth = Auth.auth()
-    private var firestore = Firestore.firestore()
+    private var db = Firestore.firestore()
     
+    var recipeModel: recipeViewModel
+    
+    
+    //MARK: - Check if the passwords are the same
+    
+    func passwordsCheck(_ passowrd1: String, _ password2: String) -> Bool {
+        passowrd1.elementsEqual(password2)
+    }
     
     // MARK: - SignIn
     
@@ -54,18 +62,11 @@ struct FirebaseModel {
             //self.registerSuccessfull = true
             guard let uid:String =  Auth.auth().currentUser?.uid else { return }
 
-            self.firestore.collection("Users").document(uid).setData(["Username": username])
+            self.db.collection("Users").document(uid).setData(["Username": username])
 
 
             print("true")
         }
-
-    }
-    
-    //MARK: - Check if the passwords are the same
-    
-    func passwordsCheck(_ passowrd1: String, _ password2: String) -> Bool {
-        passowrd1.elementsEqual(password2)
     }
 }
     

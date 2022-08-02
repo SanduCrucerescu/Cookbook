@@ -17,8 +17,19 @@ class FirebaseViewModel: ObservableObject {
     @Published private(set) var isEmail:Bool = true
 
     private var auth = Auth.auth()
-    private var firestore = Firestore.firestore()
+    private var db = Firestore.firestore()
+    var recipeViewModel: recipeViewModel
     
+    
+    init(recipeViewModel: recipeViewModel) {
+        self.recipeViewModel = recipeViewModel
+    }
+    
+    //MARK: - Check if the passwords are the same
+    
+    func passwordsCheck(_ passowrd1: String, _ password2: String) -> Bool {
+        passowrd1.elementsEqual(password2)
+    }
     
     //MARK: - Checks if it is a valid email
     
@@ -40,7 +51,9 @@ class FirebaseViewModel: ObservableObject {
             }
              self.isLogedIn = true
                 print("true")
-                viewRouter.page = .MainPage
+             self.getData()
+             print(self.recipeViewModel.recipes)
+             viewRouter.page = .MainPage
         }        
     }
 
@@ -73,16 +86,32 @@ class FirebaseViewModel: ObservableObject {
             self.registerSuccessfull = true
             guard let uid:String =  Auth.auth().currentUser?.uid else { return }
 
-            self.firestore.collection("Users").document(uid).setData(["Username": username])
+            self.db.collection("Users").document(uid).setData(["Username": username])
 
 
             print("true")
         }
     }
     
-    //MARK: - Check if the passwords are the same
+    //MARK: - Get data from firebase
     
-    func passwordsCheck(_ passowrd1: String, _ password2: String) -> Bool {
-        passowrd1.elementsEqual(password2)
+    func getData() {
+        
+        db.collection("Recipes").getDocuments { snapshot, error in
+            if error == nil {
+                if let shapshot = snapshot {
+                    self.recipeViewModel.recipes =  snapshot?.documents.map({ data in
+                        return Recipe(id: data.documentID,
+                                      title: data["Title"] as? String ?? "",
+                                      description: data["Desctiprion"] as? String ?? "",
+                                      author: data["Author"] as? String ?? "")
+                    }) ?? []
+                }
+                print(self.recipeViewModel.recipes)
+                
+            } else {
+                print("no data")
+            }
+        }
     }
 }

@@ -44,6 +44,7 @@ struct PasswordTextFiels: ViewModifier {
 private struct ContentView: ViewModifier {
     @State var showMenu = false
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var recipes: recipeViewModel
     
     func body(content: Content) -> some View {
         let drag = DragGesture()
@@ -69,7 +70,7 @@ private struct ContentView: ViewModifier {
                     
     
                 if self.showMenu {
-                    MenuItemsView(viewRouter: viewRouter)
+                    MenuItemsView(viewRouter: viewRouter, recipe: recipes)
                         .frame(width: geo.size.width/2)
                         .transition(.move(edge: .leading))
                 }
@@ -143,8 +144,8 @@ extension Color {
 
 
 extension View {
-    func contentView(viewRouter: ViewRouter) -> some View{
-        self.modifier(ContentView(viewRouter: viewRouter))
+    func contentView(viewRouter: ViewRouter, recipe: recipeViewModel) -> some View{
+        self.modifier(ContentView(viewRouter: viewRouter, recipes: recipe))
     }
     
     func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {

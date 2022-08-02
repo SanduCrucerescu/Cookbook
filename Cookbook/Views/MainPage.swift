@@ -21,6 +21,7 @@ struct MainPage: View {
     
     
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var recipes: recipeViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -33,7 +34,7 @@ struct MainPage: View {
                     }
                 }
             }
-            .contentView(viewRouter: viewRouter)
+            .contentView(viewRouter: viewRouter, recipe: recipes)
             .ignoresSafeArea(.all, edges: .bottom)
             .background(Image("LoginRegisterBackground").renderingMode(.original))
         }
@@ -128,7 +129,8 @@ struct MainPage: View {
 struct MainPageContents_Previews: PreviewProvider {
     static var previews: some View {
         let viewRouter = ViewRouter()
-        MainPage(viewRouter: viewRouter)
+        let recipe = recipeViewModel()
+        MainPage(viewRouter: viewRouter, recipes: recipe)
     }
 }
 
