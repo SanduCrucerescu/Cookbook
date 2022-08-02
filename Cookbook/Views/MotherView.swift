@@ -22,11 +22,17 @@ struct MotherView: View {
     var body: some View {
         switch viewRouter.page {
             case .Login:
-                LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
+                LoginView()
+                    .environmentObject(viewRouter)
+                    .environmentObject(firebase)
             case .MainPage:
-                MainPage(viewRouter: viewRouter, recipes: recipeViewModel, firebaseViewModel: firebase)
+                MainPage()
+                    .environmentObject(viewRouter)
+                    .environmentObject(recipeViewModel)
             case .Register:
-                Register(viewRouter: viewRouter, firebaseViewModel: firebase)
+                Register()
+                    .environmentObject(viewRouter)
+                    .environmentObject(firebase)
         }
     }
 }

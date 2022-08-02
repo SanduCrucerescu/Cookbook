@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct Register: View {
-    @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var firebaseViewModel: FirebaseViewModel
+//    @ObservedObject var viewRouter: ViewRouter
+//    @ObservedObject var firebaseViewModel: FirebaseViewModel
+    
     let height = UIScreen.main.bounds.height
     var width = UIScreen.main.bounds.width
     
@@ -35,8 +36,8 @@ struct Register: View {
     
     var body: some View {
         ZStack{
-            TopPart(viewRouter: viewRouter)
-            CenterRectangle(firebaseViewModel: firebaseViewModel)
+            TopPart()
+            CenterRectangle()
                 .frame(
                     width: width * DrawingConstants.centerRectangleWidthMltiplier,
                     height: DrawingConstants.centerRectangleHeight)
@@ -49,7 +50,7 @@ struct Register: View {
     
     struct TopPart: View {
         let height = UIScreen.main.bounds.height
-        @ObservedObject var viewRouter: ViewRouter
+        @EnvironmentObject var viewRouter: ViewRouter
         
         var body: some View {
             Button(
@@ -82,7 +83,7 @@ struct Register: View {
         @State private var username: String = ""
         @State private var password1: String = ""
         @State private var password2: String = ""
-        @ObservedObject var firebaseViewModel: FirebaseViewModel
+        @EnvironmentObject var firebaseViewModel: FirebaseViewModel
         @State var va = false
         
         var body: some View {
@@ -163,6 +164,8 @@ struct Register_Previews: PreviewProvider {
         let viewRouter = ViewRouter()
         let recipe = RecipeViewModel()
         let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
-        Register(viewRouter: viewRouter, firebaseViewModel: firebaseViewModel)
+        Register()
+            .environmentObject(viewRouter)
+            .environmentObject(firebaseViewModel)
     }
 }

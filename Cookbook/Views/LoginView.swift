@@ -9,8 +9,6 @@ import SwiftUI
   // MARK: - LoginView
 
 struct LoginView: View {
-    var firebaseViewModel: FirebaseViewModel
-    @ObservedObject var viewRouter: ViewRouter
     let height = UIScreen.main.bounds.height
     var width = UIScreen.main.bounds.width
     
@@ -41,24 +39,25 @@ struct LoginView: View {
                 .padding(.bottom, DrawingConstants.upperTextPadding)
                 .foregroundColor(.granola)
             Spacer()
-            CenterSquare(firebaseViewModel: firebaseViewModel, viewRouter: viewRouter)
+            CenterSquare()
                 .frame(
                     width: width * DrawingConstants.centerWidthMultiplier,
                     height: height < DrawingConstants.screenSize
                                     ? DrawingConstants.centerHeightIphone8
                                     : DrawingConstants.centerHeightIphone13)
             Spacer()
-            BottomText(viewRouter: viewRouter)
+            BottomText()
                 .padding(.top, DrawingConstants.bottomTextPadding)
-        }.frame( maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .frame( maxWidth: .infinity, maxHeight: .infinity)
         .background(Image("LoginRegisterBackground").renderingMode(.original))
     }
     
     // MARK: - Center square
     
     struct CenterSquare: View {
-        @ObservedObject var firebaseViewModel: FirebaseViewModel
-        @ObservedObject var viewRouter: ViewRouter
+        @EnvironmentObject var firebaseViewModel: FirebaseViewModel
+        @EnvironmentObject var viewRouter: ViewRouter
         @State private var email: String = "test@t.com"
         @State private var passoword: String = "test12"
         
@@ -101,7 +100,7 @@ struct LoginView: View {
     // MARK: - Bottom Text
     
     struct BottomText: View {
-        @ObservedObject var viewRouter: ViewRouter
+        @EnvironmentObject var viewRouter: ViewRouter
         
         var body: some View {
             HStack{
@@ -176,8 +175,7 @@ struct ContentView_Previews: PreviewProvider {
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
         let viewRouter = ViewRouter()
         Group {
-            LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
-            LoginView(firebaseViewModel: firebase, viewRouter: viewRouter)
+            LoginView()
         }
     }
 }

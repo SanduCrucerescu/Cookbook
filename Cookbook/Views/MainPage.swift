@@ -20,9 +20,8 @@ struct MainPage: View {
     }
     
     
-    @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var recipes: RecipeViewModel
-    @ObservedObject var firebaseViewModel: FirebaseViewModel
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var recipes: RecipeViewModel
     
     var body: some View {
         GeometryReader { geo in
