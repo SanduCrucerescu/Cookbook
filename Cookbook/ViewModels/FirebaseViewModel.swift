@@ -97,7 +97,7 @@ class FirebaseViewModel: ObservableObject {
     
     func getData() {
         
-        db.collection("Recipes").getDocuments { snapshot, error in
+        db.collection("Recipes").addSnapshotListener { snapshot, error in
             if error == nil {
                 if let shapshot = snapshot {
                     self.recipeViewModel.recipes =  snapshot?.documents.map({ data in

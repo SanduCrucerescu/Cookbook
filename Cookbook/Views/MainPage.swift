@@ -22,6 +22,7 @@ struct MainPage: View {
     
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var recipes: recipeViewModel
+    @ObservedObject var firebaseViewModel: FirebaseViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -126,11 +127,11 @@ struct MainPage: View {
 
 
 
-struct MainPageContents_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewRouter = ViewRouter()
-        let recipe = recipeViewModel()
-        MainPage(viewRouter: viewRouter, recipes: recipe)
-    }
-}
+//struct MainPageContents_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let viewRouter = ViewRouter()
+//        let recipe = recipeViewModel()
+//        MainPage(viewRouter: viewRouter, recipes: recipe)
+//    }
+//}
 

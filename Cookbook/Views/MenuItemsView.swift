@@ -22,8 +22,7 @@ struct MenuItemsView: View {
     
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var recipe: recipeViewModel
-    
-    
+        
     var body: some View {
         VStack {
             Image(systemName: "person.crop.circle")
