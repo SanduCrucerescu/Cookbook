@@ -18,10 +18,11 @@ class FirebaseViewModel: ObservableObject {
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
+    @Published private(set) var image: UIImage?
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
-//    private var storageRef = Storage.storage().reference()
+    private var storageRef = Storage.storage().reference()
     
     var recipeViewModel: RecipeViewModel
     
@@ -125,18 +126,52 @@ class FirebaseViewModel: ObservableObject {
     
     func uploadImage(_ image: UIImage?) {
         guard image != nil else { return }
-        
-        let storageRef = Storage.storage().reference()
+    
         let imageData = image!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else { return }
         
-        let fileRef = storageRef.child("images/\(UUID().uuidString).jpg")
+        let path = "images/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
         
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
-                 
+                self.db.collection("Recipes").document().setData(
+                    ["image": path]
+                )
             }
         }
     }
+    
+    //MARK: - Get photo from db
+    
+    func getPhoto() {
+        
+        db.collection("images").getDocuments{ snapshot, error in
+            if error == nil && snapshot != nil {
+                var paths = [String]()
+                
+                for doc in snapshot!.documents {
+                    paths.append(doc["url"] as! String)
+                }
+
+                for path in paths {
+                    let fileRef = self.storageRef.child(path)
+                    
+                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                        if error == nil && data != nil {
+                            print("yes")
+                            DispatchQueue.main.async {
+                                self.image = UIImage(data: data!)
+                            }
+                        }
+                    }
+                }
+            }
+        
+        
+        
+        }
+    }
+    
 }

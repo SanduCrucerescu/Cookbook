@@ -23,10 +23,11 @@ struct AddingRecipeView: View {
     
     @State var showPicker: Bool = false
     @State var image: UIImage?
+    @State var retrivedImage: UIImage?
     
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var recipes: RecipeViewModel
-    @EnvironmentObject var firbase: FirebaseViewModel
+    @EnvironmentObject var firebase: FirebaseViewModel
     
     
     var body: some View {
@@ -50,6 +51,12 @@ struct AddingRecipeView: View {
                             .resizable()
                             .frame(width: 200, height: 200)
                     }
+                
+                if firebase.image != nil {
+                    Image(uiImage: firebase.image!)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                    }
 
                 Button(
                     action: {showPicker = true}
@@ -59,9 +66,15 @@ struct AddingRecipeView: View {
                     }
                 
                 Button (
-                    action: {firbase.uploadImage(image!)}
+                    action: {firebase.uploadImage(image!)}
                 ) {
                     Text("Upload Image")
+                }
+                
+                Button (
+                    action: {firebase.getPhoto()}
+                ) {
+                    Text("Get image")
                 }
                     
                 }.sheet(isPresented: $showPicker, onDismiss: nil) {
