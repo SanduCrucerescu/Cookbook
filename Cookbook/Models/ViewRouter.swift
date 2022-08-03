@@ -8,6 +8,6 @@
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    @Published var page: Page = .Login
+    @Published var page: Page = .AddRecipe
 }
 

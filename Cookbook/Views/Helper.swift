@@ -8,4 +8,5 @@ enum Page {
     case Login
     case MainPage
     case Register
+    case AddRecipe
 }

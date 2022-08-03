@@ -45,6 +45,16 @@ struct MenuItemsView: View {
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
+                    Image(systemName: "plus")
+                        .imageScale(.large)
+                    Text("Add a new recipe")
+                        .font(.headline)
+                        .onTapGesture {
+                            viewRouter.page = .AddRecipe
+                        }
+                }
+                .padding(.top, DrawingConstants.itemsTopPadding)
+                HStack {
                     Image(systemName: "bookmark")
                         .imageScale(.large)
                     Text("Saved")
