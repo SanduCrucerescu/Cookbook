@@ -26,6 +26,7 @@ struct AddingRecipeView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var recipes: RecipeViewModel
+    @EnvironmentObject var firbase: FirebaseViewModel
     
     
     var body: some View {
@@ -56,8 +57,9 @@ struct AddingRecipeView: View {
                     {
                         Text("Select image")
                     }
+                
                 Button (
-                    action: {}
+                    action: {firbase.uploadImage(image!)}
                 ) {
                     Text("Upload Image")
                 }
@@ -81,6 +83,7 @@ struct AddingRecipeView_Previews: PreviewProvider {
         AddingRecipeView()
             .environmentObject(viewRouter)
             .environmentObject(recipe)
+            .environmentObject(firebaseViewModel)
 
     }
 }

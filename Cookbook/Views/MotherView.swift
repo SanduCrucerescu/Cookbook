@@ -36,7 +36,8 @@ struct MotherView: View {
             case .AddRecipe:
                 AddingRecipeView()
                     .environmentObject(viewRouter)
-                    .environmentObject(recipeViewModel) 
+                    .environmentObject(recipeViewModel)
+                    .environmentObject(firebase)
         }
     }
 }

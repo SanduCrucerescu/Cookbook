@@ -8,7 +8,10 @@
 import Foundation
 import FirebaseAuth
 import Firebase
+import FirebaseCore
+import FirebaseStorage
 import FirebaseFirestoreSwift
+import UIKit
 
 class FirebaseViewModel: ObservableObject {
     @Published private(set) var isLogedIn: Bool = true
@@ -18,6 +21,8 @@ class FirebaseViewModel: ObservableObject {
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
+//    private var storageRef = Storage.storage().reference()
+    
     var recipeViewModel: RecipeViewModel
     
     
@@ -112,6 +117,25 @@ class FirebaseViewModel: ObservableObject {
                 }
             } else {
                 print("no data")
+            }
+        }
+    }
+    
+    //MARK: - Upload image to db
+    
+    func uploadImage(_ image: UIImage?) {
+        guard image != nil else { return }
+        
+        let storageRef = Storage.storage().reference()
+        let imageData = image!.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else { return }
+        
+        let fileRef = storageRef.child("images/\(UUID().uuidString).jpg")
+        
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            if error == nil && metadata != nil {
+                 
             }
         }
     }
