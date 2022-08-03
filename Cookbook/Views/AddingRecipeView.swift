@@ -52,12 +52,6 @@ struct AddingRecipeView: View {
                             .frame(width: 200, height: 200)
                     }
                 
-                if firebase.image != nil {
-                    Image(uiImage: firebase.image!)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                    }
-
                 Button(
                     action: {showPicker = true}
                 )
@@ -71,11 +65,11 @@ struct AddingRecipeView: View {
                     Text("Upload Image")
                 }
                 
-                Button (
-                    action: {firebase.getPhoto()}
-                ) {
-                    Text("Get image")
-                }
+//                Button (
+//                    action: {firebase.getPhoto()}
+//                ) {
+//                    Text("Get image")
+   //             }
                     
                 }.sheet(isPresented: $showPicker, onDismiss: nil) {
                     ImagePicker(

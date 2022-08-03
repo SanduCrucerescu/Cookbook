@@ -13,12 +13,12 @@ import FirebaseStorage
 import FirebaseFirestoreSwift
 import UIKit
 
-class FirebaseViewModel: ObservableObject {
+@MainActor class FirebaseViewModel: ObservableObject {
     @Published private(set) var isLogedIn: Bool = true
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
-    @Published private(set) var image: UIImage?
+    private(set) var image: UIImage?
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
@@ -102,22 +102,34 @@ class FirebaseViewModel: ObservableObject {
     //MARK: - Get data from firebase
     
     func getData() {
+        //var image: UIImage?
         
         db.collection("Recipes").addSnapshotListener { snapshot, error in
             if error == nil {
                 if let shapshot = snapshot {
-                    DispatchQueue.main.async {
-                        self.recipeViewModel.recipes =  snapshot?.documents.map({ data in
-                            return Recipe(id: data.documentID,
-                                          title: data["Title"] as? String ?? "",
-                                          description: data["Desctiprion"] as? String ?? "",
-                                          author: data["Author"] as? String ?? "")
+                    
+                    for recipe in snapshot!.documents {
+ 
+                    
+                   //recipe DispatchQueue.main.async {
+                        self.recipeViewModel.recipes = snapshot?.documents.map({ data in
+                            var image: UIImage?
+                            Task{
+                                await self.getPhoto(data["imageURL"] as? String ?? "")
+                            }
+                                return Recipe(id: data.documentID,
+                                              title: data["Title"] as? String ?? "",
+                                              description: data["Desctiprion"] as? String ?? "",
+                                              author: data["Author"] as? String ?? "",
+                                              image: image!)
+
                         }) ?? []
                         print(self.recipeViewModel.recipes)
+                    //}
                     }
+                } else {
+                    print("no data")
                 }
-            } else {
-                print("no data")
             }
         }
     }
@@ -135,7 +147,7 @@ class FirebaseViewModel: ObservableObject {
         let fileRef = storageRef.child(path)
         
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            if error == nil && metadata != nil {
+            if error == nil && metadata != nil { 
                 self.db.collection("Recipes").document().setData(
                     ["image": path]
                 )
@@ -145,33 +157,18 @@ class FirebaseViewModel: ObservableObject {
     
     //MARK: - Get photo from db
     
-    func getPhoto() {
-        
-        db.collection("images").getDocuments{ snapshot, error in
-            if error == nil && snapshot != nil {
-                var paths = [String]()
-                
-                for doc in snapshot!.documents {
-                    paths.append(doc["url"] as! String)
-                }
-
-                for path in paths {
-                    let fileRef = self.storageRef.child(path)
-                    
-                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                        if error == nil && data != nil {
-                            print("yes")
-                            DispatchQueue.main.async {
-                                self.image = UIImage(data: data!)
-                            }
-                        }
-                    }
+    func getPhoto(_ path: String) async -> UIImage {
+        let fileRef = self.storageRef.child(path)
+        var image = UIImage(systemName: "plus")
+        await fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if error == nil && data != nil {
+                print("yes")
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data!)
+                    print("s")
                 }
             }
-        
-        
-        
         }
+        return image!
     }
-    
 }
