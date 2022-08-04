@@ -27,6 +27,7 @@
 		FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */; };
 		FAC93C922891EF1200F317FF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C912891EF1200F317FF /* Extensions.swift */; };
 		FAC93C962891F3C600F317FF /* MenuItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C952891F3C600F317FF /* MenuItemsView.swift */; };
+		FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB4797289C145300C49E5D /* CachedAsyncImage.swift */; };
 		FAF9FD8828995A0300D6A99F /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8728995A0200D6A99F /* Recipe.swift */; };
 		FAF9FD8A28995AC100D6A99F /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */; };
 		FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */; };
@@ -52,6 +53,7 @@
 		FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		FAC93C912891EF1200F317FF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FAC93C952891F3C600F317FF /* MenuItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemsView.swift; sourceTree = "<group>"; };
+		FACB4797289C145300C49E5D /* CachedAsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		FAF9FD8728995A0200D6A99F /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingRecipeView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 		FAC93C772891EDC100F317FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FACB4797289C145300C49E5D /* CachedAsyncImage.swift */,
 				FAC93C912891EF1200F317FF /* Extensions.swift */,
 				FAC93C792891EDC100F317FF /* ViewRouter.swift */,
 				FAF9FD8728995A0200D6A99F /* Recipe.swift */,
@@ -262,6 +265,7 @@
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,
 				FAC93C8D2891EDC100F317FF /* Helper.swift in Sources */,
+				FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */,
 				FAC93C8B2891EDC100F317FF /* Register.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -149,16 +149,6 @@ import UIKit
 //        var images = [UIImage]()
 //
 //        let imageSapshot = await fileRef.getData(maxSize: 5 * 1024 * 1024)
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //        await fileRef.getData(maxSize: 5 * 1024 * 1024) {data, error in
 //            if error == nil && data != nil {
 //                print("yes")
