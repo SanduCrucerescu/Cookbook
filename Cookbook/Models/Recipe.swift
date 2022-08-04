@@ -13,6 +13,6 @@ struct Recipe: Identifiable {
     var title: String
     var description: String
     var author: String
-    var image: UIImage
+    var image: String
 }
 

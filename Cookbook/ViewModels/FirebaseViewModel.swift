@@ -18,7 +18,7 @@ import UIKit
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
-    private(set) var image: UIImage?
+    //private(set) var image: UIImage?
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
@@ -47,7 +47,7 @@ import UIKit
     }
     
     // MARK: - SignIn
-    
+    @MainActor
     func signIn(_ email: String, _ passwordProvided: String, _ viewRouter: ViewRouter) {
          auth.signIn(withEmail: email, password: passwordProvided) { result, error in
             guard result != nil, error == nil else {
@@ -57,7 +57,9 @@ import UIKit
             }
              self.isLogedIn = true
                 print("true")
-             self.getData()
+             Task {
+                 await self.getData()
+             }
              print(self.recipeViewModel.recipes)
              viewRouter.page = .MainPage
         }        
@@ -100,39 +102,21 @@ import UIKit
     }
     
     //MARK: - Get data from firebase
-    
-    func getData() {
-        //var image: UIImage?
-        
-        db.collection("Recipes").addSnapshotListener { snapshot, error in
-            if error == nil {
-                if let shapshot = snapshot {
-                    
-                    for recipe in snapshot!.documents {
- 
-                    
-                   //recipe DispatchQueue.main.async {
-                        self.recipeViewModel.recipes = snapshot?.documents.map({ data in
-                            var image: UIImage?
-                            Task{
-                                await self.getPhoto(data["imageURL"] as? String ?? "")
-                            }
-                                return Recipe(id: data.documentID,
-                                              title: data["Title"] as? String ?? "",
-                                              description: data["Desctiprion"] as? String ?? "",
-                                              author: data["Author"] as? String ?? "",
-                                              image: image!)
-
-                        }) ?? []
-                        print(self.recipeViewModel.recipes)
-                    //}
-                    }
-                } else {
-                    print("no data")
-                }
-            }
+    func getData() async {
+        try await db.collection("Recipes").addSnapshotListener { snapshot, error in
+            self.recipeViewModel.recipes = snapshot?.documents.map({ data  in
+                return Recipe(id: data.documentID,
+                              title: data["Title"] as? String ?? "",
+                              description: data["Desctiprion"] as? String ?? "",
+                              author: data["Author"] as? String ?? "",
+                              image: data["imageURL"] as? String ?? "")
+            }) ?? []
         }
     }
+
+    
+    
+    
     
     //MARK: - Upload image to db
     
@@ -147,28 +131,44 @@ import UIKit
         let fileRef = storageRef.child(path)
         
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            if error == nil && metadata != nil { 
-                self.db.collection("Recipes").document().setData(
-                    ["image": path]
-                )
+            if error == nil && metadata != nil {
+                fileRef.downloadURL { url, error in
+                    if error == nil && url != nil {
+                        print(url?.absoluteString)
+                    }
+                }
+                //self.db.collection("Recipes").document().setData(["image": path])
             }
         }
     }
     
     //MARK: - Get photo from db
-    
-    func getPhoto(_ path: String) async -> UIImage {
-        let fileRef = self.storageRef.child(path)
-        var image = UIImage(systemName: "plus")
-        await fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-            if error == nil && data != nil {
-                print("yes")
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data!)
-                    print("s")
-                }
-            }
-        }
-        return image!
-    }
+   
+//    func getPhoto(_ path: String) ->  UIImage {
+//        let fileRef = self.storageRef.child(path)
+//        var images = [UIImage]()
+//
+//        let imageSapshot = await fileRef.getData(maxSize: 5 * 1024 * 1024)
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//        await fileRef.getData(maxSize: 5 * 1024 * 1024) {data, error in
+//            if error == nil && data != nil {
+//                print("yes")
+//                let image = await UIImage(data: data!)!
+//                images.append(image)
+//                    //print(image)
+//                    //print("s")
+//            }
+//        }
+//        return images.first!
+//
+//    }
 }
