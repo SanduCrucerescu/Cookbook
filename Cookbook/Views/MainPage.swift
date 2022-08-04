@@ -69,6 +69,8 @@ struct MainPage: View {
     
     
     struct OtherRecipes: View {
+        @EnvironmentObject var recipes: RecipeViewModel
+        
         let geo: GeometryProxy
         var body: some View {
             Text("Other Recipes")
@@ -76,31 +78,39 @@ struct MainPage: View {
                 .font(.title2)
                 .padding(.horizontal)
                 LazyVStack(){
-                    ForEach(0..<50) { i in
+                    ForEach(recipes.recipes) { i in
                         ZStack(alignment: .leading){
                             RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
                                 .fill(.white)
                                 .shadow(radius: DrawingConstants.boxesShadow)
                             HStack(alignment: .top) {
-                                Group{
-                                    Image("köttbullar")
-                                        .resizable()
-                                        .frame(width: 120,height: 90, alignment: .leading)
-                                        .layoutPriority(-1)
-                                        .clipShape(RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius))
-                                }.padding(.leading, 10)
+                                CachedAsyncImage(url: URL(string: i.image), urlCache: .imageCache) { phase in
+                                    if let image = phase.image{
+                                        image
+                                            .resizable()
+                                            .frame(width: 120,height: 90, alignment: .leading)
+                                            .layoutPriority(-1)
+                                            .clipShape(RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius))
+                                            .padding(.leading, 10)
+                                    } else {
+                                        ProgressView()
+                                            .frame(width: 120,height: 90, alignment: .center)
+                                    }
+                                }
+                                
+                                
                                 VStack(alignment: .leading) {
-                                    Text("Köttbullar")
+                                    Text(i.title)
                                         .font(.title3)
                                         .foregroundColor(.darkGrey)
                                         .bold()
-                                    Text("Added by:")
+                                    Text("Added by: \(i.author)")
                                         .font(.caption2)
                                         .foregroundColor(.lightGrey)
                                     Divider()
                                         .frame(width: geo.size.width/3,height: 2)
     
-                                    Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")
+                                    Text(i.description)
                                         .font(.caption2)
                                         .foregroundColor(.lightGrey)
                                         .padding(.trailing, 30)
@@ -123,14 +133,3 @@ struct MainPage: View {
             }
         }
     }
-
-
-
-//struct MainPageContents_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewRouter = ViewRouter()
-//        let recipe = recipeViewModel()
-//        MainPage(viewRouter: viewRouter, recipes: recipe)
-//    }
-//}
-
