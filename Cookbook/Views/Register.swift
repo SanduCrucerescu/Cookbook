@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct Register: View {
-//    @ObservedObject var viewRouter: ViewRouter
-//    @ObservedObject var firebaseViewModel: FirebaseViewModel
-    
     let height = UIScreen.main.bounds.height
     var width = UIScreen.main.bounds.width
     
@@ -52,7 +49,6 @@ struct Register: View {
     
     struct TopPart: View {
         let height = UIScreen.main.bounds.height
-        @EnvironmentObject var viewRouter: ViewRouter
         
         var body: some View {
             Text("Register")
@@ -149,11 +145,9 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        let viewRouter = ViewRouter()
         let recipe = RecipeViewModel()
         let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
         Register()
-            .environmentObject(viewRouter)
             .environmentObject(firebaseViewModel)
     }
 }

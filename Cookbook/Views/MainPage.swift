@@ -20,33 +20,37 @@ struct MainPage: View {
     }
     
     
-    @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var recipes: RecipeViewModel
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                //LazyVStack {
-                    ScrollView(showsIndicators: false){
-                        VStack(alignment: .leading) {
-                            PopularRecipes()
-                            //Divider()
-                            Text("Other Recipes")
-                                .foregroundColor(.granola)
-                                .font(.title2)
-                                .padding(.horizontal)
-                            LazyVStack{
-                            ForEach(recipes.recipes) { recipe in
-                                OtherRecipes(recipe: recipe, geo: geo)
+       NavigationView {
+            GeometryReader { geo in
+                ZStack {
+                    //LazyVStack {
+                        ScrollView(showsIndicators: false){
+                            VStack(alignment: .leading) {
+                                PopularRecipes()
+                                //Divider()
+                                Text("Other Recipes")
+                                    .foregroundColor(.granola)
+                                    .font(.title2)
+                                    .padding(.horizontal)
+                                LazyVStack{
+                                ForEach(recipes.recipes) { recipe in
+                                    OtherRecipes(recipe: recipe, geo: geo)
+                                }
                             }
                         }
                     }
                 }
+                .contentView(recipe: recipes)
+                .ignoresSafeArea(.all, edges: .bottom)
+                .background(Image("LoginRegisterBackground").renderingMode(.original))
             }
-            .contentView(viewRouter: viewRouter, recipe: recipes)
-            .ignoresSafeArea(.all, edges: .bottom)
-            .background(Image("LoginRegisterBackground").renderingMode(.original))
+            .navigationBarHidden(true)
         }
+       .navigationBarHidden(true)
+       .navigationBarBackButtonHidden(true)
     }
     
     struct PopularRecipes: View {
@@ -83,7 +87,6 @@ struct MainPage: View {
         private(set) var geo: GeometryProxy
         
         var body: some View {
-            NavigationView{
                 ZStack(alignment: .leading){
                     RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
                         .fill(.white)
@@ -131,7 +134,6 @@ struct MainPage: View {
                 .frame(
                     width: geo.size.width/DrawingConstants.otherBoxesWidthMultiplier ,
                     height: DrawingConstants.otherBoxesHeight)
-                }
             }
         }
     }
@@ -140,10 +142,8 @@ struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
         let recipe = RecipeViewModel()
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
-        let viewRouter = ViewRouter()
         Group {
             MainPage()
-                .environmentObject(viewRouter)
                 .environmentObject(firebase)
                 .environmentObject(recipe)
         }

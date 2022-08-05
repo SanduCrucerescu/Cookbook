@@ -47,21 +47,20 @@ import UIKit
     
     // MARK: - SignIn
     @MainActor
-    func signIn(_ email: String, _ passwordProvided: String, _ viewRouter: ViewRouter) {
-         auth.signIn(withEmail: email, password: passwordProvided) { result, error in
-            guard result != nil, error == nil else {
-                self.isLogedIn = false
-                print("false")
-                return
-            }
-             self.isLogedIn = true
-                print("true")
-             Task {
-                 await self.getData()
-             }
-             print(self.recipeViewModel.recipes)
-             //viewRouter.page = .MainPage
-        }        
+    func signIn(_ email: String, _ passwordProvided: String) async -> Void {
+        do {
+            let authDataResults = try await auth.signIn(withEmail: email, password: passwordProvided)
+            
+            _ = authDataResults.user
+            
+            self.isLogedIn = true
+            
+            await self.getData()
+            
+        } catch {
+            self.isLogedIn = false
+            print(error)
+        }
     }
 
     
@@ -102,7 +101,7 @@ import UIKit
     
     //MARK: - Get data from firebase
     func getData() async {
-        try await db.collection("Recipes").addSnapshotListener { snapshot, error in
+       db.collection("Recipes").addSnapshotListener { snapshot, error in
             self.recipeViewModel.recipes = snapshot?.documents.map({ data  in
                 return Recipe(id: data.documentID,
                               title: data["Title"] as? String ?? "",
@@ -125,11 +124,11 @@ import UIKit
         let path = "images/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
         
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
                 fileRef.downloadURL { url, error in
                     if error == nil && url != nil {
-                        print(url?.absoluteString)
+                        print(url?.absoluteString ?? "No URL")
                     }
                 }
                 //self.db.collection("Recipes").document().setData(["image": path])

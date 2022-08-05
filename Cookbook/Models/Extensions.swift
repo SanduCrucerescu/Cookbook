@@ -43,7 +43,6 @@ struct PasswordTextFiels: ViewModifier {
 
 private struct ContentView: ViewModifier {
     @State var showMenu = false
-    @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var recipes: RecipeViewModel
     
     func body(content: Content) -> some View {
@@ -70,7 +69,7 @@ private struct ContentView: ViewModifier {
                     
     
                 if self.showMenu {
-                    MenuItemsView(viewRouter: viewRouter, recipe: recipes)
+                    MenuItemsView(recipe: recipes)
                         .frame(width: geo.size.width/2)
                         .transition(.move(edge: .leading))
                 }
@@ -144,8 +143,8 @@ extension Color {
 
 
 extension View {
-    func contentView(viewRouter: ViewRouter, recipe: RecipeViewModel) -> some View{
-        self.modifier(ContentView(viewRouter: viewRouter, recipes: recipe))
+    func contentView(recipe: RecipeViewModel) -> some View{
+        self.modifier(ContentView(recipes: recipe))
     }
     
     func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {

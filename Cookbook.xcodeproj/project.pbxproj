@@ -17,13 +17,10 @@
 		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
 		FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C742891EBAF00F317FF /* CookbookApp.swift */; };
-		FAC93C862891EDC100F317FF /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C792891EDC100F317FF /* ViewRouter.swift */; };
 		FAC93C872891EDC100F317FF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C7B2891EDC100F317FF /* CustomButton.swift */; };
 		FAC93C882891EDC100F317FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C7C2891EDC100F317FF /* TextField.swift */; };
 		FAC93C8A2891EDC100F317FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C7F2891EDC100F317FF /* LoginView.swift */; };
 		FAC93C8B2891EDC100F317FF /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C802891EDC100F317FF /* Register.swift */; };
-		FAC93C8C2891EDC100F317FF /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C812891EDC100F317FF /* MotherView.swift */; };
-		FAC93C8D2891EDC100F317FF /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C822891EDC100F317FF /* Helper.swift */; };
 		FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */; };
 		FAC93C922891EF1200F317FF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C912891EF1200F317FF /* Extensions.swift */; };
 		FAC93C962891F3C600F317FF /* MenuItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C952891F3C600F317FF /* MenuItemsView.swift */; };
@@ -43,13 +40,10 @@
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
-		FAC93C792891EDC100F317FF /* ViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		FAC93C7B2891EDC100F317FF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		FAC93C7C2891EDC100F317FF /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		FAC93C7F2891EDC100F317FF /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FAC93C802891EDC100F317FF /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
-		FAC93C812891EDC100F317FF /* MotherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
-		FAC93C822891EDC100F317FF /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		FAC93C912891EF1200F317FF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FAC93C952891F3C600F317FF /* MenuItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemsView.swift; sourceTree = "<group>"; };
@@ -128,7 +122,6 @@
 			children = (
 				FACB4797289C145300C49E5D /* CachedAsyncImage.swift */,
 				FAC93C912891EF1200F317FF /* Extensions.swift */,
-				FAC93C792891EDC100F317FF /* ViewRouter.swift */,
 				FAF9FD8728995A0200D6A99F /* Recipe.swift */,
 			);
 			path = Models;
@@ -151,8 +144,6 @@
 				FAC93C952891F3C600F317FF /* MenuItemsView.swift */,
 				FAC93C7F2891EDC100F317FF /* LoginView.swift */,
 				FAC93C802891EDC100F317FF /* Register.swift */,
-				FAC93C812891EDC100F317FF /* MotherView.swift */,
-				FAC93C822891EDC100F317FF /* Helper.swift */,
 				FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */,
 				FAF9FD8D289A985300D6A99F /* ImagePicker.swift */,
 			);
@@ -253,18 +244,15 @@
 				FAC93C8A2891EDC100F317FF /* LoginView.swift in Sources */,
 				FAF9FD8828995A0300D6A99F /* Recipe.swift in Sources */,
 				FAF9FD8E289A985300D6A99F /* ImagePicker.swift in Sources */,
-				FAC93C862891EDC100F317FF /* ViewRouter.swift in Sources */,
 				FAF9FD8A28995AC100D6A99F /* RecipeViewModel.swift in Sources */,
 				FA3F4A022895974E00C5DBC6 /* MainPage.swift in Sources */,
 				FAC93C962891F3C600F317FF /* MenuItemsView.swift in Sources */,
-				FAC93C8C2891EDC100F317FF /* MotherView.swift in Sources */,
 				FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */,
 				FAC93C882891EDC100F317FF /* TextField.swift in Sources */,
 				FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */,
 				FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,
-				FAC93C8D2891EDC100F317FF /* Helper.swift in Sources */,
 				FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */,
 				FAC93C8B2891EDC100F317FF /* Register.swift in Sources */,
 			);

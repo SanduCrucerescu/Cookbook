@@ -25,7 +25,6 @@ struct AddingRecipeView: View {
     @State var image: UIImage?
     @State var retrivedImage: UIImage?
     
-    @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var recipes: RecipeViewModel
     @EnvironmentObject var firebase: FirebaseViewModel
     
@@ -33,7 +32,7 @@ struct AddingRecipeView: View {
     var body: some View {
         ZStack {
             Button(
-                action: {viewRouter.page = .MainPage}) {
+                action: {}) {
                     Image(systemName: "chevron.left")
                         .resizable(resizingMode: .stretch)
                         .foregroundColor(.gray)
@@ -77,18 +76,16 @@ struct AddingRecipeView: View {
                         showPicker: $showPicker)
                 
         }
-            .contentView(viewRouter: viewRouter, recipe: recipes)
+            .contentView(recipe: recipes)
     }
 }
 
 }
 struct AddingRecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewRouter = ViewRouter()
         let recipe = RecipeViewModel()
         let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
         AddingRecipeView()
-            .environmentObject(viewRouter)
             .environmentObject(recipe)
             .environmentObject(firebaseViewModel)
 

@@ -20,7 +20,6 @@ struct MenuItemsView: View {
         static let shadowRadius: CGFloat = 0.05
     }
     
-    @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var recipe: RecipeViewModel
         
     var body: some View {
@@ -50,8 +49,8 @@ struct MenuItemsView: View {
                     Text("Add a new recipe")
                         .font(.headline)
                         .onTapGesture {
-                            viewRouter.page = .AddRecipe
-                        }
+
+                    }
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
@@ -73,7 +72,6 @@ struct MenuItemsView: View {
                         .imageScale(.large)
                     Text("Sign Out")
                         .onTapGesture {
-                            viewRouter.page = .Login
                             print("s")
                         }
                         .font(.headline)
