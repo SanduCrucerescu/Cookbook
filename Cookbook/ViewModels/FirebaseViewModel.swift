@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 import UIKit
 
 @MainActor class FirebaseViewModel: ObservableObject {
-    @Published private(set) var isLogedIn: Bool = false
+    @Published private(set) var isLogedIn: Bool?
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true

@@ -47,9 +47,9 @@ struct LoginView: View {
             .frame( maxWidth: .infinity, maxHeight: .infinity)
             .background(Image("LoginRegisterBackground").renderingMode(.original))
             .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
     
     // MARK: - Center square
@@ -67,7 +67,7 @@ struct LoginView: View {
                     .fill(.white)
                     .shadow(radius: DrawingConstants.shadow)
                 VStack {
-                    if !firebaseViewModel.isLogedIn {
+                    if !(firebaseViewModel.isLogedIn ?? true) {
                         Text("Email or password incorect. Try again")
                             .foregroundColor(.red)
                     }
@@ -78,19 +78,19 @@ struct LoginView: View {
                         .textFieldStyle(
                             TextFieldDesign(
                                 image: "mail",
-                                error: !firebaseViewModel.isLogedIn))
+                                error: !(firebaseViewModel.isLogedIn ?? true)))
                         TextField(
                             "Password",
                             text: $passoword)
                         .textFieldStyle(
                             TextFieldDesign(
                                 image: "key",
-                                error: !firebaseViewModel.isLogedIn))
+                                error: !(firebaseViewModel.isLogedIn ?? true)))
                         NavigationLink(destination: MainPage().environmentObject(firebaseViewModel.recipeViewModel) , isActive: $isLogedI, label: {
                                         Button(action: {
                                             Task{
                                                 await firebaseViewModel.signIn(email, passoword)
-                                                isLogedI = firebaseViewModel.isLogedIn
+                                                isLogedI = firebaseViewModel.isLogedIn ?? false
                                                 print(isLogedI)
                                             }
                                           print(isLogedI)

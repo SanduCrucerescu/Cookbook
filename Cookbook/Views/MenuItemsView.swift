@@ -67,15 +67,24 @@ struct MenuItemsView: View {
                         .font(.headline)
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
-                HStack {
-                    Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .imageScale(.large)
-                    Text("Sign Out")
-                        .onTapGesture {
-                            print("s")
-                        }
-                        .font(.headline)
+                
+                NavigationLink {
+                    LoginView()
+                } label: {
+                    HStack {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .imageScale(.large)
+                        Text("Sign Out")
+                            .font(.headline)
+                    }
                 }
+
+//                HStack {
+//                    Image(systemName: "rectangle.portrait.and.arrow.right")
+//                        .imageScale(.large)
+//                    Text("Sign Out")
+//                        .font(.headline)
+//                }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 Spacer()
             }
