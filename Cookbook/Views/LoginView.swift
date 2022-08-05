@@ -19,9 +19,9 @@ struct LoginView: View {
         static let paddingAll: CGFloat = 37
         static let paddingVerical: CGFloat = 4.8
         static let fontSize: CGFloat = 33
-        static let upperTextPadding: CGFloat = 400
+       // static let upperTextPadding: CGFloat = 400
         static let bottomTextFont: CGFloat = 15
-        static let bottomTextPadding: CGFloat = 350
+       // static let bottomTextPadding: CGFloat = 350
         static let screenSize: CGFloat = 700
         static let centerWidthMultiplier: CGFloat = 0.8
         static let centerHeightIphone8: CGFloat = 290
@@ -30,27 +30,31 @@ struct LoginView: View {
     }
     
     var body: some View {
-        ZStack{
-            Text("Sign In")
-                .font(.system(
-                    size: DrawingConstants.fontSize,
-                    weight: .regular,
-                    design: .default))
-                .padding(.bottom, DrawingConstants.upperTextPadding)
-                .foregroundColor(.granola)
-            Spacer()
-            CenterSquare()
-                .frame(
-                    width: width * DrawingConstants.centerWidthMultiplier,
-                    height: height < DrawingConstants.screenSize
-                                    ? DrawingConstants.centerHeightIphone8
-                                    : DrawingConstants.centerHeightIphone13)
-            Spacer()
-            BottomText()
-                .padding(.top, DrawingConstants.bottomTextPadding)
+        NavigationView{
+            VStack(alignment: .center){
+                Text("Sign In")
+                    .font(.system(
+                        size: DrawingConstants.fontSize,
+                        weight: .regular,
+                        design: .default))
+                    //.padding(.bottom, DrawingConstants.upperTextPadding)
+                    .foregroundColor(.granola)
+               // Spacer()
+                CenterSquare()
+                    .frame(
+                        width: width * DrawingConstants.centerWidthMultiplier,
+                        height: height < DrawingConstants.screenSize
+                                        ? DrawingConstants.centerHeightIphone8
+                                        : DrawingConstants.centerHeightIphone13)
+               // Spacer()
+                BottomText()
+                   // .padding(.top, DrawingConstants.bottomTextPadding)
+            }
+            .frame( maxWidth: .infinity, maxHeight: .infinity)
+            .background(Image("LoginRegisterBackground").renderingMode(.original))
+            .navigationBarHidden(true)
+            
         }
-        .frame( maxWidth: .infinity, maxHeight: .infinity)
-        .background(Image("LoginRegisterBackground").renderingMode(.original))
     }
     
     // MARK: - Center square
@@ -60,6 +64,8 @@ struct LoginView: View {
         @EnvironmentObject var viewRouter: ViewRouter
         @State private var email: String = "test@t.com"
         @State private var passoword: String = "test12"
+        @State private var isLogedI: Bool = false
+        
         
         var body: some View {
             ZStack(alignment: .center){
@@ -67,10 +73,10 @@ struct LoginView: View {
                     .fill(.white)
                     .shadow(radius: DrawingConstants.shadow)
                 VStack {
-                    if !firebaseViewModel.isLogedIn {
-                        Text("Email or password incorect. Try again")
-                            .foregroundColor(.red)
-                    }
+//                    if !firebaseViewModel.isLogedIn {
+//                        Text("Email or password incorect. Try again")
+//                            .foregroundColor(.red)
+//                    }
                     VStack(spacing: DrawingConstants.VStackSpacing) {
                         TextField(
                             "Email",
@@ -86,11 +92,61 @@ struct LoginView: View {
                             TextFieldDesign(
                                 image: "key",
                                 error: !firebaseViewModel.isLogedIn))
-                        Button(
-                            "Login",
-                            action: {firebaseViewModel.signIn(email, passoword, viewRouter)})
-                        .buttonStyle(CustomButton(color:.granola))
-                    }
+//                        NavigationLink().onTapGesture {
+//                            firebaseViewModel.signIn(email, passoword, viewRouter)
+//                        } {
+////                            firebaseViewModel.signIn(email, passoword, viewRouter)
+//                            if firebaseViewModel.isLogedIn {
+//                                MainPage()
+//                                    .environmentObject(firebaseViewModel.recipeViewModel)
+//                            }
+//                        }
+//                        .buttonStyle(CustomButton(color: .granola))
+//                        NavigationLink(destination: {
+//                            //if firebaseViewModel.isLogedIn {
+//                                MainPage()
+//                                    .environmentObject(firebaseViewModel.recipeViewModel)
+//                            //}
+                        
+//                        NavigationLink(isActive: $isLogedI) {
+//                            MainPage()
+//                                .environmentObject(firebaseViewModel.recipeViewModel)
+//                        } label: {
+//                            Text("v")
+//                        }
+//
+//
+//                        Button {
+//                            firebaseViewModel.signIn(email, passoword, viewRouter)
+//                            print("gggg \(firebaseViewModel.isLogedIn)")
+//                            if firebaseViewModel.isLogedIn {
+//                                self.isLogedI = true
+//                                print("1")
+//                            }
+//                        } label: {
+//                            Text("Sign In")
+//                        }
+//
+                        NavigationLink(destination: Text("aaa") , isActive: $isLogedI, label: {
+                                        Button(action: {
+                                            Task{
+                                                await firebaseViewModel.signIn(email, passoword, viewRouter)
+                                            }
+                                            isLogedI = firebaseViewModel.isLogedIn
+                                            print(isLogedI)
+                                        }, label: {
+                                            Text("Sign In")
+                                        })
+                        })
+
+//
+//
+//                        }, label: {
+//                            Text("login")
+//                        }).onTapGesture {
+//                            firebaseViewModel.signIn(email, passoword, viewRouter)
+//                        }
+                        }
                     .padding(.horizontal)
                 }
             }
@@ -110,49 +166,25 @@ struct LoginView: View {
                                 size: DrawingConstants.bottomTextFont,
                                 weight: .light,
                                 design: .default))
-                    
-                Button(
-                    action: {
-                        viewRouter.page = .Register})
-                        {Text("Register Now")
-                            .underline()}
+                
+                
+                NavigationLink{
+                    Register()
+                } label: {
+                    Text("Register now")
+                        .underline()
                         .font(
                             .system(
                                 size: DrawingConstants.bottomTextFont,
                                 weight: .semibold,
                                 design: .default))
                         .foregroundColor(.black)
+                }
             }
         }
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -176,6 +208,8 @@ struct ContentView_Previews: PreviewProvider {
         let viewRouter = ViewRouter()
         Group {
             LoginView()
+                .environmentObject(viewRouter)
+                .environmentObject(firebase)
         }
     }
 }

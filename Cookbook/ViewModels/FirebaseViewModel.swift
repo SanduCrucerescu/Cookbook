@@ -14,11 +14,10 @@ import FirebaseFirestoreSwift
 import UIKit
 
 @MainActor class FirebaseViewModel: ObservableObject {
-    @Published private(set) var isLogedIn: Bool = true
+    @Published private(set) var isLogedIn: Bool = false
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
-    //private(set) var image: UIImage?
 
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
@@ -61,7 +60,7 @@ import UIKit
                  await self.getData()
              }
              print(self.recipeViewModel.recipes)
-             viewRouter.page = .MainPage
+             //viewRouter.page = .MainPage
         }        
     }
 
@@ -113,10 +112,6 @@ import UIKit
             }) ?? []
         }
     }
-
-    
-    
-    
     
     //MARK: - Upload image to db
     

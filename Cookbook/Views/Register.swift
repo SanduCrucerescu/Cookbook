@@ -22,7 +22,6 @@ struct Register: View {
         static let backButtonPaddingButtom: CGFloat = 700
         static let backButtonPaddingTrailing: CGFloat = 330
         static let textFont: CGFloat = 33
-        static let textPaddingBottom: CGFloat = 530
         static let rectangleCornerRadius: CGFloat = 15
         static let rectangleShadow: CGFloat = 5
         static let VStackSpacing: CGFloat = 15
@@ -35,15 +34,18 @@ struct Register: View {
     
     
     var body: some View {
-        ZStack{
-            TopPart()
-            CenterRectangle()
-                .frame(
-                    width: width * DrawingConstants.centerRectangleWidthMltiplier,
-                    height: DrawingConstants.centerRectangleHeight)
-            
+        NavigationView {
+            VStack{
+                TopPart()
+                CenterRectangle()
+                    .frame(
+                        width: width * DrawingConstants.centerRectangleWidthMltiplier,
+                        height: DrawingConstants.centerRectangleHeight)
+                    
+            }
+            .navigationBarHidden(true)
+            .background(Image("LoginRegisterBackground"))
         }
-        .background(Image("LoginRegisterBackground"))
     }
     
     // MARK: - Top part of the register view
@@ -53,26 +55,12 @@ struct Register: View {
         @EnvironmentObject var viewRouter: ViewRouter
         
         var body: some View {
-            Button(
-                action: {viewRouter.page = .Login}) {
-                    Image(systemName: "chevron.left")
-                        .resizable(resizingMode: .stretch)
-                        .foregroundColor(.gray)
-                        .frame(
-                            width: DrawingConstants.backButtonIconFrameWidth,
-                            height: DrawingConstants.backButtonIconFrameHeight)
-                }
-                .padding(.bottom, height < 700
-                         ? DrawingConstants.backButtonHeightIphone8
-                         : DrawingConstants.backButtonHeightIphoneXS)
-                .padding(.trailing, DrawingConstants.backButtonPaddingTrailing)
             Text("Register")
                 .font(
                     .system(
                         size: DrawingConstants.textFont,
                         weight: .regular,
                         design: .default ))
-                .padding(.bottom, DrawingConstants.textPaddingBottom)
         }
     }
     

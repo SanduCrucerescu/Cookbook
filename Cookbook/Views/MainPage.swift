@@ -26,11 +26,20 @@ struct MainPage: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                ScrollView(showsIndicators: false){
-                    VStack(alignment: .leading) {
-                        PopularRecipes()
-                        Divider()
-                        OtherRecipes(geo: geo)
+                //LazyVStack {
+                    ScrollView(showsIndicators: false){
+                        VStack(alignment: .leading) {
+                            PopularRecipes()
+                            //Divider()
+                            Text("Other Recipes")
+                                .foregroundColor(.granola)
+                                .font(.title2)
+                                .padding(.horizontal)
+                            LazyVStack{
+                            ForEach(recipes.recipes) { recipe in
+                                OtherRecipes(recipe: recipe, geo: geo)
+                            }
+                        }
                     }
                 }
             }
@@ -70,66 +79,74 @@ struct MainPage: View {
     
     struct OtherRecipes: View {
         @EnvironmentObject var recipes: RecipeViewModel
+        private(set) var recipe: Recipe
+        private(set) var geo: GeometryProxy
         
-        let geo: GeometryProxy
         var body: some View {
-            Text("Other Recipes")
-                .foregroundColor(.granola)
-                .font(.title2)
-                .padding(.horizontal)
-                LazyVStack(){
-                    ForEach(recipes.recipes) { i in
-                        ZStack(alignment: .leading){
-                            RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
-                                .fill(.white)
-                                .shadow(radius: DrawingConstants.boxesShadow)
-                            HStack(alignment: .top) {
-                                CachedAsyncImage(url: URL(string: i.image), urlCache: .imageCache) { phase in
-                                    if let image = phase.image{
-                                        image
-                                            .resizable()
-                                            .frame(width: 120,height: 90, alignment: .leading)
-                                            .layoutPriority(-1)
-                                            .clipShape(RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius))
-                                            .padding(.leading, 10)
-                                    } else {
-                                        ProgressView()
-                                            .frame(width: 120,height: 90, alignment: .center)
-                                    }
-                                }
-                                
-                                
-                                VStack(alignment: .leading) {
-                                    Text(i.title)
-                                        .font(.title3)
-                                        .foregroundColor(.darkGrey)
-                                        .bold()
-                                    Text("Added by: \(i.author)")
-                                        .font(.caption2)
-                                        .foregroundColor(.lightGrey)
-                                    Divider()
-                                        .frame(width: geo.size.width/3,height: 2)
-    
-                                    Text(i.description)
-                                        .font(.caption2)
-                                        .foregroundColor(.lightGrey)
-                                        .padding(.trailing, 30)
-                                }
-                                
-                                Spacer()
-                                Button(action: {})
-                                    {
-                                        Image(systemName: "heart")
-                                            .foregroundColor(.red)
-                                    }
+            NavigationView{
+                ZStack(alignment: .leading){
+                    RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
+                        .fill(.white)
+                        .shadow(radius: DrawingConstants.boxesShadow)
+                    HStack(alignment: .top) {
+                        CachedAsyncImage(url: URL(string: recipe.image), urlCache: .imageCache) { phase in
+                            if let image = phase.image{
+                                image
+                                    .resizable()
+                                    .frame(width: 120,height: 90, alignment: .leading)
+                                    .layoutPriority(-1)
+                                    .clipShape(RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius))
+                                    .padding(.leading, 10)
+                            } else {
+                                ProgressView()
+                                    .frame(width: 120,height: 90, alignment: .center)
                             }
-                            .padding(.trailing, 10)
                         }
-                        .frame(
-                            width: geo.size.width/DrawingConstants.otherBoxesWidthMultiplier ,
-                            height: DrawingConstants.otherBoxesHeight)
+                        VStack(alignment: .leading) {
+                            Text(recipe.title)
+                                .font(.title3)
+                                .foregroundColor(.darkGrey)
+                                .bold()
+                            Text("Added by: \(recipe.author)")
+                                .font(.caption2)
+                                .foregroundColor(.lightGrey)
+                            Divider()
+                                .frame(width: geo.size.width/3,height: 2)
+
+                            Text(recipe.description)
+                                .font(.caption2)
+                                .foregroundColor(.lightGrey)
+                                .padding(.trailing, 30)
+                        }
+                        
+                        Spacer()
+                        Button(action: {})
+                            {
+                                Image(systemName: "heart")
+                                    .foregroundColor(.red)
+                            }
                     }
+                    .padding(.trailing, 10)
+                }
+                .frame(
+                    width: geo.size.width/DrawingConstants.otherBoxesWidthMultiplier ,
+                    height: DrawingConstants.otherBoxesHeight)
                 }
             }
         }
     }
+
+struct MainPage_Previews: PreviewProvider {
+    static var previews: some View {
+        let recipe = RecipeViewModel()
+        let firebase = FirebaseViewModel(recipeViewModel: recipe)
+        let viewRouter = ViewRouter()
+        Group {
+            MainPage()
+                .environmentObject(viewRouter)
+                .environmentObject(firebase)
+                .environmentObject(recipe)
+        }
+    }
+}
+
