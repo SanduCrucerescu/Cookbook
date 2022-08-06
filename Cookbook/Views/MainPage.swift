@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainPage: View {
-    
+
     private struct DrawingConstants{
         static let boxesCornerRadius: CGFloat = 15
         static let boxesShadow: CGFloat = 5
@@ -18,10 +18,11 @@ struct MainPage: View {
         static let otherBoxesWidthMultiplier: CGFloat = 1.05
         static let otherBoxesHeight: CGFloat = 110
     }
-    
-    
+
+
     @EnvironmentObject var recipes: RecipeViewModel
-    
+    @State private var search: String = ""
+
     var body: some View {
        NavigationView {
             GeometryReader { geo in
@@ -29,29 +30,52 @@ struct MainPage: View {
                     //LazyVStack {
                         ScrollView(showsIndicators: false){
                             VStack(alignment: .leading) {
+                                TagLineView()
+                                    .padding(.horizontal)
+                                
+                                TextField(
+                                        "Search",
+                                        text: $search)
+                                    .textFieldStyle(TextFieldDesign(image: "magnifyingglass", error: false))
+                                    .padding(.horizontal)
+
                                 PopularRecipes()
-                                //Divider()
-                                Text("Other Recipes")
+
+                                Text("Lunch")
                                     .foregroundColor(.granola)
                                     .font(.title2)
                                     .padding(.horizontal)
                                 LazyVStack{
-                                ForEach(recipes.recipes) { recipe in
-                                    OtherRecipes(recipe: recipe, geo: geo)
+                                    ForEach(recipes.recipes) { recipe in
+                                        OtherRecipes(recipe: recipe, geo: geo)
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                .contentView(recipe: recipes)
-                .ignoresSafeArea(.all, edges: .bottom)
-                .background(Image("LoginRegisterBackground").renderingMode(.original))
+                    .contentView(recipe: recipes)
+                    .ignoresSafeArea(.all, edges: .bottom)
+                    .background(Color.backgroundColor)
+                    //.background(Image("LoginRegisterBackground").renderingMode(.original))
             }
             .navigationBarHidden(true)
         }
        .navigationBarHidden(true)
        .navigationBarBackButtonHidden(true)
     }
+
+    struct TagLineView: View {
+        var body: some View {
+            Text("Find the \nBest ")
+                .foregroundColor(.granola)
+                .font(.system(size: 28, design: .default))
+            + Text("Recipes!")
+                .underline()
+                .font(.system(size: 28, design: .default))
+                .foregroundColor(.darkGranola)
+        }
+    }
+    
     
     struct PopularRecipes: View {
         var body: some View {
@@ -63,29 +87,43 @@ struct MainPage: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack{
                     ForEach(0..<50) { i in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
-                                .fill(.white)
-                                .shadow(radius: DrawingConstants.boxesShadow)
-                            .frame(
-                                width: DrawingConstants.popularBoxesWidth,
-                                height: DrawingConstants.populatBoxesHeight)
-                            Text("\(i)")
+                        VStack(alignment: .leading){
+                            Image("köttbullar")
+                                .resizable()
+                                .frame(width: 210, height: 200 * (210/210 ))
+                                .cornerRadius(10)
+                            Text("Köttbullar")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                            Spacer()
+                            HStack(spacing: 2) {
+                                ForEach(0 ..< 5) { item in
+                                        Image(systemName: "star")
+                                    }
+                                    Spacer()
+                                    Text("$1299")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                
+                            }
                         }
+                        .frame(width: 210)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(10)
                     }
                 }
-                .frame(height: DrawingConstants.lazyVStackHeight)
-                .padding(.horizontal)
             }
+            .padding(.leading)
         }
     }
-    
-    
+
+
     struct OtherRecipes: View {
         @EnvironmentObject var recipes: RecipeViewModel
         private(set) var recipe: Recipe
         private(set) var geo: GeometryProxy
-        
+
         var body: some View {
                 ZStack(alignment: .leading){
                     RoundedRectangle(cornerRadius: DrawingConstants.boxesCornerRadius)
@@ -121,7 +159,7 @@ struct MainPage: View {
                                 .foregroundColor(.lightGrey)
                                 .padding(.trailing, 30)
                         }
-                        
+
                         Spacer()
                         Button(action: {})
                             {
@@ -136,7 +174,8 @@ struct MainPage: View {
                     height: DrawingConstants.otherBoxesHeight)
             }
         }
-    }
+}
+
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {

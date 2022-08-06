@@ -25,7 +25,7 @@ struct TextFieldDesign: TextFieldStyle {
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(.white)
                 .frame(height: DrawingConstants.frameHeight)
-                .shadow(color: error ? .red : .gray, radius: DrawingConstants.shadow)
+                //.shadow(color: error ? .red : .gray, radius: DrawingConstants.shadow)
             HStack{
                 Image(systemName: image)
                     .padding(.leading, DrawingConstants.imagePading)
