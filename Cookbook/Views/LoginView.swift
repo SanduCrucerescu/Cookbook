@@ -64,7 +64,7 @@ struct LoginView: View {
         var body: some View {
             ZStack(alignment: .center){
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
-                    .fill(.white)
+                    .fill(Color.backgroundColor)
                     .shadow(radius: DrawingConstants.shadow)
                 VStack {
                     if !(firebaseViewModel.isLogedIn ?? true) {
