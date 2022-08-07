@@ -37,7 +37,8 @@ struct MenuItemsView: View {
                     Image(systemName: "person.fill")
                         .imageScale(.large)
                     Text("My profile")
-                        .font(.headline)
+                        .font(.custom("Welland Semibold",
+                                      size: 17))
                         .onTapGesture {
                             print(recipe.recipes)
                         }
@@ -47,7 +48,8 @@ struct MenuItemsView: View {
                     Image(systemName: "plus")
                         .imageScale(.large)
                     Text("Add a new recipe")
-                        .font(.headline)
+                        .font(.custom("Welland Semibold",
+                                      size: 17))
                         .onTapGesture {
 
                     }
@@ -57,14 +59,16 @@ struct MenuItemsView: View {
                     Image(systemName: "bookmark")
                         .imageScale(.large)
                     Text("Saved")
-                        .font(.headline)
+                        .font(.custom("Welland Semibold",
+                                      size: 17))
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
                     Image(systemName: "gearshape")
                         .imageScale(.large)
                     Text("Settings")
-                        .font(.headline)
+                        .font(.custom("Welland Semibold",
+                                      size: 17))
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 
@@ -75,16 +79,10 @@ struct MenuItemsView: View {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .imageScale(.large)
                         Text("Sign Out")
-                            .font(.headline)
+                            .font(.custom("Welland Semibold",
+                                          size: 17))
                     }
                 }
-
-//                HStack {
-//                    Image(systemName: "rectangle.portrait.and.arrow.right")
-//                        .imageScale(.large)
-//                    Text("Sign Out")
-//                        .font(.headline)
-//                }
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 Spacer()
             }

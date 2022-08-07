@@ -24,14 +24,13 @@ struct Register: View {
         static let VStackSpacing: CGFloat = 15
         static let centerRectangleWidthMltiplier: CGFloat = 0.8
         static let centerRectangleHeight: CGFloat = 450
-        static let passwordInformation: CGFloat = 16
+        static let passwordInformation: CGFloat = 18
 
     }
     
     
     
     var body: some View {
-        NavigationView {
             VStack{
                 TopPart()
                 CenterRectangle()
@@ -40,24 +39,20 @@ struct Register: View {
                         height: DrawingConstants.centerRectangleHeight)
                     
             }
-            .navigationBarHidden(true)
+            //.ignoresSafeArea(.all)
+            //.navigationBarHidden(true)
+            .navigationBarTitle(Text(""), displayMode: .inline)
             .background(Image("LoginRegisterBackground"))
-        }
     }
     
     // MARK: - Top part of the register view
     
     struct TopPart: View {
-        let height = UIScreen.main.bounds.height
-        
         var body: some View {
             Text("Register")
-                .font(
-                    .system(
-                        size: DrawingConstants.textFont,
-                        weight: .regular,
-                        design: .default ))
-                .foregroundColor(.sageGreen)
+                .font(.custom("Welland",
+                              size: DrawingConstants.textFont))
+                .foregroundColor(.white)
         }
     }
     
@@ -69,7 +64,6 @@ struct Register: View {
         @State private var password1: String = ""
         @State private var password2: String = ""
         @EnvironmentObject var firebaseViewModel: FirebaseViewModel
-        @State var va = false
         
         var body: some View {
             ZStack{
@@ -100,10 +94,8 @@ struct Register: View {
                                     error: false,
                                     shadow: true))
                             Text("The password needs to be at least 6 characters long")
-                                .font(
-                                    .system(
-                                        size: DrawingConstants.passwordInformation,
-                                        weight: .light))
+                                .font(.custom("Welland",
+                                              size: DrawingConstants.passwordInformation))
                                 .foregroundColor(.gray)
                         }
                     }
@@ -133,7 +125,7 @@ struct Register: View {
                             Button(
                                 "Register",
                                 action: {firebaseViewModel.register(email, password1, password2, username)})
-                            .buttonStyle(CustomButton(color: .sageGreen))
+                            .buttonStyle(CustomButton(color: .white))
                         }
                     }
                     .padding(.horizontal)

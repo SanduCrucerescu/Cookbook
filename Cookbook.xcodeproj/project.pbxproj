@@ -29,6 +29,11 @@
 		FAF9FD8A28995AC100D6A99F /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */; };
 		FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */; };
 		FAF9FD8E289A985300D6A99F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8D289A985300D6A99F /* ImagePicker.swift */; };
+		FAFDCBF628A012F400935A9E /* Welland-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF228A0113400935A9E /* Welland-Black.otf */; };
+		FAFDCBF728A012F400935A9E /* Welland-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF328A0113400935A9E /* Welland-Bold.otf */; };
+		FAFDCBF828A012F400935A9E /* Welland-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF128A0113300935A9E /* Welland-Light.otf */; };
+		FAFDCBF928A012F400935A9E /* Welland-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF528A0113400935A9E /* Welland-Semibold.otf */; };
+		FAFDCBFA28A012F400935A9E /* Welland.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF428A0113400935A9E /* Welland.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,12 @@
 		FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingRecipeView.swift; sourceTree = "<group>"; };
 		FAF9FD8D289A985300D6A99F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FAFDCBEB28A00D2800935A9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FAFDCBF128A0113300935A9E /* Welland-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Welland-Light.otf"; sourceTree = "<group>"; };
+		FAFDCBF228A0113400935A9E /* Welland-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Welland-Black.otf"; sourceTree = "<group>"; };
+		FAFDCBF328A0113400935A9E /* Welland-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Welland-Bold.otf"; sourceTree = "<group>"; };
+		FAFDCBF428A0113400935A9E /* Welland.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Welland.otf; sourceTree = "<group>"; };
+		FAFDCBF528A0113400935A9E /* Welland-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Welland-Semibold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +101,8 @@
 		FA5CAED128900EF600757760 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
+				FAFDCBEB28A00D2800935A9E /* Info.plist */,
+				FAFDCBE828A00C2E00935A9E /* Welland-Font */,
 				FAC93C772891EDC100F317FF /* Models */,
 				FAC93C832891EDC100F317FF /* ViewModels */,
 				FAC93C7A2891EDC100F317FF /* ViewModifiers */,
@@ -157,6 +170,18 @@
 				FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FAFDCBE828A00C2E00935A9E /* Welland-Font */ = {
+			isa = PBXGroup;
+			children = (
+				FAFDCBF228A0113400935A9E /* Welland-Black.otf */,
+				FAFDCBF328A0113400935A9E /* Welland-Bold.otf */,
+				FAFDCBF128A0113300935A9E /* Welland-Light.otf */,
+				FAFDCBF528A0113400935A9E /* Welland-Semibold.otf */,
+				FAFDCBF428A0113400935A9E /* Welland.otf */,
+			);
+			path = "Welland-Font";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +252,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFDCBF628A012F400935A9E /* Welland-Black.otf in Resources */,
+				FAFDCBF728A012F400935A9E /* Welland-Bold.otf in Resources */,
+				FAFDCBF828A012F400935A9E /* Welland-Light.otf in Resources */,
+				FAFDCBF928A012F400935A9E /* Welland-Semibold.otf in Resources */,
+				FAFDCBFA28A012F400935A9E /* Welland.otf in Resources */,
 				FA5CAEDA28900EF900757760 /* Preview Assets.xcassets in Resources */,
 				FA5CAED728900EF900757760 /* Assets.xcassets in Resources */,
 				FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */,
@@ -387,6 +417,7 @@
 				DEVELOPMENT_TEAM = Q8VFSTQPQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookbook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,6 +449,7 @@
 				DEVELOPMENT_TEAM = Q8VFSTQPQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cookbook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

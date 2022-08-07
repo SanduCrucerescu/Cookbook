@@ -63,11 +63,13 @@ struct MainPage: View {
         var body: some View {
             Text("Find the \nBest ")
                 .foregroundColor(.sageGreen)
-                .font(.system(size: 28, design: .default))
+                .font(.custom("Welland",
+                              size: 30))
             + Text("Recipes!")
                 .underline()
-                .font(.system(size: 28, design: .default))
-                .foregroundColor(.sageGreen)
+                .font(.custom("Welland Bold",
+                              size: 30))
+                .foregroundColor(.darkSageGreen)
         }
     }
     
@@ -77,7 +79,8 @@ struct MainPage: View {
         
         var body: some View {
             Text("Popular Recipes")
-                .font(.title)
+                .font(.custom("Welland",
+                              size: 33))
                 .frame(alignment: .leading)
                 .padding(.horizontal)
                 .foregroundColor(.sageGreen)
@@ -99,7 +102,8 @@ struct MainPage: View {
         var body: some View {
             Text("Lunch")
                 .foregroundColor(.sageGreen)
-                .font(.title2)
+                .font(.custom("Welland",
+                              size: 33))
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -146,17 +150,17 @@ struct RecipeBox: View {
                     }
                 }
                 Text(recipe.title)
-                    .font(.title3)
-                    .fontWeight(.bold)
+                    .font(.custom("Welland Bold",
+                                  size: 20))
                 Spacer()
                 HStack(spacing: 2) {
                     ForEach(0 ..< 5) { item in
                         Image(systemName: "star")
                     }
                     Spacer()
-                    Text("$1299")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                Text("$1299")
+                    .font(.custom("Welland Bold",
+                                  size: 20))
                     
                 }
             }

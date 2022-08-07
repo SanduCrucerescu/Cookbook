@@ -18,8 +18,8 @@ struct LoginView: View {
         static let VStackSpacing: CGFloat = 28
         static let paddingAll: CGFloat = 37
         static let paddingVerical: CGFloat = 4.8
-        static let fontSize: CGFloat = 33
-        static let bottomTextFont: CGFloat = 15
+        static let fontSize: CGFloat = 40
+        static let bottomTextFont: CGFloat = 17
         static let screenSize: CGFloat = 700
         static let centerWidthMultiplier: CGFloat = 0.8
         static let centerHeightIphone8: CGFloat = 290
@@ -31,11 +31,14 @@ struct LoginView: View {
         NavigationView{
             VStack(alignment: .center){
                 Text("Sign In")
-                    .font(.system(
-                        size: DrawingConstants.fontSize,
-                        weight: .regular,
-                        design: .default))
+                    .font(.custom("Welland Semibold",
+                                  size: DrawingConstants.fontSize))
                     .foregroundColor(.white)
+//                    .font(.system(
+//                        size: DrawingConstants.fontSize,
+//                        weight: .regular,
+//                        design: .default))
+//                    .foregroundColor(.white)
                 CenterSquare()
                     .frame(
                         width: width * DrawingConstants.centerWidthMultiplier,
@@ -113,11 +116,9 @@ struct LoginView: View {
         var body: some View {
             HStack{
                 Text("Don't have an account!")
-                        .font(
-                            .system(
-                                size: DrawingConstants.bottomTextFont,
-                                weight: .light,
-                                design: .default))
+                        .font(.custom("Welland",
+                                      size: DrawingConstants.bottomTextFont))
+                        .foregroundColor(Color.sageGreen)
                 
                 
                 NavigationLink{
@@ -125,12 +126,9 @@ struct LoginView: View {
                 } label: {
                     Text("Register now")
                         .underline()
-                        .font(
-                            .system(
-                                size: DrawingConstants.bottomTextFont,
-                                weight: .semibold,
-                                design: .default))
-                        .foregroundColor(.black)
+                        .font(.custom("Welland",
+                                      size: DrawingConstants.bottomTextFont))
+                        .foregroundColor(Color.sageGreen)
                 }
             }
         }

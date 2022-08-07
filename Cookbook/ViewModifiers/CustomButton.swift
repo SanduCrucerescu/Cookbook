@@ -28,7 +28,8 @@ struct CustomButton: ButtonStyle {
             configuration
                 .label
                 .foregroundColor(color)
-                .font(.system(size: DrawingConstants.textSize, weight: .regular, design: .default))
+                .font(.custom("Welland",
+                              size: DrawingConstants.textSize))
         }
     }
 }
