@@ -28,11 +28,16 @@ struct ShakeEffect: GeometryEffect {
 
 struct PasswordTextFiels: ViewModifier {
     let image: String
+    let shadow: Bool
     @ObservedObject var firebaseViewModel: FirebaseViewModel
     
     func body(content: Content) -> some View {
         content
-            .textFieldStyle(TextFieldDesign(image: image, error: firebaseViewModel.passwordsAreNotEqual))
+            .textFieldStyle(
+                TextFieldDesign(
+                    image: image,
+                    error: firebaseViewModel.passwordsAreNotEqual,
+                    shadow: shadow))
             .modifier(ShakeEffect(shakes: !firebaseViewModel.passwordsAreNotEqual ? 2 : 0))
             .animation(Animation.linear, value: firebaseViewModel.passwordsAreNotEqual)
     }

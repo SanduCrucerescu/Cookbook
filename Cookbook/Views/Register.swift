@@ -85,11 +85,19 @@ struct Register: View {
                             TextField(
                                 "Email",
                                 text: $email)
-                            .textFieldStyle(TextFieldDesign(image: "mail", error: !firebaseViewModel.isEmail))
+                            .textFieldStyle(
+                                TextFieldDesign(
+                                    image: "mail",
+                                    error: !firebaseViewModel.isEmail,
+                                    shadow: true))
                             TextField(
                                 "Username",
                                 text: $username)
-                            .textFieldStyle(TextFieldDesign(image: "person", error: false))
+                            .textFieldStyle(
+                                TextFieldDesign(
+                                    image: "person",
+                                    error: false,
+                                    shadow: true))
                             Text("The password needs to be at least 6 characters long")
                                 .font(
                                     .system(
@@ -108,11 +116,19 @@ struct Register: View {
                             TextField(
                                 "Password",
                                 text: $password1)
-                                .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
+                                .textFieldStyle(
+                                    TextFieldDesign(
+                                        image: "key",
+                                        error: firebaseViewModel.passwordsAreNotEqual,
+                                        shadow: true))
                             TextField(
                                 "Confirm Password",
                                 text: $password2)
-                                .textFieldStyle(TextFieldDesign(image: "key", error: firebaseViewModel.passwordsAreNotEqual))
+                                .textFieldStyle(
+                                    TextFieldDesign(
+                                        image: "key",
+                                        error: firebaseViewModel.passwordsAreNotEqual,
+                                        shadow: true))
                             Button(
                                 "Register",
                                 action: {firebaseViewModel.register(email, password1, password2, username)})

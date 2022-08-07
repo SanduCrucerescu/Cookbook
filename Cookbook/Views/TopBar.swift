@@ -31,23 +31,18 @@ struct TopBar: View {
                     .cornerRadius(10.0)
             }
             Spacer()
-            
-//            Image(systemName: "line.horizontal.3")
-//                .font(.system(size: DrawingConstansts.imageSize))
-//                .foregroundColor(.granola)
-//                .onTapGesture {
-//                    print(self.showMenu)
-//                    withAnimation{
-//                        self.showMenu.toggle()
-//                    }
-//                }
-//                .padding(.leading, DrawingConstansts.imageLeadingPadding)
-            
-//            TextField(
-//                "Search",
-//                text: $search)
-//            .textFieldStyle(TextFieldDesign(image: "magnifyingglass", error: false))
-//            .padding(.trailing, DrawingConstansts.textFieldTrailingPadding)
+            Button {
+                withAnimation{
+                    self.showMenu.toggle()
+                }
+            } label: {
+                Image(systemName: "message")
+                    .padding()
+                    .foregroundColor(.granola)
+                    .background(Color.white)
+                    .cornerRadius(10.0)
+            }
+            .padding(.trailing, DrawingConstansts.textFieldTrailingPadding)
         }
         .padding(.horizontal)
     }

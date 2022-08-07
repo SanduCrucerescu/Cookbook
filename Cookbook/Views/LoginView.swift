@@ -64,7 +64,7 @@ struct LoginView: View {
         var body: some View {
             ZStack(alignment: .center){
                 RoundedRectangle(cornerRadius: DrawingConstants.rectangleCornerRadius)
-                    .fill(Color.backgroundColor)
+                    .fill(.white)
                     .shadow(radius: DrawingConstants.shadow)
                 VStack {
                     if !(firebaseViewModel.isLogedIn ?? true) {
@@ -78,14 +78,16 @@ struct LoginView: View {
                         .textFieldStyle(
                             TextFieldDesign(
                                 image: "mail",
-                                error: !(firebaseViewModel.isLogedIn ?? true)))
+                                error: !(firebaseViewModel.isLogedIn ?? true),
+                                shadow: true))
                         TextField(
                             "Password",
                             text: $passoword)
                         .textFieldStyle(
                             TextFieldDesign(
                                 image: "key",
-                                error: !(firebaseViewModel.isLogedIn ?? true)))
+                                error: !(firebaseViewModel.isLogedIn ?? true),
+                                shadow: true))
                         NavigationLink(destination: MainPage().environmentObject(firebaseViewModel.recipeViewModel) , isActive: $isLogedI, label: {
                                         Button(action: {
                                             Task{

@@ -35,7 +35,11 @@ struct MainPage: View {
                             TextField(
                                     "Search",
                                     text: $search)
-                                .textFieldStyle(TextFieldDesign(image: "magnifyingglass", error: false))
+                                .textFieldStyle(
+                                    TextFieldDesign(
+                                        image: "magnifyingglass",
+                                        error: false,
+                                        shadow: false))
                                 .padding(.horizontal)
 
                             PopularRecipes()

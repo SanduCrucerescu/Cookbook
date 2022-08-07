@@ -10,10 +10,11 @@ import SwiftUI
 struct TextFieldDesign: TextFieldStyle {
     let image: String
     var error: Bool
+    let shadow: Bool
     
     private struct DrawingConstants {
         static let frameHeight: CGFloat = 50
-        static let shadow: CGFloat = 5
+        static let shadow: CGFloat = 1
         static let fontSize: CGFloat = 20
         static let imagePading: CGFloat = 8
         static let cornerRadius: CGFloat = 10
@@ -25,7 +26,9 @@ struct TextFieldDesign: TextFieldStyle {
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(.white)
                 .frame(height: DrawingConstants.frameHeight)
-                //.shadow(color: error ? .red : .gray, radius: DrawingConstants.shadow)
+                .shadow(
+                    color: error ? .red : .gray,
+                    radius: shadow ? DrawingConstants.shadow : 0)
             HStack{
                 Image(systemName: image)
                     .padding(.leading, DrawingConstants.imagePading)
