@@ -62,12 +62,12 @@ struct MainPage: View {
     struct TagLineView: View {
         var body: some View {
             Text("Find the \nBest ")
-                .foregroundColor(.granola)
+                .foregroundColor(.sageGreen)
                 .font(.system(size: 28, design: .default))
             + Text("Recipes!")
                 .underline()
                 .font(.system(size: 28, design: .default))
-                .foregroundColor(.darkGranola)
+                .foregroundColor(.sageGreen)
         }
     }
     
@@ -80,7 +80,7 @@ struct MainPage: View {
                 .font(.title)
                 .frame(alignment: .leading)
                 .padding(.horizontal)
-                .foregroundColor(.granola)
+                .foregroundColor(.sageGreen)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack{
                     ForEach(recipes.recipes) { recipe in
@@ -98,7 +98,7 @@ struct MainPage: View {
 
         var body: some View {
             Text("Lunch")
-                .foregroundColor(.granola)
+                .foregroundColor(.sageGreen)
                 .font(.title2)
                 .padding(.horizontal)
             

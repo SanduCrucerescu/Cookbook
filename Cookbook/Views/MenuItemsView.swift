@@ -30,7 +30,7 @@ struct MenuItemsView: View {
                     width: DrawingConstants.imageWidth,
                     height: DrawingConstants.imageHeight,
                     alignment: .center)
-                .foregroundColor(.granola)
+                .foregroundColor(.white)
             VStack(alignment: .leading){
                 Divider()
                 HStack {
@@ -90,12 +90,12 @@ struct MenuItemsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, DrawingConstants.itemsLeadingPadding)
-            .foregroundColor(.granola)
+            .foregroundColor(.white)
             //.background(Color.mustardYellow)
             //.edgesIgnoringSafeArea(.all)
         }
         .padding(.top, DrawingConstants.menuTopPadding)
-        .background(Color.mustardYellow)
+        .background(Color.sageGreen)
         .innerShadow(
             color: .black.opacity(DrawingConstants.shadowColorOpacity),
             radius: DrawingConstants.shadowRadius)

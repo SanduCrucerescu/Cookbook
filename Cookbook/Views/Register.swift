@@ -57,6 +57,7 @@ struct Register: View {
                         size: DrawingConstants.textFont,
                         weight: .regular,
                         design: .default ))
+                .foregroundColor(.sageGreen)
         }
     }
     
@@ -132,7 +133,7 @@ struct Register: View {
                             Button(
                                 "Register",
                                 action: {firebaseViewModel.register(email, password1, password2, username)})
-                            .buttonStyle(CustomButton(color: .granola))
+                            .buttonStyle(CustomButton(color: .sageGreen))
                         }
                     }
                     .padding(.horizontal)

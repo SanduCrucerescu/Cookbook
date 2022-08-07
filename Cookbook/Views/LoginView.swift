@@ -35,7 +35,7 @@ struct LoginView: View {
                         size: DrawingConstants.fontSize,
                         weight: .regular,
                         design: .default))
-                    .foregroundColor(.granola)
+                    .foregroundColor(.white)
                 CenterSquare()
                     .frame(
                         width: width * DrawingConstants.centerWidthMultiplier,
@@ -98,7 +98,7 @@ struct LoginView: View {
                                           print(isLogedI)
                                         }, label: {
                                             Text("Sign In")
-                                        }) .buttonStyle(CustomButton(color: .granola))
+                                        }) .buttonStyle(CustomButton(color: .white))
                         })
                         }
                     .padding(.horizontal)

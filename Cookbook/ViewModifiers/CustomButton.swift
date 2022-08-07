@@ -22,7 +22,7 @@ struct CustomButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack{
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                .fill(Color.mustardYellow)
+                .fill(Color.sageGreen)
                 .frame(height: DrawingConstants.frameHeight)
                 .frame(width: DrawingConstants.buttonWidth)
             configuration
