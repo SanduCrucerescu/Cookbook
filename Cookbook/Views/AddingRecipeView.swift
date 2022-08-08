@@ -138,15 +138,15 @@ struct AddingRecipeView: View {
     }
 }
 
-struct AddingRecipeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let recipe = RecipeViewModel()
-        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
-        AddingRecipeView()
-            .environmentObject(recipe)
-            .environmentObject(firebaseViewModel)
-
-    }
-}
+//struct AddingRecipeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let recipe = RecipeViewModel()
+//        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
+//        AddingRecipeView()
+//            .environmentObject(recipe)
+//            .environmentObject(firebaseViewModel)
+//
+//    }
+//}
 
 

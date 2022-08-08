@@ -22,13 +22,21 @@ import UIKit
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
     private var storageRef = Storage.storage().reference()
+  
+    @Published private var recipes: Array<Recipe> = []
     
-    var recipeViewModel: RecipeViewModel
-    
-    
-    init(recipeViewModel: RecipeViewModel) {
-        self.recipeViewModel = recipeViewModel
+    var recipeViewModel: RecipeViewModel?
+
+    init(recipeViewModel: RecipeViewModel?=nil) {
+       self.recipeViewModel = recipeViewModel
     }
+
+    
+    func getRecipes() -> Array<Recipe> {
+        recipes
+    }
+    
+    
     
     //MARK: - Check if the passwords are the same
     
@@ -102,14 +110,15 @@ import UIKit
     //MARK: - Get data from firebase
     func getData() async {
        db.collection("Recipes").addSnapshotListener { snapshot, error in
-            self.recipeViewModel.recipes = snapshot?.documents.map({ data  in
+           self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
                 return Recipe(id: data.documentID,
                               title: data["Title"] as? String ?? "",
                               description: data["Desctiprion"] as? String ?? "",
                               author: data["Author"] as? String ?? "",
                               image: data["imageURL"] as? String ?? "")
-            }) ?? []
+           }) ?? []
         }
+        print(self.recipes)
     }
     
     //MARK: - Upload Directions

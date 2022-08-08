@@ -55,6 +55,7 @@ struct LoginView: View {
     
     struct CenterSquare: View {
         @EnvironmentObject var firebaseViewModel: FirebaseViewModel
+        @EnvironmentObject var recipeViewModel: RecipeViewModel
         @State private var email: String = "test@t.com"
         @State private var passoword: String = "test12"
         @State private var isLogedI: Bool = false
@@ -87,7 +88,7 @@ struct LoginView: View {
                                 image: "key",
                                 error: !(firebaseViewModel.isLogedIn ?? true),
                                 shadow: true))
-                        NavigationLink(destination: MainPage().environmentObject(firebaseViewModel.recipeViewModel) , isActive: $isLogedI, label: {
+                        NavigationLink(destination: MainPage().environmentObject(recipeViewModel) , isActive: $isLogedI, label: {
                                         Button(action: {
                                             Task{
                                                 await firebaseViewModel.signIn(email, passoword)
@@ -147,13 +148,13 @@ struct LoginView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        let recipe = RecipeViewModel()
-        let firebase = FirebaseViewModel(recipeViewModel: recipe)
-        Group {
-            LoginView()
-                .environmentObject(firebase)
-        }
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let recipe = RecipeViewModel()
+//        let firebase = FirebaseViewModel(recipeViewModel: recipe)
+//        Group {
+//            LoginView()
+//                .environmentObject(firebase)
+//        }
+//    }
+//}

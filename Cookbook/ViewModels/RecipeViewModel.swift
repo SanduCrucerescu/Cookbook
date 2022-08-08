@@ -7,14 +7,14 @@
 
 import Foundation
 
+@MainActor
 class RecipeViewModel: ObservableObject {
     @Published var recipes:Array<Recipe> = []
     
-    var firebase: FirebaseViewModel?
-    
-    
+    var firebase: FirebaseViewModel = FirebaseViewModel()
+
     func addRecipe() {
-        
+        firebase.uploadDirection(<#T##direction: Array<Direction>##Array<Direction>#>, <#T##uid: String##String#>)
     }
     
     

@@ -153,11 +153,11 @@ struct Register: View {
 
 
 
-struct Register_Previews: PreviewProvider {
-    static var previews: some View {
-        let recipe = RecipeViewModel()
-        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
-        Register()
-            .environmentObject(firebaseViewModel)
-    }
-}
+//struct Register_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let recipe = RecipeViewModel()
+//        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
+//        Register()
+//            .environmentObject(firebaseViewModel)
+//    }
+//}

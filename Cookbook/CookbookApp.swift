@@ -10,20 +10,23 @@ import Firebase
 
 @main
 struct CookbookApp: App {
-    @StateObject var recipeViewModel: RecipeViewModel
-    @StateObject var firebase: FirebaseViewModel
+    @ObservedObject var recipeViewModel: RecipeViewModel
+    @ObservedObject var firebase: FirebaseViewModel
         
     init() {
         FirebaseApp.configure()
-        self._recipeViewModel = StateObject(wrappedValue: RecipeViewModel())
-        self._firebase = StateObject(wrappedValue: FirebaseViewModel(recipeViewModel: RecipeViewModel())) //TODO: fix the init
-        
+        let b = RecipeViewModel()
+        let a = FirebaseViewModel(recipeViewModel: b)
+        self.firebase = a
+        self.recipeViewModel = b
+    
     }
     
     var body: some Scene {
         WindowGroup {
             LoginView()
                 .environmentObject(firebase)
+                .environmentObject(recipeViewModel)
         }
     }
 }
