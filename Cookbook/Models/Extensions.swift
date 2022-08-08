@@ -77,7 +77,7 @@ private struct ContentView: ViewModifier {
                     
     
                 if self.showMenu {
-                    MenuItemsView(recipe: recipes)
+                    MenuItemsView(showMenu: $showMenu, recipe: recipes)
                         .frame(width: geo.size.width/2)
                         .transition(.move(edge: .leading))
                 }

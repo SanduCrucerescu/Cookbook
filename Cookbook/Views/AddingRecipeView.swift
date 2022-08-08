@@ -36,7 +36,7 @@ struct AddingRecipeView: View {
     @EnvironmentObject var firebase: FirebaseViewModel
     
     @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
-    
+    @State var directions: Array<Direction> = [Direction(direction: "")]
     
     var body: some View {
         VStack {
@@ -48,43 +48,51 @@ struct AddingRecipeView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
+                    Group {
                         TextField("Title", text: $title)
                             .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
-                        
+
                         TextField("Description", text: $description)
                             .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                        Divider()
+                    
                         Text("Image")
                             .font(.custom("Welland",
                                           size: DrawingConstants.subcategoriesFontSize))
                             .foregroundColor(.sageGreen)
-                        
-                        Image("köttbullar") // Image(uiImage: ) for stored images
-                            .resizable()
-                            .cornerRadius(DrawingConstants.imageCornerRadius)
-                            .frame(width: DrawingConstants.imageWidth,
-                                   height: DrawingConstants.imageHeight)
-                        
-                        Text("Ingredients")
-                            .font(.custom("Welland",
-                                          size: 22))
-                            .foregroundColor(.sageGreen)
-                    
-                        VStack{
-                            ForEach(ingredients) { ingredient in
-                                IngredientTextField(i: ingredient, ingredients: $ingredients)
-                            }
-                       }
-                        
-                        Button (
-                            action: {showPicker = true}
-                        ) {
-                            Text("Upload Image")}
-
                     }
-                            
+                    Image("köttbullar") // Image(uiImage: ) for stored images
+                        .resizable()
+                        .cornerRadius(DrawingConstants.imageCornerRadius)
+                        .frame(width: DrawingConstants.imageWidth,
+                               height: DrawingConstants.imageHeight)
+                    Divider()
+                    Text("Ingredients")
+                        .font(.custom("Welland",
+                                      size: 22))
+                        .foregroundColor(.sageGreen)
+                
+                    VStack{
+                        ForEach(ingredients) { ingredient in
+                            IngredientTextField(i: ingredient, ingredients: $ingredients)
+                        }
+                    }
+                    Divider()
+                        
+                    Text("Directions")
+                        .font(.custom("Welland",
+                                      size: 22))
+                        .foregroundColor(.sageGreen)
+
+                    VStack {
+                        ForEach(directions) { direction in
+                            DirectionsTextField(dir: direction, directions: $directions)
+                        }
+                    }
                 }
                 .padding(.horizontal)
                 .ignoresSafeArea()
+            }
         }
         .contentView(recipe: recipes, on: false)
         .navigationBarTitle(Text(""), displayMode: .inline)
@@ -93,10 +101,10 @@ struct AddingRecipeView: View {
                 ImagePicker(
                     image: $image,
                 showPicker: $showPicker)}
-    
+        
+    }
 }
 
-}
 struct AddingRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         let recipe = RecipeViewModel()

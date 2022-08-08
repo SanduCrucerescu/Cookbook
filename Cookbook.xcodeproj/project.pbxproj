@@ -11,6 +11,8 @@
 		FA52954628A146F30046CACD /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954528A146F20046CACD /* Ingredient.swift */; };
 		FA52954828A161400046CACD /* IngredientTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954728A1613F0046CACD /* IngredientTextField.swift */; };
 		FA52954A28A169670046CACD /* RecipeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954928A169670046CACD /* RecipeBox.swift */; };
+		FA52954C28A170670046CACD /* DirectionsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954B28A170670046CACD /* DirectionsTextField.swift */; };
+		FA52954E28A170990046CACD /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954D28A170990046CACD /* Direction.swift */; };
 		FA5CAED728900EF900757760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAED628900EF900757760 /* Assets.xcassets */; };
 		FA5CAEDA28900EF900757760 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAED928900EF900757760 /* Preview Assets.xcassets */; };
 		FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAEE02890299700757760 /* GoogleService-Info.plist */; };
@@ -45,6 +47,8 @@
 		FA52954528A146F20046CACD /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		FA52954728A1613F0046CACD /* IngredientTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTextField.swift; sourceTree = "<group>"; };
 		FA52954928A169670046CACD /* RecipeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBox.swift; sourceTree = "<group>"; };
+		FA52954B28A170670046CACD /* DirectionsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsTextField.swift; sourceTree = "<group>"; };
+		FA52954D28A170990046CACD /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		FA5CAECF28900EF600757760 /* Cookbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5CAED628900EF900757760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				FAC93C912891EF1200F317FF /* Extensions.swift */,
 				FAF9FD8728995A0200D6A99F /* Recipe.swift */,
 				FA52954528A146F20046CACD /* Ingredient.swift */,
+				FA52954D28A170990046CACD /* Direction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				FAC93C802891EDC100F317FF /* Register.swift */,
 				FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */,
 				FA52954728A1613F0046CACD /* IngredientTextField.swift */,
+				FA52954B28A170670046CACD /* DirectionsTextField.swift */,
 				FAF9FD8D289A985300D6A99F /* ImagePicker.swift */,
 			);
 			path = Views;
@@ -280,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC93C872891EDC100F317FF /* CustomButton.swift in Sources */,
+				FA52954C28A170670046CACD /* DirectionsTextField.swift in Sources */,
 				FAC93C8A2891EDC100F317FF /* LoginView.swift in Sources */,
 				FAF9FD8828995A0300D6A99F /* Recipe.swift in Sources */,
 				FA52954828A161400046CACD /* IngredientTextField.swift in Sources */,
@@ -293,6 +300,7 @@
 				FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */,
 				FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */,
 				FA52954A28A169670046CACD /* RecipeBox.swift in Sources */,
+				FA52954E28A170990046CACD /* Direction.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,
 				FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */,

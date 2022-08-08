@@ -20,6 +20,7 @@ struct MenuItemsView: View {
         static let shadowRadius: CGFloat = 0.05
     }
     
+    @Binding var showMenu: Bool
     @ObservedObject var recipe: RecipeViewModel
         
     var body: some View {
@@ -44,8 +45,15 @@ struct MenuItemsView: View {
                         }
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
+                
+            
                 NavigationLink(destination: {
                     AddingRecipeView()
+                        .onAppear {
+                            withAnimation(){
+                                showMenu = false
+                            }
+                        }
                 }, label: {
                     HStack {
                         Image(systemName: "plus")
