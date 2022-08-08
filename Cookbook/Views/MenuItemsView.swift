@@ -44,16 +44,17 @@ struct MenuItemsView: View {
                         }
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
-                HStack {
-                    Image(systemName: "plus")
-                        .imageScale(.large)
-                    Text("Add a new recipe")
-                        .font(.custom("Welland Semibold",
-                                      size: 17))
-                        .onTapGesture {
-
+                NavigationLink(destination: {
+                    AddingRecipeView()
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus")
+                            .imageScale(.large)
+                        Text("Add a new recipe")
+                            .font(.custom("Welland Semibold",
+                                          size: 17))
                     }
-                }
+                })
                 .padding(.top, DrawingConstants.itemsTopPadding)
                 HStack {
                     Image(systemName: "bookmark")

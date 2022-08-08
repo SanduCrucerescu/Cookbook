@@ -24,45 +24,65 @@ struct AddingRecipeView: View {
     @State var showPicker: Bool = false
     @State var image: UIImage?
     @State var retrivedImage: UIImage?
+    @State var title: String = ""
+    @State var description: String = ""
     
     @EnvironmentObject var recipes: RecipeViewModel
     @EnvironmentObject var firebase: FirebaseViewModel
     
     
     var body: some View {
-        ZStack {
-            Button(
-                action: {}) {
-                    Image(systemName: "chevron.left")
-                        .resizable(resizingMode: .stretch)
-                        .foregroundColor(.gray)
-                        .frame(
-                            width: DrawingConstants.backButtonIconFrameWidth,
-                            height: DrawingConstants.backButtonIconFrameHeight)
-                }
-                .padding(.bottom, height < 700
-                         ? DrawingConstants.backButtonHeightIphone8
-                         : DrawingConstants.backButtonHeightIphone13)
-                .padding(.trailing, DrawingConstants.backButtonPaddingTrailing)
             VStack{
-                if image != nil {
-                        Image(uiImage: image!)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                    }
+                Text("Create a recipe")
+                    .font(.custom("Welland",
+                                  size: 35))
+                    .foregroundColor(.sageGreen)
                 
-                Button(
-                    action: {showPicker = true}
-                )
-                    {
-                        Text("Select image")
-                    }
+                TextField("Title", text: $title)
+                    .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
                 
-                Button (
-                    action: {firebase.uploadImage(image!)}
-                ) {
-                    Text("Upload Image")
+                TextField("Description", text: $description)
+                    .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                Text("Image")
+                    .font(.custom("Welland",
+                                  size: 22))
+                    .foregroundColor(.sageGreen)
+                
+                Image("köttbullar")
+                    .resizable()
+                    .cornerRadius(10)
+                    .frame(width: 200, height: 180)
+                
+                Text("Ingredients")
+                    .font(.custom("Welland",
+                                  size: 22))
+                    .foregroundColor(.sageGreen)
+            
+                List{
+                    TextField("Ingredient", text: $title)
+                        .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
                 }
+                
+                
+//
+//                if image != nil {
+//                        Image(uiImage: image!)
+//                            .resizable()
+//                            .frame(width: 200, height: 200)
+//                    }
+//
+//                Button(
+//                    action: {showPicker = true}
+//                )
+//                    {
+//                        Text("Select image")
+//                    }
+//
+//                Button (
+//                    action: {firebase.uploadImage(image!)}
+//                ) {
+//                    Text("Upload Image")
+//                }
                 
 //                Button (
 //                    action: {firebase.getPhoto()}
@@ -70,14 +90,17 @@ struct AddingRecipeView: View {
 //                    Text("Get image")
    //             }
                     
-                }.sheet(isPresented: $showPicker, onDismiss: nil) {
+                }
+            .padding(.horizontal)
+            .contentView(recipe: recipes, on: false)
+            .background(Color.backgroundColor)
+            .ignoresSafeArea()
+            .sheet(isPresented: $showPicker, onDismiss: nil) {
                     ImagePicker(
                         image: $image,
-                        showPicker: $showPicker)
-                
-        }
-            .contentView(recipe: recipes)
-    }
+                        showPicker: $showPicker)}
+            //.navigationBarHidden(true)
+    
 }
 
 }

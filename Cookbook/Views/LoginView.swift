@@ -51,6 +51,7 @@ struct LoginView: View {
             .background(Image("LoginRegisterBackground").renderingMode(.original))
             .navigationBarHidden(true)
         }
+        .accentColor(.white)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }

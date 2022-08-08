@@ -49,6 +49,7 @@ struct PasswordTextFiels: ViewModifier {
 private struct ContentView: ViewModifier {
     @State var showMenu = false
     @ObservedObject var recipes: RecipeViewModel
+    @State var on = true
     
     func body(content: Content) -> some View {
         let drag = DragGesture()
@@ -63,7 +64,9 @@ private struct ContentView: ViewModifier {
         GeometryReader{ geo in
             ZStack(alignment: .leading) {
                 VStack {
-                    TopBar(showMenu: $showMenu)
+                    if on {
+                        TopBar(showMenu: $showMenu)
+                    }
                     Spacer()
                     content
                     Spacer()
@@ -156,8 +159,8 @@ extension Color {
 
 
 extension View {
-    func contentView(recipe: RecipeViewModel) -> some View{
-        self.modifier(ContentView(recipes: recipe))
+    func contentView(recipe: RecipeViewModel, on: Bool) -> some View{
+        self.modifier(ContentView(recipes: recipe, on: on))
     }
     
     func innerShadow(color: Color, radius: CGFloat = 0.1) -> some View {

@@ -31,18 +31,19 @@ struct Register: View {
     
     
     var body: some View {
-            VStack{
-                TopPart()
-                CenterRectangle()
-                    .frame(
-                        width: width * DrawingConstants.centerRectangleWidthMltiplier,
-                        height: DrawingConstants.centerRectangleHeight)
-                    
-            }
-            //.ignoresSafeArea(.all)
-            //.navigationBarHidden(true)
-            .navigationBarTitle(Text(""), displayMode: .inline)
-            .background(Image("LoginRegisterBackground"))
+        
+        VStack{
+            TopPart()
+            CenterRectangle()
+                .frame(
+                    width: width * DrawingConstants.centerRectangleWidthMltiplier,
+                    height: DrawingConstants.centerRectangleHeight)
+                
+        }
+        //.ignoresSafeArea(.all)
+        //.navigationBarHidden(true)
+        .navigationBarTitle(Text(""), displayMode: .inline)
+        .background(Image("LoginRegisterBackground"))
     }
     
     // MARK: - Top part of the register view

@@ -48,7 +48,7 @@ struct MainPage: View {
                         }
                     }
                 }
-                .contentView(recipe: recipes)
+                .contentView(recipe: recipes, on: true)
                 .ignoresSafeArea(.all, edges: .bottom)
                 .background(Color.backgroundColor)
             }
