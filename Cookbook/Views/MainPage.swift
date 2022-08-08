@@ -17,6 +17,8 @@ struct MainPage: View {
         static let lazyVStackHeight: CGFloat = 110
         static let otherBoxesWidthMultiplier: CGFloat = 1.05
         static let otherBoxesHeight: CGFloat = 110
+        static let titleFont: CGFloat = 33
+        static let subcategoriesFontSize: CGFloat = 30
     }
 
 
@@ -65,11 +67,11 @@ struct MainPage: View {
             Text("Find the \nBest ")
                 .foregroundColor(.sageGreen)
                 .font(.custom("Welland",
-                              size: 30))
+                              size: DrawingConstants.titleFont))
             + Text("Recipes!")
                 .underline()
                 .font(.custom("Welland Bold",
-                              size: 30))
+                              size: DrawingConstants.titleFont))
                 .foregroundColor(.darkSageGreen)
         }
     }
@@ -81,7 +83,7 @@ struct MainPage: View {
         var body: some View {
             Text("Popular Recipes")
                 .font(.custom("Welland",
-                              size: 33))
+                              size: DrawingConstants.subcategoriesFontSize))
                 .frame(alignment: .leading)
                 .padding(.horizontal)
                 .foregroundColor(.sageGreen)
@@ -104,7 +106,7 @@ struct MainPage: View {
             Text("Lunch")
                 .foregroundColor(.sageGreen)
                 .font(.custom("Welland",
-                              size: 33))
+                              size: DrawingConstants.subcategoriesFontSize))
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -128,48 +130,6 @@ struct MainPage_Previews: PreviewProvider {
                 .environmentObject(firebase)
                 .environmentObject(recipe)
         }
-    }
-}
-
-
-struct RecipeBox: View {
-    private(set) var recipe: Recipe
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.white)
-            VStack(alignment: .leading){
-                CachedAsyncImage(url: URL(string: recipe.image), urlCache: .imageCache) { phase in
-                    if let image = phase.image{
-                        image
-                            .resizable()
-                            .frame(width: 210, height: 200 * (210/210))
-                            .cornerRadius(10)
-                    } else {
-                        ProgressView()
-                            .frame(width: 210,height: 200 * (210/210))
-                    }
-                }
-                Text(recipe.title)
-                    .font(.custom("Welland Bold",
-                                  size: 20))
-                Spacer()
-                HStack(spacing: 2) {
-                    ForEach(0 ..< 5) { item in
-                        Image(systemName: "star")
-                    }
-                    Spacer()
-                Text("$1299")
-                    .font(.custom("Welland Bold",
-                                  size: 20))
-                    
-                }
-            }
-        }
-        .frame(width: 210)
-        .padding()
-        .background(.white)
-        .cornerRadius(10)
     }
 }
 

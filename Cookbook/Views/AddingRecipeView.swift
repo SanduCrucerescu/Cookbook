@@ -16,6 +16,11 @@ struct AddingRecipeView: View {
         static let backButtonHeightIphone13: CGFloat = 600
         static let backButtonPaddingButtom: CGFloat = 700
         static let backButtonPaddingTrailing: CGFloat = 330
+        static let titleSize: CGFloat = 35
+        static let subcategoriesFontSize: CGFloat = 22
+        static let imageCornerRadius: CGFloat = 10
+        static let imageWidth: CGFloat = 200
+        static let imageHeight: CGFloat = 180
     }
     
     let height = UIScreen.main.bounds.height
@@ -34,63 +39,60 @@ struct AddingRecipeView: View {
     
     
     var body: some View {
-        Text("Create a recipe")
-            .font(.custom("Welland",
-                          size: 35))
-            .foregroundColor(.sageGreen)
-        VStack(alignment: .leading) {
-            ScrollView(showsIndicators: false){
-                    TextField("Title", text: $title)
-                        .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
-                    
-                    TextField("Description", text: $description)
-                        .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
-                    Text("Image")
-                        .font(.custom("Welland",
-                                      size: 22))
-                        .foregroundColor(.sageGreen)
-                    
-                    Image("köttbullar") // Image(uiImage: ) for stored images
-                        .resizable()
-                        .cornerRadius(10)
-                        .frame(width: 200, height: 180)
-                    
-                    Text("Ingredients")
-                        .font(.custom("Welland",
-                                      size: 22))
-                        .foregroundColor(.sageGreen)
-                
-                    VStack{
-                        ForEach(ingredients) { ingredient in
-                            IngredientTextField(i: ingredient, ingredients: $ingredients)
-                        }
-                   }
-                    
-    //                Button (
-    //                    action: {firebase.uploadImage(image!)}
-    //                ) {
-    //                    Text("Upload Image")
-    //                }
-                    
-    //                Button (
-    //                    action: {firebase.getPhoto()}
-    //                ) {
-    //                    Text("Get image")
-       //             }
+        VStack {
+            Text("Create a recipe")
+                .font(.custom("Welland",
+                              size: DrawingConstants.titleSize))
+                .ignoresSafeArea()
+                .foregroundColor(.sageGreen)
+            
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                        TextField("Title", text: $title)
+                            .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
                         
-                    }
-                .padding(.horizontal)
-                .contentView(recipe: recipes, on: false)
-                .background(Color.backgroundColor)
-                //.ignoresSafeArea()
-                .sheet(isPresented: $showPicker, onDismiss: nil) {
-                        ImagePicker(
-                            image: $image,
-                        showPicker: $showPicker)}
-        }
-        .navigationBarTitle(Text(""), displayMode: .inline)
+                        TextField("Description", text: $description)
+                            .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                        Text("Image")
+                            .font(.custom("Welland",
+                                          size: DrawingConstants.subcategoriesFontSize))
+                            .foregroundColor(.sageGreen)
+                        
+                        Image("köttbullar") // Image(uiImage: ) for stored images
+                            .resizable()
+                            .cornerRadius(DrawingConstants.imageCornerRadius)
+                            .frame(width: DrawingConstants.imageWidth,
+                                   height: DrawingConstants.imageHeight)
+                        
+                        Text("Ingredients")
+                            .font(.custom("Welland",
+                                          size: 22))
+                            .foregroundColor(.sageGreen)
+                    
+                        VStack{
+                            ForEach(ingredients) { ingredient in
+                                IngredientTextField(i: ingredient, ingredients: $ingredients)
+                            }
+                       }
+                        
+                        Button (
+                            action: {showPicker = true}
+                        ) {
+                            Text("Upload Image")}
 
-        .ignoresSafeArea(.all, edges: .bottom)
+                    }
+                            
+                }
+                .padding(.horizontal)
+                .ignoresSafeArea()
+        }
+        .contentView(recipe: recipes, on: false)
+        .navigationBarTitle(Text(""), displayMode: .inline)
+        .background(Color.backgroundColor)
+        .sheet(isPresented: $showPicker, onDismiss: nil) {
+                ImagePicker(
+                    image: $image,
+                showPicker: $showPicker)}
     
 }
 
