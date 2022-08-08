@@ -30,7 +30,7 @@ struct AddingRecipeView: View {
     @EnvironmentObject var firebase: FirebaseViewModel
     
     @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
-    @State var directions: Array<Direction> = [Direction(direction: "")]
+    @State var directions: Array<Direction> = [Direction(direction: "sas")]
     @State var dateNow = ""
     @State var showPiker = false
     
@@ -117,7 +117,7 @@ struct AddingRecipeView: View {
                     
                 }
                 Button {
-                    recipes.addRecipe()
+                    recipes.addRecipe(directions)
                 } label: {
                     Text("Submit Recipe")
                         

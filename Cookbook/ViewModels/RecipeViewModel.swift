@@ -13,8 +13,8 @@ class RecipeViewModel: ObservableObject {
     
     var firebase: FirebaseViewModel = FirebaseViewModel()
 
-    func addRecipe() {
-        firebase.uploadDirection(<#T##direction: Array<Direction>##Array<Direction>#>, <#T##uid: String##String#>)
+    func addRecipe(_ directions: Array<Direction>) {
+        firebase.uploadDirection(directions, "test")
     }
     
     

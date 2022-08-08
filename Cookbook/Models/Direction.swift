@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Direction: Identifiable {
+struct Direction: Identifiable, Codable{
     var id = UUID()
     var direction: String
+    
+    var dictionary: [String: Any] {
+        return["direction": direction]
+    }
 }

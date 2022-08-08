@@ -124,8 +124,14 @@ import UIKit
     //MARK: - Upload Directions
     
     func uploadDirection(_ direction: Array<Direction>, _ uid: String) {
-        self.db.collection("Directions").document(UUID().uuidString).setData(["RecipeUID": uid,
-                                                                              "Directions": direction])
+        let a =  direction.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
+            var number = 1
+            var dict = dict
+            dict["Direction \(direction.id)"] = direction.direction
+            return dict
+        }
+        print(a)
+        self.db.collection("Directions").document(uid).setData(["messages": a])
     }
     
     
