@@ -10,12 +10,6 @@ import SwiftUI
 struct AddingRecipeView: View {
     
     private struct DrawingConstants {
-        static let backButtonIconFrameWidth: CGFloat = 20
-        static let backButtonIconFrameHeight: CGFloat = 30
-        static let backButtonHeightIphone8: CGFloat = 520
-        static let backButtonHeightIphone13: CGFloat = 600
-        static let backButtonPaddingButtom: CGFloat = 700
-        static let backButtonPaddingTrailing: CGFloat = 330
         static let titleSize: CGFloat = 35
         static let subcategoriesFontSize: CGFloat = 22
         static let imageCornerRadius: CGFloat = 10
@@ -37,6 +31,9 @@ struct AddingRecipeView: View {
     
     @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
     @State var directions: Array<Direction> = [Direction(direction: "")]
+    @State var dateNow = ""
+    @State var showPiker = false
+    
     
     var body: some View {
         VStack {
@@ -50,53 +47,89 @@ struct AddingRecipeView: View {
                 VStack(alignment: .leading) {
                     Group {
                         TextField("Title", text: $title)
-                            .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
+                            .textFieldStyle(TextFieldDesign(image: "square.and.pencil",
+                                                            error: false,
+                                                            shadow: false))
 
                         TextField("Description", text: $description)
-                            .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                            .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+                                                            error: false,
+                                                            shadow: false))
                         Divider()
                     
                         Text("Image")
                             .font(.custom("Welland",
                                           size: DrawingConstants.subcategoriesFontSize))
                             .foregroundColor(.sageGreen)
+                    
                     }
-                    Image("köttbullar") // Image(uiImage: ) for stored images
+                    
+                    Group {
+                        Image("köttbullar") // Image(uiImage: ) for stored images
                         .resizable()
                         .cornerRadius(DrawingConstants.imageCornerRadius)
                         .frame(width: DrawingConstants.imageWidth,
                                height: DrawingConstants.imageHeight)
-                    Divider()
-                    Text("Ingredients")
-                        .font(.custom("Welland",
-                                      size: 22))
-                        .foregroundColor(.sageGreen)
-                
-                    VStack{
-                        ForEach(ingredients) { ingredient in
-                            IngredientTextField(i: ingredient, ingredients: $ingredients)
+                        Divider()
+                        Text("Ingredients")
+                            .font(.custom("Welland",
+                                          size: DrawingConstants.subcategoriesFontSize))
+                            .foregroundColor(.sageGreen)
+                    
+                        VStack{
+                            ForEach(ingredients) { ingredient in
+                                IngredientTextField(i: ingredient,
+                                                    ingredients: $ingredients)
+                            }
                         }
+                        Divider()
+                        
                     }
-                    Divider()
                         
                     Text("Directions")
                         .font(.custom("Welland",
-                                      size: 22))
+                                      size: DrawingConstants.subcategoriesFontSize))
                         .foregroundColor(.sageGreen)
 
                     VStack {
                         ForEach(directions) { direction in
-                            DirectionsTextField(dir: direction, directions: $directions)
+                            DirectionsTextField(dir: direction,
+                                                directions: $directions)
                         }
                     }
+                    Divider()
+                    
+                    HStack {
+                        Text("Prep Time")
+                            .font(.custom("Welland",
+                                          size: DrawingConstants.subcategoriesFontSize))
+                            .foregroundColor(.sageGreen)
+                        TextField("Minutes", text: $dateNow)
+                            .textFieldStyle(TextFieldDesign(image: "timer",
+                                                            error: false,
+                                                            shadow: false))
+                    }
+                    
+                    Text("Total time: \(dateNow)")
+                        .font(.custom("Welland",
+                                      size: DrawingConstants.subcategoriesFontSize))
+                        .foregroundColor(.sageGreen)
+                    
                 }
-                .padding(.horizontal)
-                .ignoresSafeArea()
+                Button {
+                    recipes.addRecipe()
+                } label: {
+                    Text("Submit Recipe")
+                        
+                }
+                .buttonStyle(CustomButton(color: .white))
             }
         }
         .contentView(recipe: recipes, on: false)
+        .padding(.horizontal)
         .navigationBarTitle(Text(""), displayMode: .inline)
         .background(Color.backgroundColor)
+        .ignoresSafeArea(.all, edges: .bottom)
         .sheet(isPresented: $showPicker, onDismiss: nil) {
                 ImagePicker(
                     image: $image,

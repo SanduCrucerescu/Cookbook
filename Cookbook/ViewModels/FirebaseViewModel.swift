@@ -112,6 +112,15 @@ import UIKit
         }
     }
     
+    //MARK: - Upload Directions
+    
+    func uploadDirection(_ direction: Array<Direction>, _ uid: String) {
+        self.db.collection("Directions").document(UUID().uuidString).setData(["RecipeUID": uid,
+                                                                              "Directions": direction])
+    }
+    
+    
+    
     //MARK: - Upload image to db
     
     func uploadImage(_ image: UIImage?) {

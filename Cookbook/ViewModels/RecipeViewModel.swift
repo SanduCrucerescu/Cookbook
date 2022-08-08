@@ -10,4 +10,17 @@ import Foundation
 class RecipeViewModel: ObservableObject {
     @Published var recipes:Array<Recipe> = []
     
+    var firebase: FirebaseViewModel?
+    
+    
+    func addRecipe() {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 }

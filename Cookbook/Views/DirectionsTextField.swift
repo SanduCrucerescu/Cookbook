@@ -14,7 +14,7 @@ struct DirectionsTextField: View {
     
     var body: some View {
         HStack{
-            TextField("Ingredient", text: $direction)
+            TextField("Direction", text: $direction)
                 .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
                 .lineLimit(3)
             Image(systemName: "minus.circle")
@@ -22,7 +22,7 @@ struct DirectionsTextField: View {
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
                     let index = directions.firstIndex(where: {$0.id == dir.id})
-                    guard index != 0 else { return }
+                    guard direction.count != 0 else { return }
                     directions.remove(at: index!)
             }
                 
