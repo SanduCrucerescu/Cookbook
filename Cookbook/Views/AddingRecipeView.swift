@@ -30,76 +30,67 @@ struct AddingRecipeView: View {
     @EnvironmentObject var recipes: RecipeViewModel
     @EnvironmentObject var firebase: FirebaseViewModel
     
+    @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
+    
     
     var body: some View {
-            VStack{
-                Text("Create a recipe")
-                    .font(.custom("Welland",
-                                  size: 35))
-                    .foregroundColor(.sageGreen)
-                
-                TextField("Title", text: $title)
-                    .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
-                
-                TextField("Description", text: $description)
-                    .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
-                Text("Image")
-                    .font(.custom("Welland",
-                                  size: 22))
-                    .foregroundColor(.sageGreen)
-                
-                Image("köttbullar")
-                    .resizable()
-                    .cornerRadius(10)
-                    .frame(width: 200, height: 180)
-                
-                Text("Ingredients")
-                    .font(.custom("Welland",
-                                  size: 22))
-                    .foregroundColor(.sageGreen)
-            
-                List{
-                    TextField("Ingredient", text: $title)
-                        .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
-                }
-                
-                
-//
-//                if image != nil {
-//                        Image(uiImage: image!)
-//                            .resizable()
-//                            .frame(width: 200, height: 200)
-//                    }
-//
-//                Button(
-//                    action: {showPicker = true}
-//                )
-//                    {
-//                        Text("Select image")
-//                    }
-//
-//                Button (
-//                    action: {firebase.uploadImage(image!)}
-//                ) {
-//                    Text("Upload Image")
-//                }
-                
-//                Button (
-//                    action: {firebase.getPhoto()}
-//                ) {
-//                    Text("Get image")
-   //             }
+        Text("Create a recipe")
+            .font(.custom("Welland",
+                          size: 35))
+            .foregroundColor(.sageGreen)
+        VStack(alignment: .leading) {
+            ScrollView(showsIndicators: false){
+                    TextField("Title", text: $title)
+                        .textFieldStyle(TextFieldDesign(image: "square.and.pencil", error: false, shadow: false))
                     
-                }
-            .padding(.horizontal)
-            .contentView(recipe: recipes, on: false)
-            .background(Color.backgroundColor)
-            .ignoresSafeArea()
-            .sheet(isPresented: $showPicker, onDismiss: nil) {
-                    ImagePicker(
-                        image: $image,
+                    TextField("Description", text: $description)
+                        .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                    Text("Image")
+                        .font(.custom("Welland",
+                                      size: 22))
+                        .foregroundColor(.sageGreen)
+                    
+                    Image("köttbullar") // Image(uiImage: ) for stored images
+                        .resizable()
+                        .cornerRadius(10)
+                        .frame(width: 200, height: 180)
+                    
+                    Text("Ingredients")
+                        .font(.custom("Welland",
+                                      size: 22))
+                        .foregroundColor(.sageGreen)
+                
+                    VStack{
+                        ForEach(ingredients) { ingredient in
+                            IngredientTextField(i: ingredient, ingredients: $ingredients)
+                        }
+                   }
+                    
+    //                Button (
+    //                    action: {firebase.uploadImage(image!)}
+    //                ) {
+    //                    Text("Upload Image")
+    //                }
+                    
+    //                Button (
+    //                    action: {firebase.getPhoto()}
+    //                ) {
+    //                    Text("Get image")
+       //             }
+                        
+                    }
+                .padding(.horizontal)
+                .contentView(recipe: recipes, on: false)
+                .background(Color.backgroundColor)
+                //.ignoresSafeArea()
+                .sheet(isPresented: $showPicker, onDismiss: nil) {
+                        ImagePicker(
+                            image: $image,
                         showPicker: $showPicker)}
-            //.navigationBarHidden(true)
+        }
+        .navigationBarTitle(Text(""), displayMode: .inline)
+
+        .ignoresSafeArea(.all, edges: .bottom)
     
 }
 
@@ -114,3 +105,5 @@ struct AddingRecipeView_Previews: PreviewProvider {
 
     }
 }
+
+

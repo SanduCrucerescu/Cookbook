@@ -34,11 +34,6 @@ struct LoginView: View {
                     .font(.custom("Welland Semibold",
                                   size: DrawingConstants.fontSize))
                     .foregroundColor(.white)
-//                    .font(.system(
-//                        size: DrawingConstants.fontSize,
-//                        weight: .regular,
-//                        design: .default))
-//                    .foregroundColor(.white)
                 CenterSquare()
                     .frame(
                         width: width * DrawingConstants.centerWidthMultiplier,

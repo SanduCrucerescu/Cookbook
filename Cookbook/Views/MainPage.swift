@@ -54,6 +54,7 @@ struct MainPage: View {
             }
             .navigationBarHidden(true)
         }
+       .accentColor(.sageGreen)
        .navigationBarHidden(true)
        .navigationBarBackButtonHidden(true)
     }
