@@ -18,19 +18,19 @@ import UIKit
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
-
+    
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
     private var storageRef = Storage.storage().reference()
-  
+    
     @Published private var recipes: Array<Recipe> = []
     
     var recipeViewModel: RecipeViewModel?
-
+    
     init(recipeViewModel: RecipeViewModel?=nil) {
-       self.recipeViewModel = recipeViewModel
+        self.recipeViewModel = recipeViewModel
     }
-
+    
     
     func getRecipes() -> Array<Recipe> {
         recipes
@@ -48,7 +48,7 @@ import UIKit
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
@@ -70,16 +70,16 @@ import UIKit
             print(error)
         }
     }
-
+    
     
     // MARK: - Register
     
     func register(_ email: String, _ password1: String, _ password2: String, _ username: String) {
-//        guard isValidEmail(email) else {
-//            self.isEmail.toggle()
-//            print("false email")
-//            return
-//        }
+        //        guard isValidEmail(email) else {
+        //            self.isEmail.toggle()
+        //            print("false email")
+        //            return
+        //        }
         if isValidEmail(email){
             self.isEmail = true
         } else {
@@ -99,70 +99,51 @@ import UIKit
             }
             self.registerSuccessfull = true
             guard let uid:String =  Auth.auth().currentUser?.uid else { return }
-
+            
             self.db.collection("Users").document(uid).setData(["Username": username])
-
-
+            
+            
             print("true")
         }
     }
     
     //MARK: - Get data from firebase
     func getData() async {
-       db.collection("Recipes").addSnapshotListener { snapshot, error in
-           self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
+        db.collection("Recipes").addSnapshotListener { snapshot, error in
+            self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
                 return Recipe(id: data.documentID,
                               title: data["Title"] as? String ?? "",
                               description: data["Desctiprion"] as? String ?? "",
                               author: data["Author"] as? String ?? "",
-                              image: data["imageURL"] as? String ?? "")
-           }) ?? []
+                              image: data["imageURL"] as? String ?? "",
+                              ingredients: data["Ingredients"] as? [Ingredient] ?? [],
+                              directions: data["Directions"] as? [Direction] ?? [],
+                              prepTime: data["PrepTime"] as? Int ?? 0)
+            }) ?? []
         }
         print(self.recipes)
     }
     
     //MARK: - Upload recipe
     
-    func uploadRecipe(_ title: String, _ description: String, _ author: String, _ image: UIImage) async {
-        do{
-            var imageURL: String = ""
-            
-            try await self.uploadImage(image) { status, response in
-                self.db.collection("Recipes").document(UUID().uuidString).setData(["Author": author,
-                                                                                   "Title": title,
-                                                                                   "Description": description,
-                                                                                   "imageURL": response])
-            }
-            
-//            let a = try self.db.collection("Recipes").document(UUID().uuidString).setData(["Author": author,
-//                                                                               "Title": title,
-//                                                                               "Description": description,
-//                                                                               "imageURL": imageURL])
-        } catch {
-            print(error)
+    func uploadRecipe(_ title: String, _ description: String, _ author: String, _ image: UIImage, _ ingredients: [String: Any], _ directions: [String: Any]) async {
+        await self.uploadImage(image) { status, response in
+            self.db.collection("Recipes").document(UUID().uuidString).setData(["Author": author,
+                                                                               "Title": title,
+                                                                               "Description": description,
+                                                                               "imageURL": response,
+                                                                               "Ingredients": ingredients,
+                                                                               "Directions": directions])
         }
     }
     
-    
-    
-    //MARK: - Upload Directions
-    
-    func uploadDirection(_ direction: [String: Any], _ uid: String) {
-        self.db.collection("Directions").document(uid).setData(["messages": direction])
-    }
-    
-    //MARK: - Upload Ingredients
-    
-    func uploadIngredients(_ ingredients: [String: Any], _ uid: String) {
-        self.db.collection("Ingredients").document(uid).setData(["ingredients": ingredients ])
-    }
     
     
     //MARK: - Upload image to db
     
     func uploadImage(_ image: UIImage?, completion: @escaping(_ status: Bool, _ response: String) -> Void) async {
         //guard image != nil else { return }
-    
+        
         let imageData = image!.jpegData(compressionQuality: 0.8)
         
         
@@ -170,7 +151,7 @@ import UIKit
         
         let path = "images/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
-                
+        
         
         let _ = await fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
@@ -184,24 +165,4 @@ import UIKit
             }
         }
     }
-    
-    //MARK: - Get photo from db
-   
-//    func getPhoto(_ path: String) ->  UIImage {
-//        let fileRef = self.storageRef.child(path)
-//        var images = [UIImage]()
-//
-//        let imageSapshot = await fileRef.getData(maxSize: 5 * 1024 * 1024)
-//        await fileRef.getData(maxSize: 5 * 1024 * 1024) {data, error in
-//            if error == nil && data != nil {
-//                print("yes")
-//                let image = await UIImage(data: data!)!
-//                images.append(image)
-//                    //print(image)
-//                    //print("s")
-//            }
-//        }
-//        return images.first!
-//
-//    }
 }

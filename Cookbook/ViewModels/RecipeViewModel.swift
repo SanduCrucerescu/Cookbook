@@ -41,20 +41,6 @@ class RecipeViewModel: ObservableObject {
             
         }
         
-        // await firebase.uploadRecipe(title, description, "Alex", image!)
-        
-        title = ""
-        description = ""
-        
-        //firebase.uploadIngredients(ingredientsDictionary, "test")
-        
-        //firebase.uploadDirection(directionsDictionary, "test")
+        await firebase.uploadRecipe(title, description, UUID().uuidString, image!, ingredientsDictionary, directionsDictionary)
     }
-    
-    
-    
-    
-    
-    
-    
 }

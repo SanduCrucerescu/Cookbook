@@ -14,5 +14,8 @@ struct Recipe: Identifiable {
     var description: String
     var author: String
     var image: String
+    var ingredients: Array<Ingredient>
+    var directions: Array<Direction>
+    var prepTime: Int
 }
 
