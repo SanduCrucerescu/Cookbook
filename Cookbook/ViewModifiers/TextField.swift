@@ -11,6 +11,7 @@ struct TextFieldDesign: TextFieldStyle {
     let image: String
     var error: Bool
     let shadow: Bool
+    var height: CGFloat?
     
     private struct DrawingConstants {
         static let frameHeight: CGFloat = 50
@@ -25,7 +26,7 @@ struct TextFieldDesign: TextFieldStyle {
         ZStack{
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(.white)
-                .frame(height: DrawingConstants.frameHeight)
+                .frame(height: height ?? DrawingConstants.frameHeight)
                 .shadow(
                     color: error ? .red : .gray,
                     radius: shadow ? DrawingConstants.shadow : 0)

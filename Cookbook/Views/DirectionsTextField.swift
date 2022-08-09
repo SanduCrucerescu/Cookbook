@@ -14,9 +14,12 @@ struct DirectionsTextField: View {
     
     var body: some View {
         HStack{
-            TextField("Direction", text: $direction)
-                .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
-                .lineLimit(3)
+            TextField("Direction", text: $direction, axis: .vertical)
+                .lineLimit(3, reservesSpace: true)
+                .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+                                                error: false,
+                                                shadow: false,
+                                                height: 80))
             Image(systemName: "minus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
