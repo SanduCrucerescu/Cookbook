@@ -5,8 +5,8 @@ section. <br>
 
 # Rquired software and hardware
 <li>MacOS device</li>
-<li>Xcode 13.2</li>
+<li>Xcode 14 beta 5</li>
 <li>Firebase</li>
-<li>Optional: an IOS device </li>
+<li>Optional: an IOS device with IOS 16 beta installed </li>
 
 #### The app is still in development
