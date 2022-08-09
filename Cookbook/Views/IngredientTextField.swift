@@ -21,8 +21,10 @@ struct IngredientTextField: View {
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
                     let index = ingredients.firstIndex(where: {$0.id == i.id})
-                    guard ingredients.count != 0 else { return }
-                    ingredients.remove(at: index!)
+//                    guard ingredients.count != 0 else { return }
+                    if ingredients.count != 1 {
+                        ingredients.remove(at: index!)
+                    }
             }
                 
             Image(systemName: "plus.circle")

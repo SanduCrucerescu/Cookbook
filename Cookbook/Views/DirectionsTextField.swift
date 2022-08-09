@@ -25,8 +25,11 @@ struct DirectionsTextField: View {
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
                     let index = directions.firstIndex(where: {$0.id == dir.id})
-                    guard direction.count != 0 else { return }
-                    directions.remove(at: index!)
+//                    guard directions.count == 1 else { return }
+                    //print(directions.count)
+                    if directions.count != 1 {
+                        directions.remove(at: index!)
+                    }
             }
                 
             Image(systemName: "plus.circle")
