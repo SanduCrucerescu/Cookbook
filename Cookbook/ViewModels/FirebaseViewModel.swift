@@ -121,38 +121,63 @@ import UIKit
         print(self.recipes)
     }
     
-    //MARK: - Upload Directions
+    //MARK: - Upload recipe
     
-    func uploadDirection(_ direction: Array<Direction>, _ uid: String) {
-        let a =  direction.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
-            var number = 1
-            var dict = dict
-            dict["Direction \(direction.id)"] = direction.direction
-            return dict
+    func uploadRecipe(_ title: String, _ description: String, _ author: String, _ image: UIImage) async {
+        do{
+            var imageURL: String = ""
+            
+            try await self.uploadImage(image) { status, response in
+                self.db.collection("Recipes").document(UUID().uuidString).setData(["Author": author,
+                                                                                   "Title": title,
+                                                                                   "Description": description,
+                                                                                   "imageURL": response])
+            }
+            
+//            let a = try self.db.collection("Recipes").document(UUID().uuidString).setData(["Author": author,
+//                                                                               "Title": title,
+//                                                                               "Description": description,
+//                                                                               "imageURL": imageURL])
+        } catch {
+            print(error)
         }
-        print(a)
-        self.db.collection("Directions").document(uid).setData(["messages": a])
     }
     
     
     
+    //MARK: - Upload Directions
+    
+    func uploadDirection(_ direction: [String: Any], _ uid: String) {
+        self.db.collection("Directions").document(uid).setData(["messages": direction])
+    }
+    
+    //MARK: - Upload Ingredients
+    
+    func uploadIngredients(_ ingredients: [String: Any], _ uid: String) {
+        self.db.collection("Ingredients").document(uid).setData(["ingredients": ingredients ])
+    }
+    
+    
     //MARK: - Upload image to db
     
-    func uploadImage(_ image: UIImage?) {
-        guard image != nil else { return }
+    func uploadImage(_ image: UIImage?, completion: @escaping(_ status: Bool, _ response: String) -> Void) async {
+        //guard image != nil else { return }
     
         let imageData = image!.jpegData(compressionQuality: 0.8)
         
-        guard imageData != nil else { return }
+        
+        //guard imageData != nil else { return }
         
         let path = "images/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
+                
         
-        _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        let _ = await fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
                 fileRef.downloadURL { url, error in
                     if error == nil && url != nil {
-                        print(url?.absoluteString ?? "No URL")
+                        //print(url?.absoluteString ?? "No URL")
+                        completion(true, url?.absoluteString ?? "No URL")
                     }
                 }
                 //self.db.collection("Recipes").document().setData(["image": path])

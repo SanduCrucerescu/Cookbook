@@ -121,15 +121,16 @@ struct MainPage: View {
 
     }
 }
-//struct MainPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let recipe = RecipeViewModel()
-//        let firebase = FirebaseViewModel(recipeViewModel: recipe)
-//        Group {
-//            MainPage()
-//                .environmentObject(firebase)
-//                .environmentObject(recipe)
-//        }
-//    }
-//}
-//
+
+struct MainPage_Previews: PreviewProvider {
+    static var previews: some View {
+        let recipe = RecipeViewModel()
+        let firebase = FirebaseViewModel(recipeViewModel: recipe)
+        Group {
+            MainPage()
+                .environmentObject(firebase)
+                .environmentObject(recipe)
+        }
+    }
+}
+

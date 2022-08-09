@@ -25,7 +25,8 @@ struct TopBar: View {
                     self.showMenu.toggle()
                 }
             } label: {
-                Image("Menu")
+                Image(systemName: "sidebar.left")
+                    .font(.title3)
                     .padding()
                     .background(Color.white)
                     .cornerRadius(10.0)
@@ -37,12 +38,12 @@ struct TopBar: View {
                 }
             } label: {
                 Image(systemName: "message")
+                    .font(.title3)
                     .padding()
-                    .foregroundColor(.granola)
                     .background(Color.white)
                     .cornerRadius(10.0)
             }
-            .padding(.trailing, DrawingConstansts.textFieldTrailingPadding)
+            //.padding(.trailing, DrawingConstansts.textFieldTrailingPadding)
         }
         .padding(.horizontal)
     }

@@ -17,22 +17,16 @@ struct AddingRecipeView: View {
         static let imageHeight: CGFloat = 180
     }
     
-    let height = UIScreen.main.bounds.height
-    var width = UIScreen.main.bounds.width
-    
-    @State var showPicker: Bool = false
-    @State var image: UIImage?
-    @State var retrivedImage: UIImage?
-    @State var title: String = ""
-    @State var description: String = ""
+//    let height = UIScreen.main.bounds.height
+//    var width = UIScreen.main.bounds.width
     
     @EnvironmentObject var recipes: RecipeViewModel
     @EnvironmentObject var firebase: FirebaseViewModel
     
-    @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
-    @State var directions: Array<Direction> = [Direction(direction: "sas")]
-    @State var dateNow = ""
-    @State var showPiker = false
+//    @State var ingredients: Array<Ingredient> = [Ingredient(description: "")]
+//    @State var directions: Array<Direction> = [Direction(direction: "sas")]
+//    @State var dateNow = ""
+//    @State var showPiker = false
     
     
     var body: some View {
@@ -46,12 +40,12 @@ struct AddingRecipeView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     Group {
-                        TextField("Title", text: $title)
+                        TextField("Title", text: $recipes.title)
                             .textFieldStyle(TextFieldDesign(image: "square.and.pencil",
                                                             error: false,
                                                             shadow: false))
 
-                        TextField("Description", text: $description)
+                        TextField("Description", text: $recipes.description)
                             .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                             error: false,
                                                             shadow: false))
@@ -65,11 +59,29 @@ struct AddingRecipeView: View {
                     }
                     
                     Group {
-                        Image("köttbullar") // Image(uiImage: ) for stored images
-                        .resizable()
-                        .cornerRadius(DrawingConstants.imageCornerRadius)
-                        .frame(width: DrawingConstants.imageWidth,
-                               height: DrawingConstants.imageHeight)
+                        if recipes.image == nil {
+                            Image("köttbullar") // Image(uiImage: ) for stored images
+                                .resizable()
+                                .cornerRadius(DrawingConstants.imageCornerRadius)
+                                .frame(width: DrawingConstants.imageWidth,
+                                       height: DrawingConstants.imageHeight)
+                                .onTapGesture {
+                                    withAnimation {
+                                        recipes.showPicker = true
+                                    }
+                                }
+                        } else {
+                            Image(uiImage: recipes.image!) // Image(uiImage: ) for stored images
+                                .resizable()
+                                .cornerRadius(DrawingConstants.imageCornerRadius)
+                                .frame(width: DrawingConstants.imageWidth,
+                                       height: DrawingConstants.imageHeight)
+                                .onTapGesture {
+                                    withAnimation {
+                                        recipes.showPicker = true
+                                    }
+                                }
+                        }
                         Divider()
                         Text("Ingredients")
                             .font(.custom("Welland",
@@ -77,9 +89,9 @@ struct AddingRecipeView: View {
                             .foregroundColor(.sageGreen)
                     
                         VStack{
-                            ForEach(ingredients) { ingredient in
+                            ForEach(recipes.ingredients) { ingredient in
                                 IngredientTextField(i: ingredient,
-                                                    ingredients: $ingredients)
+                                                    ingredients: $recipes.ingredients)
                             }
                         }
                         Divider()
@@ -92,9 +104,9 @@ struct AddingRecipeView: View {
                         .foregroundColor(.sageGreen)
 
                     VStack {
-                        ForEach(directions) { direction in
+                        ForEach(recipes.directions) { direction in
                             DirectionsTextField(dir: direction,
-                                                directions: $directions)
+                                                directions: $recipes.directions)
                         }
                     }
                     Divider()
@@ -104,20 +116,22 @@ struct AddingRecipeView: View {
                             .font(.custom("Welland",
                                           size: DrawingConstants.subcategoriesFontSize))
                             .foregroundColor(.sageGreen)
-                        TextField("Minutes", text: $dateNow)
+                        TextField("Minutes", text: $recipes.dateNow)
                             .textFieldStyle(TextFieldDesign(image: "timer",
                                                             error: false,
                                                             shadow: false))
                     }
                     
-                    Text("Total time: \(dateNow)")
+                    Text("Total time: \(recipes.dateNow)")
                         .font(.custom("Welland",
                                       size: DrawingConstants.subcategoriesFontSize))
                         .foregroundColor(.sageGreen)
                     
                 }
                 Button {
-                    recipes.addRecipe(directions)
+                    Task {
+                       await recipes.addRecipe()
+                    }
                 } label: {
                     Text("Submit Recipe")
                         
@@ -127,13 +141,14 @@ struct AddingRecipeView: View {
         }
         .contentView(recipe: recipes, on: false)
         .padding(.horizontal)
-        .navigationBarTitle(Text(""), displayMode: .inline)
+        .navigationBarTitle(Text(""),
+                            displayMode: .inline)
         .background(Color.backgroundColor)
         .ignoresSafeArea(.all, edges: .bottom)
-        .sheet(isPresented: $showPicker, onDismiss: nil) {
+        .sheet(isPresented: $recipes.showPicker, onDismiss: nil) {
                 ImagePicker(
-                    image: $image,
-                showPicker: $showPicker)}
+                    image: $recipes.image,
+                    showPicker: $recipes.showPicker)}
         
     }
 }
