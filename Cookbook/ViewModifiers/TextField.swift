@@ -15,7 +15,7 @@ struct TextFieldDesign: TextFieldStyle {
     
     private struct DrawingConstants {
         static let frameHeight: CGFloat = 50
-        static let shadow: CGFloat = 1
+        static let shadow: CGFloat = 2
         static let fontSize: CGFloat = 20
         static let imagePading: CGFloat = 8
         static let cornerRadius: CGFloat = 10

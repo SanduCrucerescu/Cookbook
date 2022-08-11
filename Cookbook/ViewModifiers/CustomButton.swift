@@ -22,9 +22,12 @@ struct CustomButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack{
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                .fill(Color.sageGreen)
+                .fill(configuration.isPressed ? Color.sageGreen.opacity(0.5) : Color.sageGreen)
                 .frame(height: DrawingConstants.frameHeight)
                 .frame(width: DrawingConstants.buttonWidth)
+                .scaleEffect(configuration.isPressed ? 1.2 : 1)
+                .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+                
             configuration
                 .label
                 .foregroundColor(color)

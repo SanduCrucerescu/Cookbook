@@ -9,18 +9,20 @@ import SwiftUI
 
 struct IngredientTextField: View {
     @State var ingredient = ""
-    var i: Ingredient
+    var i: Ingredient?
     @Binding var ingredients: Array<Ingredient>
     
     var body: some View {
         HStack{
             TextField("Ingredient", text: $ingredient)
-                .textFieldStyle(TextFieldDesign(image: "text.alignleft", error: false, shadow: false))
+                .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+                                                error: false,
+                                                shadow: false))
             Image(systemName: "minus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
-                    let index = ingredients.firstIndex(where: {$0.id == i.id})
+                    let index = ingredients.firstIndex(where: {$0.id == i!.id})
 //                    guard ingredients.count != 0 else { return }
                     if ingredients.count != 1 {
                         ingredients.remove(at: index!)

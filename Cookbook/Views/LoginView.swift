@@ -148,13 +148,14 @@ struct LoginView: View {
 
 
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let recipe = RecipeViewModel()
-//        let firebase = FirebaseViewModel(recipeViewModel: recipe)
-//        Group {
-//            LoginView()
-//                .environmentObject(firebase)
-//        }
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let recipe = RecipeViewModel()
+        let firebase = FirebaseViewModel(recipeViewModel: recipe)
+        Group {
+            LoginView()
+                .environmentObject(firebase)
+                .environmentObject(recipe)
+        }
+    }
+}

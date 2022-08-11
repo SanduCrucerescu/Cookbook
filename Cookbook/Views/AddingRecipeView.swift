@@ -48,6 +48,14 @@ struct AddingRecipeView: View {
                     
                     }
                 
+                if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
+                    Text("Please fill all of the fields")
+                        .font(.custom("Welland",
+                                      size: 20))
+                        .ignoresSafeArea()
+                        .foregroundColor(.red)
+                }
+                
                 Button {
                     Task {
                         await recipes.addRecipe()
@@ -59,7 +67,6 @@ struct AddingRecipeView: View {
             }
         }
         .contentView(recipe: recipes, on: false)
-        .padding(.horizontal)
         .navigationBarTitle(Text(""),
                             displayMode: .inline)
         .background(Color.backgroundColor)
@@ -77,17 +84,19 @@ struct AddingRecipeView: View {
             VStack(spacing: 10) {
                 TextField("Title", text: $recipes.title)
                     .textFieldStyle(TextFieldDesign(image: "square.and.pencil",
-                                                    error: false,
-                                                    shadow: false))
+                                                    error: recipes.emptyTitle,
+                                                    shadow: recipes.emptyTitle))
+                    
                 
                 
                 TextField("Description", text: $recipes.description, axis: .vertical)
                     .lineLimit(3, reservesSpace: true)
                     .textFieldStyle(TextFieldDesign(image: "text.alignleft",
-                                                    error: false,
-                                                    shadow: false,
+                                                    error: recipes.emptyDescription,
+                                                    shadow: recipes.emptyDescription,
                                                     height: 80))
             }
+            .padding()
         }
     }
 
@@ -124,6 +133,7 @@ struct AddingRecipeView: View {
                         }
                     }
                 }
+                .padding()
             }
         }
 
@@ -159,6 +169,7 @@ struct AddingRecipeView: View {
                     }
                 }
             }
+            .padding()
         }
     }
     
@@ -171,18 +182,19 @@ struct AddingRecipeView: View {
                         .font(.custom("Welland",
                                       size: DrawingConstants.subcategoriesFontSize))
                         .foregroundColor(.sageGreen)
-                    TextField("Minutes", text: $recipes.dateNow)
+                    TextField("Minutes", text: $recipes.prepTime)
                         .textFieldStyle(TextFieldDesign(image: "timer",
-                                                        error: false,
-                                                        shadow: false))
+                                                        error: recipes.emptyPrepTime,
+                                                        shadow: recipes.emptyPrepTime))
                 }
                 
                 
-                Text("Total time: \(recipes.dateNow)")
+                Text("Total time: \(recipes.prepTime)")
                     .font(.custom("Welland",
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
             }
+            .padding()
         }
     }
 

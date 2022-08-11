@@ -15,11 +15,13 @@ class RecipeViewModel: ObservableObject {
     @Published var retrivedImage: UIImage?
     @Published var title: String = ""
     @Published var description: String = ""
-    
     @Published var ingredients: Array<Ingredient> = [Ingredient(description: "")]
     @Published var directions: Array<Direction> = [Direction(direction: "sas")]
-    @Published var dateNow = ""
-    @Published var showPiker = false
+    @Published var prepTime = ""
+    @Published var emptyTitle = false
+    @Published var emptyDescription = false
+    @Published var emptyImage = false
+    @Published var emptyPrepTime = false
     
     
     @Published var recipes:Array<Recipe> = []
@@ -27,20 +29,34 @@ class RecipeViewModel: ObservableObject {
     var firebase: FirebaseViewModel = FirebaseViewModel()
 
     func addRecipe() async {
-        let directionsDictionary =  directions.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
-           // var number = 1
-            var dict = dict
-            dict["Direction \(direction.id)"] = direction.direction
-            return dict
-        }
-        
-        let ingredientsDictionary = ingredients.reduce([String: Any]()) { (dict, ingredient) -> [String: Any] in
-            var dict = dict
-            dict["Ingredient \(ingredient.id)"] = ingredient.description
-            return dict
+                
+        guard !title.isEmpty && !description.isEmpty && !prepTime.isEmpty else {
+            emptyTitle = title.isEmpty ? true : false;
+            emptyDescription = description.isEmpty ? true : false;
+            emptyPrepTime = prepTime.isEmpty ? true : false;
             
+            return
         }
         
-        await firebase.uploadRecipe(title, description, UUID().uuidString, image!, ingredientsDictionary, directionsDictionary)
+//        guard !description.isEmpty else { emptyDescription = true; return}
+
+        print(emptyTitle)
+
+
+//        let directionsDictionary =  directions.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
+//           // var number = 1
+//            var dict = dict
+//            dict["Direction \(direction.id)"] = direction.direction
+//            return dict
+//        }
+//
+//        let ingredientsDictionary = ingredients.reduce([String: Any]()) { (dict, ingredient) -> [String: Any] in
+//            var dict = dict
+//            dict["Ingredient \(ingredient.id)"] = ingredient.description
+//            return dict
+//
+//        }
+//
+//        await firebase.uploadRecipe(title, description, UUID().uuidString, image!, ingredientsDictionary, directionsDictionary)
     }
 }
