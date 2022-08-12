@@ -47,7 +47,6 @@ struct AddingRecipeView: View {
                     PrepTime()
                     
                     }
-                
                 if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
                     Text("Please fill all of the fields")
                         .font(.custom("Welland",
@@ -89,8 +88,13 @@ struct AddingRecipeView: View {
                     
                 
                 
-                TextField("Description", text: $recipes.description, axis: .vertical)
-                    .lineLimit(3, reservesSpace: true)
+//                TextField("Description", text: $recipes.description, axis: .vertical)
+//                    .lineLimit(3, reservesSpace: true)
+//                    .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+//                                                    error: recipes.emptyDescription,
+//                                                    shadow: recipes.emptyDescription,
+//                                                    height: 80))
+                TextField("Description", text: $recipes.description)
                     .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                     error: recipes.emptyDescription,
                                                     shadow: recipes.emptyDescription,
@@ -148,8 +152,12 @@ struct AddingRecipeView: View {
                     .foregroundColor(.sageGreen)
                 
                 VStack{
-                    ForEach(recipes.ingredients) { ingredient in
-                        IngredientTextField(i: ingredient,
+//                    ForEach(recipes.ingredients) { ingredient in
+//                        IngredientTextField(index: ingredient,
+//                                            ingredients: $recipes.ingredients)
+//                    }
+                    ForEach(0..<recipes.ingredients.count + 1, id: \.self) { ingredient in
+                        IngredientTextField(index: ingredient,
                                             ingredients: $recipes.ingredients)
                     }
                 }
@@ -163,9 +171,8 @@ struct AddingRecipeView: View {
                     .foregroundColor(.sageGreen)
                 
                 VStack {
-                    ForEach(recipes.directions) { direction in
-                        DirectionsTextField(dir: direction,
-                                            directions: $recipes.directions)
+                    ForEach(0..<recipes.directions.count + 1, id: \.self) { index in
+                        DirectionsTextField(index: index, directions: $recipes.directions)
                     }
                 }
             }

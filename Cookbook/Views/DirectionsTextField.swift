@@ -9,13 +9,18 @@ import SwiftUI
 
 struct DirectionsTextField: View {
     @State var direction = ""
-    var dir: Direction
+    var index: Int
     @Binding var directions: Array<Direction>
     
     var body: some View {
         HStack{
-            TextField("Direction", text: $direction, axis: .vertical)
-                .lineLimit(3, reservesSpace: true)
+//            TextField("Direction", text: $direction, axis: .vertical)
+//                .lineLimit(3, reservesSpace: true)
+//                .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+//                                                error: false,
+//                                                shadow: false,
+//                                                height: 80))
+            TextField("Direction", text: $direction)
                 .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                 error: false,
                                                 shadow: false,
@@ -24,11 +29,11 @@ struct DirectionsTextField: View {
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
-                    let index = directions.firstIndex(where: {$0.id == dir.id})
+                    //let index = directions.firstIndex(where: {$0.id == id})
 //                    guard directions.count == 1 else { return }
-                    //print(directions.count)
+//                    print(directions.count)
                     if directions.count != 1 {
-                        directions.remove(at: index!)
+                        directions.remove(at: index)
                     }
             }
                 

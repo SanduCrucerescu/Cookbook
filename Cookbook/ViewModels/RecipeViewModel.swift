@@ -15,8 +15,8 @@ class RecipeViewModel: ObservableObject {
     @Published var retrivedImage: UIImage?
     @Published var title: String = ""
     @Published var description: String = ""
-    @Published var ingredients: Array<Ingredient> = [Ingredient(description: "")]
-    @Published var directions: Array<Direction> = [Direction(direction: "sas")]
+    @Published var ingredients: Array<Ingredient> = []
+    @Published var directions: Array<Direction> = []
     @Published var prepTime = ""
     @Published var emptyTitle = false
     @Published var emptyDescription = false
@@ -30,10 +30,10 @@ class RecipeViewModel: ObservableObject {
 
     func addRecipe() async {
                 
-        guard !title.isEmpty && !description.isEmpty && !prepTime.isEmpty else {
-            emptyTitle = title.isEmpty ? true : false;
-            emptyDescription = description.isEmpty ? true : false;
-            emptyPrepTime = prepTime.isEmpty ? true : false;
+        guard !title.isEmpty || !description.isEmpty || !prepTime.isEmpty else {
+            emptyTitle = title.isEmpty ? true : false
+            emptyDescription = description.isEmpty ? true : false
+            emptyPrepTime = prepTime.isEmpty ? true : false
             
             return
         }

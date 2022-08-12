@@ -6,37 +6,57 @@
 //
 
 import SwiftUI
+import Combine
+
 
 struct IngredientTextField: View {
-    @State var ingredient = ""
-    var i: Ingredient?
+    @State var text = ""
+    var index: Int
     @Binding var ingredients: Array<Ingredient>
     
     var body: some View {
         HStack{
-            TextField("Ingredient", text: $ingredient)
+            TextField("Ingredient", text: $text)
                 .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                 error: false,
                                                 shadow: false))
+                .onChange(of: text) { newValue in
+                    
+                    let indexIsValid = ingredients.indices.contains(index)
+                    print(text)
+                    print(newValue)
+                    
+                    if indexIsValid {
+                        ingredients[index] = Ingredient(description: newValue)
+
+                    } else {
+                        ingredients.append(Ingredient(description: newValue))
+                    }
+                    
+                }
+              }
             Image(systemName: "minus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
-                    let index = ingredients.firstIndex(where: {$0.id == i!.id})
-//                    guard ingredients.count != 0 else { return }
-                    if ingredients.count != 1 {
-                        ingredients.remove(at: index!)
-                    }
+                    
+                    //ingredients.remove(at: index)
+                    
+//                    let inde = ingredients.firstIndex(where: {$0.id == index.id})
+////                    guard ingredients.count != 0 else { return }
+//                    if ingredients.count != 1 {
+//                        ingredients.remove(at: inde!)
+//                    }
             }
                 
             Image(systemName: "plus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
-                    ingredients.append(Ingredient(description: ingredient))
+                    //ingredients.append(Ingredient(description: ingredient))
                     print(ingredients)
                 
-            }
         }
     }
 }
+
