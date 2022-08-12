@@ -19,8 +19,9 @@ struct AddingRecipeView: View {
     
     @EnvironmentObject var recipes: RecipeViewModel
     @EnvironmentObject var firebase: FirebaseViewModel
-    
+
     var body: some View {
+
         VStack {
             Text("Create a recipe")
                 .font(.custom("Welland",
@@ -28,46 +29,49 @@ struct AddingRecipeView: View {
                 .ignoresSafeArea()
                 .foregroundColor(.sageGreen)
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading) {
-                    
-                    TileAndDescription()
-                    
-                    Divider()
-                    
-                    ImageView()
-                    
-                    
-                    Divider()
-                    
-                    IngredientsAndDirections()
-                        
-                    Divider()
-                        
-                    PrepTime()
-                    
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading) {
+                        TileAndDescription()
+
+                        Divider()
+
+                        ImageView()
+
+
+                        Divider()
+
+                        IngredientsAndDirections()
+
+                        Divider()
+
+                        PrepTime()
+
+                        }
+                    if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
+                        Text("Please fill all of the fields")
+                            .font(.custom("Welland",
+                                          size: 20))
+                            .ignoresSafeArea()
+                            .foregroundColor(.red)
                     }
-                if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
-                    Text("Please fill all of the fields")
-                        .font(.custom("Welland",
-                                      size: 20))
-                        .ignoresSafeArea()
-                        .foregroundColor(.red)
+
+                    Button {
+                        Task {
+                            await recipes.addRecipe()
+                        }
+                    } label: {
+                        Text("Submit Recipe")}
+                        .buttonStyle(CustomButton(color: .white))
+
                 }
-                
-                Button {
-                    Task {
-                        await recipes.addRecipe()
-                    }
-                } label: {
-                    Text("Submit Recipe")}
-                    .buttonStyle(CustomButton(color: .white))
-                
-            }
+            
         }
         .contentView(recipe: recipes, on: false)
         .navigationBarTitle(Text(""),
                             displayMode: .inline)
+        .toolbar{
+            EditButton()
+        }
         .background(Color.backgroundColor)
         .ignoresSafeArea(.all, edges: .bottom)
         .sheet(isPresented: $recipes.showPicker, onDismiss: nil) {
@@ -151,18 +155,25 @@ struct AddingRecipeView: View {
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 
-                VStack{
-//                    ForEach(recipes.ingredients) { ingredient in
-//                        IngredientTextField(index: ingredient,
+//                IngredientTextField(index: 0,
+//                                    ingredients: $recipes.ingredients)
+//                ForEach(Array(recipes.ingredients.enumerated()), id: \.1) { index, ingredient in
+//                    IngredientTextField(index: index + 1,
+//                                            ingredient: ingredient,
 //                                            ingredients: $recipes.ingredients)
 //                    }
-                    ForEach(0..<recipes.ingredients.count + 1, id: \.self) { ingredient in
-                        IngredientTextField(index: ingredient,
-                                            ingredients: $recipes.ingredients)
-                    }
-                }
-                Divider()
+//
                 
+                    ForEach(Array(recipes.ingredients.enumerated()), id: \.1) { index, ingredient in
+                            IngredientTextField(index: index,
+                                                ingredient: ingredient,
+                                                ingredients: $recipes.ingredients)
+                        }
+                
+                
+                
+                
+                Divider()
                 
                 
                 Text("Directions")
@@ -171,7 +182,7 @@ struct AddingRecipeView: View {
                     .foregroundColor(.sageGreen)
                 
                 VStack {
-                    ForEach(0..<recipes.directions.count + 1, id: \.self) { index in
+                    ForEach(0..<recipes.directions.count , id: \.self) { index in
                         DirectionsTextField(index: index, directions: $recipes.directions)
                     }
                 }
@@ -179,7 +190,7 @@ struct AddingRecipeView: View {
             .padding()
         }
     }
-    
+
     struct PrepTime: View {
         @EnvironmentObject var recipes: RecipeViewModel
         var body: some View {

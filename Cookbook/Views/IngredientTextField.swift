@@ -11,8 +11,10 @@ import Combine
 
 struct IngredientTextField: View {
     @State var text = ""
-    var index: Int
+    @State var index: Int
+    var ingredient: Ingredient?
     @Binding var ingredients: Array<Ingredient>
+    
     
     var body: some View {
         HStack{
@@ -21,32 +23,45 @@ struct IngredientTextField: View {
                                                 error: false,
                                                 shadow: false))
                 .onChange(of: text) { newValue in
-                    
-                    let indexIsValid = ingredients.indices.contains(index)
+                    text = newValue
+//                    if index != 0 {
+//                        index = ingredients.firstIndex(where: {$0.id == ingredient?.id})
+//                    }
+                    //let indexIsValid = ingredients.indices.contains(index)
                     print(text)
-                    print(newValue)
+                    print(index)
                     
-                    if indexIsValid {
+//                    if index == 0 {
+//                        ingredients[0].description = newValue
+//                    }
+//
+                    if index == 0 {
                         ingredients[index] = Ingredient(description: newValue)
-
                     } else {
-                        ingredients.append(Ingredient(description: newValue))
+                        if ingredients.indices.contains(index) {
+                            ingredients[index] = Ingredient(description: newValue)
+
+                        } else {
+                            ingredients.append(Ingredient(description: newValue))
+                        }
                     }
-                    
                 }
-              }
+            
+            
             Image(systemName: "minus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
                     
-                    //ingredients.remove(at: index)
-                    
-//                    let inde = ingredients.firstIndex(where: {$0.id == index.id})
-////                    guard ingredients.count != 0 else { return }
-//                    if ingredients.count != 1 {
-//                        ingredients.remove(at: inde!)
-//                    }
+                    let inde = ingredients.firstIndex(where: {$0.id == ingredient!.id})
+                   //                    guard ingredients.count != 0 else { return }
+                   if ingredients.count != 1 {
+                       ingredients.remove(at: inde!)
+                   }
+//                    guard ingredients.count != 0 else { return }
+//                if ingredients.count != 1 {
+//                    ingredients.remove(at: inde!)
+//                }
             }
                 
             Image(systemName: "plus.circle")
@@ -55,6 +70,7 @@ struct IngredientTextField: View {
                 .onTapGesture {
                     //ingredients.append(Ingredient(description: ingredient))
                     print(ingredients)
+                }
                 
         }
     }

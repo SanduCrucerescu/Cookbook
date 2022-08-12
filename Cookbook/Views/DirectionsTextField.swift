@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DirectionsTextField: View {
-    @State var direction = ""
+    @State var text = ""
     var index: Int
     @Binding var directions: Array<Direction>
     
@@ -20,11 +20,25 @@ struct DirectionsTextField: View {
 //                                                error: false,
 //                                                shadow: false,
 //                                                height: 80))
-            TextField("Direction", text: $direction)
+            TextField("Direction", text: $text)
                 .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                 error: false,
                                                 shadow: false,
                                                 height: 80))
+                .onChange(of: text) { newValue in
+                    if index == 0 {
+                        directions[index] = Direction(direction: newValue)
+                    } else {
+                        if directions.indices.contains(index) {
+                            directions[index] = Direction(direction: newValue)
+
+                        } else {
+                            directions.append(Direction(direction: newValue))
+                        }
+                    }
+                }
+            
+            
             Image(systemName: "minus.circle")
                 .font(.title)
                 .foregroundColor(.sageGreen)
@@ -37,14 +51,14 @@ struct DirectionsTextField: View {
                     }
             }
                 
-            Image(systemName: "plus.circle")
-                .font(.title)
-                .foregroundColor(.sageGreen)
-                .onTapGesture {
-                    directions.append(Direction(direction: direction))
-                   // print(ingredients)
-                
-            }
+//            Image(systemName: "plus.circle")
+//                .font(.title)
+//                .foregroundColor(.sageGreen)
+//                .onTapGesture {
+//                    directions.append(Direction(direction: direction))
+//                   // print(ingredients)
+//                
+//            }
         }
     }
 }
