@@ -24,8 +24,8 @@ struct CookbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CreateRecipeView()
-            //LoginView()
+            //CreateRecipeView()
+            LoginView()
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)
         }
