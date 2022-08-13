@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DirectionsTextField: View {
-    @State var text = ""
     var index: Int
+    @State var direction: Direction
     @Binding var directions: Array<Direction>
     
     var body: some View {
@@ -20,20 +20,18 @@ struct DirectionsTextField: View {
 //                                                error: false,
 //                                                shadow: false,
 //                                                height: 80))
-            TextField("Direction", text: $text)
+            TextField("Direction", text: $direction.direction)
                 .textFieldStyle(TextFieldDesign(image: "text.alignleft",
                                                 error: false,
                                                 shadow: false,
                                                 height: 80))
-                .onChange(of: text) { newValue in
-                    if index == 0 {
-                        directions[index] = Direction(direction: newValue)
-                    } else {
-                        if directions.indices.contains(index) {
-                            directions[index] = Direction(direction: newValue)
-
-                        } else {
-                            directions.append(Direction(direction: newValue))
+            
+                .onChange(of: direction.direction) { newValue in
+                    let indexIsValid = directions.indices.contains(index)
+  
+                    if indexIsValid {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            directions[index] = direction
                         }
                     }
                 }
@@ -43,22 +41,18 @@ struct DirectionsTextField: View {
                 .font(.title)
                 .foregroundColor(.sageGreen)
                 .onTapGesture {
-                    //let index = directions.firstIndex(where: {$0.id == id})
-//                    guard directions.count == 1 else { return }
-//                    print(directions.count)
-                    if directions.count != 1 {
-                        directions.remove(at: index)
-                    }
+                    let inde = directions.firstIndex(where: {$0.id == direction.id})
+                    guard directions.count != 1 else { return }
+                    directions.remove(at: inde!)
+                    
             }
                 
-//            Image(systemName: "plus.circle")
-//                .font(.title)
-//                .foregroundColor(.sageGreen)
-//                .onTapGesture {
-//                    directions.append(Direction(direction: direction))
-//                   // print(ingredients)
-//                
-//            }
+            Image(systemName: "plus.circle")
+                .font(.title)
+                .foregroundColor(.sageGreen)
+                .onTapGesture {
+                    directions.append(Direction(direction: ""))
+                }
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Direction: Identifiable, Codable{
+struct Direction: Identifiable, Hashable{
     var id = UUID()
     var direction: String
     

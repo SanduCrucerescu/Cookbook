@@ -15,8 +15,8 @@ class RecipeViewModel: ObservableObject {
     @Published var retrivedImage: UIImage?
     @Published var title: String = ""
     @Published var description: String = ""
-    @Published var ingredients: Array<Ingredient> = [Ingredient(description: "")]
-    @Published var directions: Array<Direction> = []
+    @Published var ingredients: Array<Ingredient> = [Ingredient(description: ""), Ingredient(description: ""), Ingredient(description: "")]
+    @Published var directions: Array<Direction> = [Direction(direction: ""), Direction(direction: ""), Direction(direction: "")]
     @Published var prepTime = ""
     @Published var emptyTitle = false
     @Published var emptyDescription = false

@@ -155,24 +155,12 @@ struct AddingRecipeView: View {
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 
-//                IngredientTextField(index: 0,
-//                                    ingredients: $recipes.ingredients)
-//                ForEach(Array(recipes.ingredients.enumerated()), id: \.1) { index, ingredient in
-//                    IngredientTextField(index: index + 1,
-//                                            ingredient: ingredient,
-//                                            ingredients: $recipes.ingredients)
-//                    }
-//
-                
-                    ForEach(Array(recipes.ingredients.enumerated()), id: \.1) { index, ingredient in
-                            IngredientTextField(index: index,
-                                                ingredient: ingredient,
-                                                ingredients: $recipes.ingredients)
-                        }
-                
-                
-                
-                
+                ForEach(Array(recipes.ingredients.enumerated()), id: \.1) { index, ingredient in
+                    IngredientTextField(index: index,
+                                            ingredient: ingredient,
+                                            ingredients: $recipes.ingredients)
+                    }
+
                 Divider()
                 
                 
@@ -182,8 +170,10 @@ struct AddingRecipeView: View {
                     .foregroundColor(.sageGreen)
                 
                 VStack {
-                    ForEach(0..<recipes.directions.count , id: \.self) { index in
-                        DirectionsTextField(index: index, directions: $recipes.directions)
+                    ForEach(Array(recipes.directions.enumerated()) , id: \.1) { index, direction in
+                        DirectionsTextField(index: index,
+                                            direction: direction,
+                                            directions: $recipes.directions)
                     }
                 }
             }
