@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Recipe: Identifiable {
+struct Recipe: Identifiable, Codable {
     var id: String
     var title: String
     var description: String

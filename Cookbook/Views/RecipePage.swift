@@ -47,19 +47,32 @@ struct contents: View {
             Text(recipe.title)
                 .font(.custom("Welland",
                               size: 30))
-                .foregroundColor(.sageGreen)
+                .foregroundColor(.lightBlack)
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt ex vel velit malesuada venenatis. Morbi volutpat luctus metus, quis laoreet magna pellentesque in. Donec tristique porttitor bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec quis felis nisl. Cras tellus turpis, commodo a arcu eget, faucibus tempor dolor. Cras at metus dignissim, molestie ante vel, lobortis felis. Sed tempor quam nibh, ultrices imperdiet quam aliquet a. Curabitur sed congue diam. Sed ut eleifend ipsum, a scelerisque nisl. Aenean egestas consectetur quam, in porttitor sem posuere id. ")
                 .font(.custom("Welland",
                               size: 18))
-                .foregroundColor(.sageGreen)
+                .foregroundColor(.lightBlack)
+            
+            Button {
+                print(recipe)
+            } label: {
+                Text("click")
+            }
+
             HStack{
                 VStack{
-                    Text("ingredients")
+                    Text("Ingredients")
+                        .font(.custom("Welland",
+                                      size: 15))
+                        .foregroundColor(.lightBlack)
                     
                 }
                 Spacer()
                 VStack{
-                    Text("description")
+                    Text("Description")
+                        .font(.custom("Welland",
+                                      size: 15))
+                        .foregroundColor(.lightBlack)
                 }
             }
         }
@@ -74,8 +87,8 @@ struct contents: View {
 
 
 
-//struct RecipePage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecipePage()
-//    }
-//}
+struct RecipePage_Previews: PreviewProvider {
+    static var previews: some View {
+        RecipePage(recipe: Recipe(id: "", title: "", description: "", author: "", image: "", ingredients: [Ingredient](), directions: [Direction](), prepTime: 0))
+    }
+}

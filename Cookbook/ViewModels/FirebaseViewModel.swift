@@ -111,17 +111,29 @@ import UIKit
     func getData() async {
         db.collection("Recipes").addSnapshotListener { snapshot, error in
             self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
-                return Recipe(id: data.documentID,
-                              title: data["Title"] as? String ?? "",
-                              description: data["Desctiprion"] as? String ?? "",
-                              author: data["Author"] as? String ?? "",
-                              image: data["imageURL"] as? String ?? "",
-                              ingredients: data["Ingredients"] as? [Ingredient] ?? [],
-                              directions: data["Directions"] as? [Direction] ?? [],
-                              prepTime: data["PrepTime"] as? Int ?? 0)
+                let id = data.documentID
+                let title = data["Title"] as? String ?? ""
+                let description = data["Desctiprion"] as? String ?? ""
+                let author = data["Author"] as? String ?? ""
+                let image = data["imageURL"] as? String ?? ""
+                let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
+                let directions = data["Directions"] as? [String: String] ?? [:]
+                let prepTime = data["PrepTime"] as? Int ?? 0
+                
+                //Converting firebase map to array
+                let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
+                let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
+                                                                                
+                return Recipe(id: id,
+                              title: title,
+                              description: description,
+                              author: author,
+                              image: image,
+                              ingredients: ingredientsArray,
+                              directions: directionsArray,
+                              prepTime: prepTime)
             }) ?? []
         }
-        print(self.recipes)
     }
     
     //MARK: - Upload recipe

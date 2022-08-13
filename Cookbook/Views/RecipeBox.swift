@@ -43,15 +43,18 @@ struct RecipeBox: View {
                     Text(recipe.title)
                         .font(.custom("Welland Bold",
                                       size: DrawingConstants.textSize))
+                        .foregroundColor(.lightBlack)
                     Spacer()
                     HStack(spacing: 2) {
                         ForEach(0 ..< 5) { item in
                             Image(systemName: "star")
+                                .foregroundColor(.lightBlack)
                         }
                         Spacer()
                     Text("$1299")
                         .font(.custom("Welland Bold",
                                       size: DrawingConstants.textSize))
+                        .foregroundColor(.lightBlack)
                         
                     }
                 }

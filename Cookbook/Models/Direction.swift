@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Direction: Identifiable, Hashable{
-    var id = UUID()
+struct Direction: Identifiable, Hashable, Codable{
+    var id = UUID().uuidString
     var direction: String
     
     var dictionary: [String: Any] {
