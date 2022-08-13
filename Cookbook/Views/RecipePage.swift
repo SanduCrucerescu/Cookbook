@@ -48,33 +48,43 @@ struct contents: View {
                 .font(.custom("Welland",
                               size: 30))
                 .foregroundColor(.lightBlack)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt ex vel velit malesuada venenatis. Morbi volutpat luctus metus, quis laoreet magna pellentesque in. Donec tristique porttitor bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec quis felis nisl. Cras tellus turpis, commodo a arcu eget, faucibus tempor dolor. Cras at metus dignissim, molestie ante vel, lobortis felis. Sed tempor quam nibh, ultrices imperdiet quam aliquet a. Curabitur sed congue diam. Sed ut eleifend ipsum, a scelerisque nisl. Aenean egestas consectetur quam, in porttitor sem posuere id. ")
+            Text("Author: \(recipe.author)")
+                .font(.custom("Welland Light",
+                               size: 15))
+                 .foregroundColor(.lightBlack)
+            Text(recipe.description)
                 .font(.custom("Welland",
                               size: 18))
                 .foregroundColor(.lightBlack)
+            Spacer()
             
-            Button {
-                print(recipe)
-            } label: {
-                Text("click")
+        
+            Text("Ingredients")
+                .font(.custom("Welland",
+                              size: 20))
+                .foregroundColor(.lightBlack)
+            ForEach(recipe.ingredients) { ingredient in
+                Text(ingredient.description)
+                    .font(.custom("Welland",
+                                  size: 18))
+                    .foregroundColor(.lightBlack)
             }
+                
+            
+            Spacer()
 
-            HStack{
-                VStack{
-                    Text("Ingredients")
-                        .font(.custom("Welland",
-                                      size: 15))
-                        .foregroundColor(.lightBlack)
-                    
-                }
-                Spacer()
-                VStack{
-                    Text("Description")
-                        .font(.custom("Welland",
-                                      size: 15))
-                        .foregroundColor(.lightBlack)
-                }
+            Text("Description")
+                .font(.custom("Welland",
+                              size: 20))
+                .foregroundColor(.lightBlack)
+            ForEach(recipe.directions) { direction in
+                Text(direction.direction)
+                    .font(.custom("Welland",
+                                  size: 18))
+                    .foregroundColor(.lightBlack)
             }
+        
+            
         }
         .padding()
         .background(Color.backgroundColor)

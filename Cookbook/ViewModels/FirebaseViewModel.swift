@@ -113,17 +113,18 @@ import UIKit
             self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
                 let id = data.documentID
                 let title = data["Title"] as? String ?? ""
-                let description = data["Desctiprion"] as? String ?? ""
+                let description = data["Description"] as? String ?? ""
                 let author = data["Author"] as? String ?? ""
                 let image = data["imageURL"] as? String ?? ""
                 let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
                 let directions = data["Directions"] as? [String: String] ?? [:]
                 let prepTime = data["PrepTime"] as? Int ?? 0
                 
+                
                 //Converting firebase map to array
                 let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
                 let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
-                                                                                
+                                                                   
                 return Recipe(id: id,
                               title: title,
                               description: description,
