@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddingRecipeView: View {
+struct CreateRecipeView: View {
     
     private struct DrawingConstants {
         static let titleSize: CGFloat = 35
@@ -47,6 +47,7 @@ struct AddingRecipeView: View {
                         PrepTime()
 
                         }
+                    
                     if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
                         Text("Please fill all of the fields")
                             .font(.custom("Welland",
@@ -60,11 +61,15 @@ struct AddingRecipeView: View {
                             await recipes.addRecipe()
                         }
                     } label: {
-                        Text("Submit Recipe")}
-                        .buttonStyle(CustomButton(color: .white))
+                        Text("Submit Recipe")
+                    }
+                    .disabled(recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime)
+                    .buttonStyle(CustomButton(color: .white))
 
+                } // Uptdate this in IOS 16
+                .onAppear{
+                    UIScrollView.appearance().keyboardDismissMode = .onDrag
                 }
-            
         }
         .contentView(recipe: recipes, on: false)
         .navigationBarTitle(Text(""),
@@ -77,6 +82,7 @@ struct AddingRecipeView: View {
         .sheet(isPresented: $recipes.showPicker, onDismiss: nil) {
             ImagePicker(
                 image: $recipes.image,
+                emptyImage: $recipes.emptyImage,
                 showPicker: $recipes.showPicker)}
     }
 
@@ -89,9 +95,10 @@ struct AddingRecipeView: View {
                     .textFieldStyle(TextFieldDesign(image: "square.and.pencil",
                                                     error: recipes.emptyTitle,
                                                     shadow: recipes.emptyTitle))
-                    
-                
-                
+                    .onChange(of: recipes.title) { newValue in
+                        recipes.emptyTitle = recipes.title.isEmpty ? true : false
+                    }
+
 //                TextField("Description", text: $recipes.description, axis: .vertical)
 //                    .lineLimit(3, reservesSpace: true)
 //                    .textFieldStyle(TextFieldDesign(image: "text.alignleft",
@@ -99,10 +106,13 @@ struct AddingRecipeView: View {
 //                                                    shadow: recipes.emptyDescription,
 //                                                    height: 80))
                 TextField("Description", text: $recipes.description)
-                    .textFieldStyle(TextFieldDesign(image: "text.alignleft",
+                    .textFieldStyle(TextFieldDesign(image: "square.and.pencil",
                                                     error: recipes.emptyDescription,
                                                     shadow: recipes.emptyDescription,
                                                     height: 80))
+                    .onChange(of: recipes.description) { newValue in
+                        recipes.emptyDescription = recipes.description.isEmpty ? true : false
+                    }
             }
             .padding()
         }
@@ -118,16 +128,25 @@ struct AddingRecipeView: View {
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 if recipes.image == nil {
-                Image("köttbullar") // Image(uiImage: ) for stored images
-                    .resizable()
-                    .cornerRadius(DrawingConstants.imageCornerRadius)
-                    .frame(width: DrawingConstants.imageWidth,
-                           height: DrawingConstants.imageHeight)
-                    .onTapGesture {
-                        withAnimation {
-                            recipes.showPicker = true
+                ZStack {
+                    RoundedRectangle(cornerRadius: DrawingConstants.imageCornerRadius)
+                        .stroke(recipes.emptyImage ? .red : .black,
+                                lineWidth: recipes.emptyImage ? 5 : 0)
+                    Image("köttbullar") // Image(uiImage: ) for stored images
+                        .resizable()
+                        .cornerRadius(DrawingConstants.imageCornerRadius)
+                        .onTapGesture {
+                            withAnimation {
+                                recipes.showPicker = true
+                            }
                         }
+                    Text("Tap to \nadd a image")
+                        .font(.custom("Welland",
+                                      size: DrawingConstants.subcategoriesFontSize))
+                        .foregroundColor(.white)
                     }
+                    .frame(width: DrawingConstants.imageWidth,
+                       height: DrawingConstants.imageHeight)
                 } else {
                     Image(uiImage: recipes.image!)
                         .resizable()
@@ -169,13 +188,12 @@ struct AddingRecipeView: View {
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 
-                VStack {
-                    ForEach(Array(recipes.directions.enumerated()) , id: \.1) { index, direction in
-                        DirectionsTextField(index: index,
-                                            direction: direction,
-                                            directions: $recipes.directions)
+                
+                ForEach(Array(recipes.directions.enumerated()) , id: \.1) { index, direction in
+                    DirectionsTextField(index: index,
+                                        direction: direction,
+                                        directions: $recipes.directions)
                     }
-                }
             }
             .padding()
         }
@@ -194,6 +212,9 @@ struct AddingRecipeView: View {
                         .textFieldStyle(TextFieldDesign(image: "timer",
                                                         error: recipes.emptyPrepTime,
                                                         shadow: recipes.emptyPrepTime))
+                        .onChange(of: recipes.prepTime) { newValue in
+                            recipes.emptyPrepTime = recipes.prepTime.isEmpty ? true : false
+                        }
                 }
                 
                 
@@ -213,7 +234,7 @@ struct AddingRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         let b = RecipeViewModel()
         let a = FirebaseViewModel(recipeViewModel: b)
-        AddingRecipeView()
+        CreateRecipeView()
             .environmentObject(a)
             .environmentObject(b)
 

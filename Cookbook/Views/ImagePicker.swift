@@ -12,6 +12,7 @@ import SwiftUI
 struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var image: UIImage?
+    @Binding var emptyImage : Bool
     @Binding var showPicker: Bool
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -41,6 +42,7 @@ class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
                 self.parent.image = image
+                self.parent.emptyImage = false
             }
             self.parent.showPicker = false
         }
@@ -49,5 +51,6 @@ class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.parent.showPicker = false
+        self.parent.emptyImage = true
     }
 }

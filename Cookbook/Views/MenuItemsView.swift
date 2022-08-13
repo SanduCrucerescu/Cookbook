@@ -48,7 +48,7 @@ struct MenuItemsView: View {
                 
             
                 NavigationLink(destination: {
-                    AddingRecipeView()
+                    CreateRecipeView()
                         .onAppear {
                             withAnimation(){
                                 showMenu = false

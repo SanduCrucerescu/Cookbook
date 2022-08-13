@@ -32,7 +32,7 @@
 		FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB4797289C145300C49E5D /* CachedAsyncImage.swift */; };
 		FAF9FD8828995A0300D6A99F /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8728995A0200D6A99F /* Recipe.swift */; };
 		FAF9FD8A28995AC100D6A99F /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */; };
-		FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */; };
+		FAF9FD8C289A966300D6A99F /* CreateRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8B289A966300D6A99F /* CreateRecipeView.swift */; };
 		FAF9FD8E289A985300D6A99F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9FD8D289A985300D6A99F /* ImagePicker.swift */; };
 		FAFDCBF628A012F400935A9E /* Welland-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF228A0113400935A9E /* Welland-Black.otf */; };
 		FAFDCBF728A012F400935A9E /* Welland-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAFDCBF328A0113400935A9E /* Welland-Bold.otf */; };
@@ -65,7 +65,7 @@
 		FACB4797289C145300C49E5D /* CachedAsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		FAF9FD8728995A0200D6A99F /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
-		FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingRecipeView.swift; sourceTree = "<group>"; };
+		FAF9FD8B289A966300D6A99F /* CreateRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeView.swift; sourceTree = "<group>"; };
 		FAF9FD8D289A985300D6A99F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		FAFDCBEB28A00D2800935A9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FAFDCBF128A0113300935A9E /* Welland-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Welland-Light.otf"; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 				FAC93C952891F3C600F317FF /* MenuItemsView.swift */,
 				FAC93C7F2891EDC100F317FF /* LoginView.swift */,
 				FAC93C802891EDC100F317FF /* Register.swift */,
-				FAF9FD8B289A966300D6A99F /* AddingRecipeView.swift */,
+				FAF9FD8B289A966300D6A99F /* CreateRecipeView.swift */,
 				FA52954728A1613F0046CACD /* IngredientTextField.swift */,
 				FA52954B28A170670046CACD /* DirectionsTextField.swift */,
 				FAF9FD8D289A985300D6A99F /* ImagePicker.swift */,
@@ -298,7 +298,7 @@
 				FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */,
 				FAC93C882891EDC100F317FF /* TextField.swift in Sources */,
 				FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */,
-				FAF9FD8C289A966300D6A99F /* AddingRecipeView.swift in Sources */,
+				FAF9FD8C289A966300D6A99F /* CreateRecipeView.swift in Sources */,
 				FA52954A28A169670046CACD /* RecipeBox.swift in Sources */,
 				FA52954E28A170990046CACD /* Direction.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
