@@ -26,11 +26,6 @@ struct RecipePage: View {
 //                                   height: DrawingConstants.imageHeight * (210/210))
                     }
                 }
-//                Image("köttbullar")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .ignoresSafeArea(.all, edges: .top)
-                
                 contents(recipe: recipe,
                          firebase: firebase)
                 CommentsSection(recipe: recipe,
@@ -40,8 +35,6 @@ struct RecipePage: View {
             .edgesIgnoringSafeArea(.top)
         }
         .background(Color.backgroundColor)
-//        .navigationBarTitle(Text(""),
-//                            displayMode: .inline)
     }
 }
 
@@ -106,7 +99,12 @@ struct CommentsSection: View {
     @State var text = ""
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text("Comments")
+                .font(.custom("Welland",
+                              size: 20))
+                .foregroundColor(.sageGreen)
+            
             ForEach(recipe.comments) { comment in
                 Text(comment.text)
             }
@@ -126,6 +124,7 @@ struct CommentsSection: View {
 
             
         }
+        .padding()
     }
 }
 
@@ -136,7 +135,16 @@ struct RecipePage_Previews: PreviewProvider {
     static var previews: some View {
         let recipe = RecipeViewModel()
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
-        RecipePage(recipe: Recipe(title: "", description: "", author: "", image: "", ingredients: [Ingredient](), directions: [Direction](), prepTime: 0, comments: [Comment]()))
+        RecipePage(recipe: Recipe(
+            title: "",
+            description: "",
+            author: "",
+            image: "",
+            ingredients: [Ingredient](),
+            directions: [Direction](),
+            prepTime: 0,
+            comments: [Comment(text: "test", author: "test")])
+        )
             .environmentObject(firebase)
     }
 }
