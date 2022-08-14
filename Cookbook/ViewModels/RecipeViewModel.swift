@@ -43,13 +43,13 @@ class RecipeViewModel: ObservableObject {
         let directionsDictionary =  directions.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
            // var number = 1
             var dict = dict
-            dict["Direction \(direction.id)"] = direction.direction
+            dict[direction.id] = direction.direction
             return dict
         }
 
         let ingredientsDictionary = ingredients.reduce([String: Any]()) { (dict, ingredient) -> [String: Any] in
             var dict = dict
-            dict["Ingredient \(ingredient.id)"] = ingredient.description
+            dict[ingredient.id] = ingredient.description
             return dict
 
         }

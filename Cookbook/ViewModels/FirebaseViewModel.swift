@@ -119,12 +119,14 @@ import UIKit
                 let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
                 let directions = data["Directions"] as? [String: String] ?? [:]
                 let prepTime = data["PrepTime"] as? Int ?? 0
+                let comments = data["Comments"] as? [String: String] ?? [:]
                 
                 
                 //Converting firebase map to array
                 let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
                 let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
-                                                                   
+                //let comentsArray: [Comment] = comments.map{ Comment(id: $0.key, text: $0.value, author: <#T##String#>)}
+                
                 return Recipe(id: id,
                               title: title,
                               description: description,
@@ -132,7 +134,8 @@ import UIKit
                               image: image,
                               ingredients: ingredientsArray,
                               directions: directionsArray,
-                              prepTime: prepTime)
+                              prepTime: prepTime,
+                              comments: [Comment]())
             }) ?? []
         }
     }
@@ -178,4 +181,25 @@ import UIKit
             }
         }
     }
+    
+    //MARK: - Add Comment
+    
+    func addComment(_ recipe: Recipe) {
+        //let commentDict = comment.conveertToDict()
+        //recipe.comments.append(comment)
+        
+        let commentDict = recipe.comments.reduce([String: Any]()) { (dict, comment) -> [String: Any]  in
+            // var number = 1
+            var dict = dict
+            var comment1 = comment.conveertToDict()
+            dict[comment.id] = comment1
+            return dict
+         }
+        
+        //print(recipe.comments)
+        
+        db.collection("Recipes").document(recipe.id).updateData(["Comments": commentDict])
+    }
 }
+
+    

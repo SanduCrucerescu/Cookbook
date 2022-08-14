@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DirectionsTextField: View {
-    var index: Int
+    private(set) var index: Int
     @State var direction: Direction
     @Binding var directions: Array<Direction>
     

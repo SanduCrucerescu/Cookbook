@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipePage: View {
     private(set) var recipe: Recipe
+    @EnvironmentObject var firebase: FirebaseViewModel
 
     var body: some View {
         ZStack{
@@ -30,7 +31,11 @@ struct RecipePage: View {
 //                    .aspectRatio(contentMode: .fit)
 //                    .ignoresSafeArea(.all, edges: .top)
                 
-                contents(recipe: recipe)
+                contents(recipe: recipe,
+                         firebase: firebase)
+                CommentsSection(recipe: recipe,
+                                firebase: firebase)
+                
             }
             .edgesIgnoringSafeArea(.top)
         }
@@ -42,6 +47,8 @@ struct RecipePage: View {
 
 struct contents: View {
     var recipe: Recipe
+    var firebase: FirebaseViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(recipe.title)
@@ -57,12 +64,10 @@ struct contents: View {
                               size: 18))
                 .foregroundColor(.lightBlack)
             Spacer()
-            
-        
             Text("Ingredients")
                 .font(.custom("Welland",
                               size: 20))
-                .foregroundColor(.lightBlack)
+                .foregroundColor(.sageGreen)
             ForEach(recipe.ingredients) { ingredient in
                 Text(ingredient.description)
                     .font(.custom("Welland",
@@ -76,7 +81,7 @@ struct contents: View {
             Text("Description")
                 .font(.custom("Welland",
                               size: 20))
-                .foregroundColor(.lightBlack)
+                .foregroundColor(.sageGreen)
             ForEach(recipe.directions) { direction in
                 Text(direction.direction)
                     .font(.custom("Welland",
@@ -95,10 +100,43 @@ struct contents: View {
     }
 }
 
+struct CommentsSection: View {
+    @State var recipe: Recipe
+    var firebase: FirebaseViewModel
+    @State var text = ""
+    
+    var body: some View {
+        VStack {
+            ForEach(recipe.comments) { comment in
+                Text(comment.text)
+            }
+            
+            TextField("Comment", text: $text)
+                .textFieldStyle(TextFieldDesign(image: "text.bubble",
+                                                error: false,
+                                                shadow: false))
+            
+            Button {
+                self.recipe.comments.append(Comment(text: text, author: "text"))
+                firebase.addComment(recipe)
+            } label: {
+                Text("Add Comment")
+            }
+            .buttonStyle(CustomButton(color: .white))
+
+            
+        }
+    }
+}
+
+
 
 
 struct RecipePage_Previews: PreviewProvider {
     static var previews: some View {
-        RecipePage(recipe: Recipe(id: "", title: "", description: "", author: "", image: "", ingredients: [Ingredient](), directions: [Direction](), prepTime: 0))
+        let recipe = RecipeViewModel()
+        let firebase = FirebaseViewModel(recipeViewModel: recipe)
+        RecipePage(recipe: Recipe(title: "", description: "", author: "", image: "", ingredients: [Ingredient](), directions: [Direction](), prepTime: 0, comments: [Comment]()))
+            .environmentObject(firebase)
     }
 }

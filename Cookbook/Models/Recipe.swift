@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Recipe: Identifiable, Codable {
-    var id: String
+    var id = UUID().uuidString
     var title: String
     var description: String
     var author: String
@@ -17,5 +17,6 @@ struct Recipe: Identifiable, Codable {
     var ingredients: Array<Ingredient>
     var directions: Array<Direction>
     var prepTime: Int
+    var comments: Array<Comment>
 }
 
