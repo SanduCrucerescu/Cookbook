@@ -11,16 +11,12 @@ struct Comment: Identifiable, Codable {
     var id = UUID().uuidString
     var text: String
     var author: String
-    var replies: Array<Comment>?
+    var replies: Array<Comment> = []
     
     func conveertToDict() -> Dictionary<String, String>{
         var dict = Dictionary<String, String>()
         dict["text"] = self.text
         dict["author"] = self.author
         return dict
-    }
-    
-    func getComments() {
-        
     }
 }
