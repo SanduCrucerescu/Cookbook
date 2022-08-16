@@ -19,4 +19,8 @@ struct Comment: Identifiable, Codable {
         dict["author"] = self.author
         return dict
     }
+    
+    func getComments() {
+        
+    }
 }

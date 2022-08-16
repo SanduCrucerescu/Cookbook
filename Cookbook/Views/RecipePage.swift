@@ -136,6 +136,7 @@ struct CommentsSection: View {
     @ObservedObject private(set) var recipePageVM: RecipePageViewModel
     @State var text = ""
     
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Comments")
@@ -149,11 +150,7 @@ struct CommentsSection: View {
                     CommentView(comment: comment,
                                 recipePageVM: recipePageVM,
                                 isReply: false)
-                    ForEach(comment.replies!) { replie in
-                        CommentView(comment: replie,
-                                    recipePageVM: recipePageVM,
-                                    isReply: true)
-                    }
+                    
                 }
             }
             
@@ -180,39 +177,64 @@ struct CommentView: View {
     private(set) var comment: Comment
     @ObservedObject private(set) var recipePageVM: RecipePageViewModel
     var isReply: Bool
+    @State var openSubComments: Bool = false
     
     var body: some View {
-        HStack {
-            if isReply {
+        VStack {
+            HStack {
+                if isReply {
+                    Spacer()
+                        .frame(width: 30)
+                }
+                VStack {
+                    Image(systemName: "person.crop.circle")
+                        .font(.system(size: 30))
+                    Spacer()
+                }
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text(comment.author)
+                        .font(.custom("Welland Bold",
+                                      size: 18))
+                        .foregroundColor(.lightBlack)
+                    Text(comment.text)
+                        .font(.custom("Welland Semibol",
+                                      size: 16))
+                        .foregroundColor(.lightBlack)
+                }
                 Spacer()
-                    .frame(width: 30)
+                Image(systemName: "arrowshape.turn.up.left")
+                    .font(.system(size: 20))
+                    .onTapGesture {
+                        recipePageVM.isReplying = true
+                        recipePageVM.authorReplyingTo = comment.author
+                        //print(recipePageVM.isReplying)
+                    
+            
+                }
             }
-            VStack {
-                Image(systemName: "person.crop.circle")
-                    .font(.system(size: 30))
-                Spacer()
+            if openSubComments  {
+                ForEach(comment.replies!) { replie in
+                    CommentView(comment: replie,
+                                recipePageVM: recipePageVM,
+                                isReply: true)
+                }
             }
-            VStack(alignment: .leading) {
-                Spacer()
-                Text(comment.author)
-                    .font(.custom("Welland Bold",
-                                  size: 18))
-                    .foregroundColor(.lightBlack)
-                Text(comment.text)
-                    .font(.custom("Welland Semibold",
-                                  size: 16))
-                    .foregroundColor(.lightBlack)
+            
+            if openSubComments {
+                Button {
+                    openSubComments = false
+                } label: {
+                    Text("Hide")
+                }
+            } else if comment.replies?.count != nil {
+                Button {
+                    openSubComments = true
+                } label: {
+                    Text("- Load \(Int(comment.replies!.count)) replies" as String)
+                }
             }
-            Spacer()
-            Image(systemName: "arrowshape.turn.up.left")
-                .font(.system(size: 20))
-                .onTapGesture {
-                    recipePageVM.isReplying = true
-                    recipePageVM.authorReplyingTo = comment.author
-                    //print(recipePageVM.isReplying)
-                
-        
-            }
+
         }
     }
 }
@@ -235,8 +257,12 @@ struct RecipePage_Previews: PreviewProvider {
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,
-            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author", replies: [Comment(text: "subcommnet", author: "123", replies: [Comment(text: "subcommnet", author: "123")])]),
-                       Comment(text: "test1233", author: "Author2", replies: [Comment(text: "subcommnet", author: "123")])])
+            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
+                               replies: [Comment(text: "subcommnet", author: "123",
+                                                 replies: [Comment(text: "subsubcommnet", author: "123")]),
+                                         Comment(text: "ste", author: "ste")]),
+                       Comment(text: "test1233", author: "Author2",
+                               replies: [Comment(text: "subcommnet", author: "1233")])])
         )
             .environmentObject(firebase)
     }
