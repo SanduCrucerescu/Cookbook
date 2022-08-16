@@ -18,6 +18,7 @@
 		FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CAEE02890299700757760 /* GoogleService-Info.plist */; };
 		FA5CAEE428902D5B00757760 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE328902D5B00757760 /* FirebaseAuth */; };
 		FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE528902D5B00757760 /* FirebaseFirestore */; };
+		FA74F47B28ABB215000F4608 /* RecipePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */; };
 		FAA0C8D5289AA95900514618 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FAA0C8D4289AA95900514618 /* FirebaseStorage */; };
 		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
@@ -55,6 +56,7 @@
 		FA5CAED628900EF900757760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageViewModel.swift; sourceTree = "<group>"; };
 		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
 		FAC93C7B2891EDC100F317FF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */,
 				FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */,
+				FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				FAF9FD8C289A966300D6A99F /* CreateRecipeView.swift in Sources */,
 				FA52954A28A169670046CACD /* RecipeBox.swift in Sources */,
 				FA52954E28A170990046CACD /* Direction.swift in Sources */,
+				FA74F47B28ABB215000F4608 /* RecipePageViewModel.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,
 				FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */,

@@ -25,7 +25,18 @@ struct CookbookApp: App {
     var body: some Scene {
         WindowGroup {
             //CreateRecipeView()
-            LoginView()
+            //LoginView()
+            RecipePage(
+                recipe: Recipe(
+                    title: "",
+                    description: "",
+                    author: "",
+                    image: "",
+                    ingredients: [Ingredient](),
+                    directions: [Direction](),
+                    prepTime: 0,
+                    comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author"),
+                               Comment(text: "test1233", author: "Author2")]))
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)
         }

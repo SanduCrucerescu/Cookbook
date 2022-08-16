@@ -10,7 +10,9 @@ import SwiftUI
 struct RecipePage: View {
     private(set) var recipe: Recipe
     @EnvironmentObject var firebase: FirebaseViewModel
-
+    @ObservedObject var recipePageVM = RecipePageViewModel()
+    
+    
     var body: some View {
         ZStack{
             ScrollView(showsIndicators: false) {
@@ -22,19 +24,21 @@ struct RecipePage: View {
                             .ignoresSafeArea(.all, edges: .top)
                     } else {
                         ProgressView()
-//                            .frame(width: DrawingConstants.imageWidth,
-//                                   height: DrawingConstants.imageHeight * (210/210))
                     }
                 }
                 contents(recipe: recipe,
                          firebase: firebase)
                 CommentsSection(recipe: recipe,
-                                firebase: firebase)
+                                firebase: firebase,
+                                recipePageVM: recipePageVM)
                 
             }
             .edgesIgnoringSafeArea(.top)
         }
         .background(Color.backgroundColor)
+        .sheet(isPresented: $recipePageVM.isReplying) {
+            Text("sheet")
+        }
     }
 }
 
@@ -95,7 +99,8 @@ struct contents: View {
 
 struct CommentsSection: View {
     @State var recipe: Recipe
-    var firebase: FirebaseViewModel
+    private(set) var firebase: FirebaseViewModel
+    @ObservedObject private(set) var recipePageVM: RecipePageViewModel
     @State var text = ""
     
     var body: some View {
@@ -104,16 +109,26 @@ struct CommentsSection: View {
                 .font(.custom("Welland",
                               size: 20))
                 .foregroundColor(.sageGreen)
+            Divider()
             
             ForEach(recipe.comments) { comment in
-                Text(comment.text)
+                CommentView(comment: comment,
+                            recipePageVM: recipePageVM)
             }
+            
+            if recipePageVM.isReplying {
+                Text("Replying to: \(recipePageVM.authorReplyingTo) ")
+                    .font(.custom("Welland",
+                                  size: 18))
+                    .foregroundColor(.lightBlack)
+            }
+            
             
             TextField("Comment", text: $text)
                 .textFieldStyle(TextFieldDesign(image: "text.bubble",
                                                 error: false,
                                                 shadow: false))
-            
+
             Button {
                 self.recipe.comments.append(Comment(text: text, author: "text"))
                 firebase.addComment(recipe)
@@ -127,6 +142,51 @@ struct CommentsSection: View {
         .padding()
     }
 }
+
+struct CommentView: View {
+    private(set) var comment: Comment
+    @ObservedObject private(set) var recipePageVM: RecipePageViewModel
+    var body: some View {
+        HStack {
+            VStack {
+                Image(systemName: "person.crop.circle")
+                    .font(.system(size: 30))
+                Spacer()
+            }
+            VStack(alignment: .leading) {
+                Spacer()
+                Text(comment.author)
+                    .font(.custom("Welland Bold",
+                                  size: 18))
+                    .foregroundColor(.lightBlack)
+                Text(comment.text)
+                    .font(.custom("Welland Semibold",
+                                  size: 16))
+                    .foregroundColor(.lightBlack)
+            }
+            Spacer()
+            if !recipePageVM.isReplying {
+                Image(systemName: "arrowshape.turn.up.left")
+                    .font(.system(size: 20))
+                    .onTapGesture {
+                        recipePageVM.isReplying = true
+                        recipePageVM.authorReplyingTo = comment.author
+                        //print(recipePageVM.isReplying)
+                    }
+            } else {
+                Image(systemName: "x.circle")
+                    .font(.system(size: 20))
+                    .onTapGesture {
+                        recipePageVM.isReplying = false
+                        recipePageVM.authorReplyingTo = comment.author
+                    }
+            }
+        }
+    }
+}
+
+
+
 
 
 
@@ -143,7 +203,8 @@ struct RecipePage_Previews: PreviewProvider {
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,
-            comments: [Comment(text: "test", author: "test")])
+            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author"),
+                       Comment(text: "test1233", author: "Author2")])
         )
             .environmentObject(firebase)
     }

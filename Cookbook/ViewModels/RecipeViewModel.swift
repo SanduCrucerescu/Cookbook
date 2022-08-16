@@ -12,7 +12,6 @@ import UIKit
 class RecipeViewModel: ObservableObject {
     @Published var showPicker: Bool = false
     @Published var image: UIImage?
-   // @Published var retrivedImage: UIImage?
     @Published var title: String = ""
     @Published var description: String = ""
     @Published var ingredients: Array<Ingredient> = [Ingredient(description: ""), Ingredient(description: ""), Ingredient(description: "")]

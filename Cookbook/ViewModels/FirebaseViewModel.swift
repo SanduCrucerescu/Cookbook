@@ -199,7 +199,7 @@ import UIKit
         let commentDict = recipe.comments.reduce([String: Any]()) { (dict, comment) -> [String: Any]  in
             // var number = 1
             var dict = dict
-            var comment1 = comment.conveertToDict()
+            let comment1 = comment.conveertToDict()
             dict[comment.id] = comment1
             return dict
          }
