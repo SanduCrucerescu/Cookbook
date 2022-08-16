@@ -26,17 +26,22 @@ struct CookbookApp: App {
         WindowGroup {
             //CreateRecipeView()
             //LoginView()
-            RecipePage(
-                recipe: Recipe(
-                    title: "",
-                    description: "",
-                    author: "",
-                    image: "",
-                    ingredients: [Ingredient](),
-                    directions: [Direction](),
-                    prepTime: 0,
-                    comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author", replies: [Comment(text: "subcommnet", author: "123")]),
-                               Comment(text: "test1233", author: "Author2", replies: [])]))
+            RecipePage(recipe: Recipe(
+                title: "",
+                description: "",
+                author: "",
+                image: "",
+                ingredients: [Ingredient](),
+                directions: [Direction](),
+                prepTime: 0,
+                comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
+                                   replies: [Comment(text: "subcommnet", author: "123",
+                                                     replies: [Comment(text: "subsubcommnet", author: "123",
+                                                                       replies: [Comment(text: "subsubsubcommnet", author: "123")])]),
+                                             Comment(text: "ste", author: "ste")]),
+                           Comment(text: "test1233", author: "Author2",
+                                   replies: [Comment(text: "subcommnet", author: "1233")])])
+            )
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)
         }

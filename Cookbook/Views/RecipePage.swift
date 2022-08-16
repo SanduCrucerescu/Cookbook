@@ -149,7 +149,8 @@ struct CommentsSection: View {
                 ForEach(recipe.comments) { comment in
                     CommentView(comment: comment,
                                 recipePageVM: recipePageVM,
-                                isReply: false)
+                                isReply: false,
+                                sizeIndendt: 0)
                     
                 }
             }
@@ -178,13 +179,13 @@ struct CommentView: View {
     @ObservedObject private(set) var recipePageVM: RecipePageViewModel
     var isReply: Bool
     @State var openSubComments: Bool = false
-    
+    @State var sizeIndendt: CGFloat
     var body: some View {
         VStack {
             HStack {
                 if isReply {
                     Spacer()
-                        .frame(width: 30)
+                        .frame(width: sizeIndendt)
                 }
                 VStack {
                     Image(systemName: "person.crop.circle")
@@ -208,16 +209,14 @@ struct CommentView: View {
                     .onTapGesture {
                         recipePageVM.isReplying = true
                         recipePageVM.authorReplyingTo = comment.author
-                        //print(recipePageVM.isReplying)
-                    
-            
                 }
             }
             if openSubComments  {
                 ForEach(comment.replies!) { replie in
                     CommentView(comment: replie,
                                 recipePageVM: recipePageVM,
-                                isReply: true)
+                                isReply: true,
+                                sizeIndendt: sizeIndendt + 30)
                 }
             }
             
@@ -230,6 +229,7 @@ struct CommentView: View {
             } else if comment.replies?.count != nil {
                 Button {
                     openSubComments = true
+                    print(sizeIndendt)
                 } label: {
                     Text("- Load \(Int(comment.replies!.count)) replies" as String)
                 }
