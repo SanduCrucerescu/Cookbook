@@ -29,7 +29,6 @@ struct CustomButton: ButtonStyle {
                        height: height ?? DrawingConstants.frameHeight)
                 .scaleEffect(configuration.isPressed ? 1.2 : 1)
                 .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
-                //.background(isEnabeled ? Color.sageGreen : Color.lightGrey)
                 
             configuration
                 .label

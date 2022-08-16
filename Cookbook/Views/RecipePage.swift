@@ -52,7 +52,9 @@ struct RecipePage: View {
                     } label: {
                         Text("Reply")
                     }
-                    .buttonStyle(CustomButton(color: .white, height: 50, width: 100))
+                    .buttonStyle(CustomButton(color: .white,
+                                              height: 50,
+                                              width: 100))
 
                 }
                 
@@ -142,9 +144,17 @@ struct CommentsSection: View {
                 .foregroundColor(.sageGreen)
             Divider()
             
-            ForEach(recipe.comments) { comment in
-                CommentView(comment: comment,
-                            recipePageVM: recipePageVM)
+            VStack {
+                ForEach(recipe.comments) { comment in
+                    CommentView(comment: comment,
+                                recipePageVM: recipePageVM,
+                                isReply: false)
+                    ForEach(comment.replies!) { replie in
+                        CommentView(comment: replie,
+                                    recipePageVM: recipePageVM,
+                                    isReply: true)
+                    }
+                }
             }
             
             
@@ -169,8 +179,14 @@ struct CommentsSection: View {
 struct CommentView: View {
     private(set) var comment: Comment
     @ObservedObject private(set) var recipePageVM: RecipePageViewModel
+    var isReply: Bool
+    
     var body: some View {
         HStack {
+            if isReply {
+                Spacer()
+                    .frame(width: 30)
+            }
             VStack {
                 Image(systemName: "person.crop.circle")
                     .font(.system(size: 30))
@@ -219,8 +235,8 @@ struct RecipePage_Previews: PreviewProvider {
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,
-            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author"),
-                       Comment(text: "test1233", author: "Author2")])
+            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author", replies: [Comment(text: "subcommnet", author: "123", replies: [Comment(text: "subcommnet", author: "123")])]),
+                       Comment(text: "test1233", author: "Author2", replies: [Comment(text: "subcommnet", author: "123")])])
         )
             .environmentObject(firebase)
     }

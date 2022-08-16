@@ -35,8 +35,8 @@ struct CookbookApp: App {
                     ingredients: [Ingredient](),
                     directions: [Direction](),
                     prepTime: 0,
-                    comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author"),
-                               Comment(text: "test1233", author: "Author2")]))
+                    comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author", replies: [Comment(text: "subcommnet", author: "123")]),
+                               Comment(text: "test1233", author: "Author2", replies: [])]))
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)
         }
