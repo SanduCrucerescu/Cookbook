@@ -8,7 +8,7 @@
 import Foundation
 
 class RecipePageViewModel: ObservableObject {
-    @Published private(set) var _isReplying: Bool = false
+    @Published private(set) var _isReplying: Bool = true
     @Published private(set) var _authorReplyingTo: String = ""
     
     

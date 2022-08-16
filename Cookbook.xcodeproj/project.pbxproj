@@ -19,6 +19,8 @@
 		FA5CAEE428902D5B00757760 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE328902D5B00757760 /* FirebaseAuth */; };
 		FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE528902D5B00757760 /* FirebaseFirestore */; };
 		FA74F47B28ABB215000F4608 /* RecipePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */; };
+		FA74F47E28ABC66B000F4608 /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA74F47D28ABC66B000F4608 /* HalfASheet */; };
+		FA74F48028ABC811000F4608 /* FirstResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74F47F28ABC811000F4608 /* FirstResponderTextField.swift */; };
 		FAA0C8D5289AA95900514618 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FAA0C8D4289AA95900514618 /* FirebaseStorage */; };
 		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
@@ -57,6 +59,7 @@
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageViewModel.swift; sourceTree = "<group>"; };
+		FA74F47F28ABC811000F4608 /* FirstResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderTextField.swift; sourceTree = "<group>"; };
 		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
 		FAC93C7B2891EDC100F317FF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5CAEE428902D5B00757760 /* FirebaseAuth in Frameworks */,
+				FA74F47E28ABC66B000F4608 /* HalfASheet in Frameworks */,
 				FAA0C8D5289AA95900514618 /* FirebaseStorage in Frameworks */,
 				FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */,
 				FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */,
@@ -182,6 +186,7 @@
 				FA52954728A1613F0046CACD /* IngredientTextField.swift */,
 				FA52954B28A170670046CACD /* DirectionsTextField.swift */,
 				FAF9FD8D289A985300D6A99F /* ImagePicker.swift */,
+				FA74F47F28ABC811000F4608 /* FirstResponderTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				FA5CAEE528902D5B00757760 /* FirebaseFirestore */,
 				FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */,
 				FAA0C8D4289AA95900514618 /* FirebaseStorage */,
+				FA74F47D28ABC66B000F4608 /* HalfASheet */,
 			);
 			productName = Cookbook;
 			productReference = FA5CAECF28900EF600757760 /* Cookbook.app */;
@@ -261,6 +267,7 @@
 			mainGroup = FA5CAEC628900EF600757760;
 			packageReferences = (
 				FA5CAEE228902D5B00757760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FA74F47C28ABC66B000F4608 /* XCRemoteSwiftPackageReference "HalfASheet" */,
 			);
 			productRefGroup = FA5CAED028900EF600757760 /* Products */;
 			projectDirPath = "";
@@ -313,6 +320,7 @@
 				FA52954E28A170990046CACD /* Direction.swift in Sources */,
 				FA74F47B28ABB215000F4608 /* RecipePageViewModel.swift in Sources */,
 				FAC93C922891EF1200F317FF /* Extensions.swift in Sources */,
+				FA74F48028ABC811000F4608 /* FirstResponderTextField.swift in Sources */,
 				FAC93C8E2891EDC100F317FF /* FirebaseViewModel.swift in Sources */,
 				FACB4798289C145300C49E5D /* CachedAsyncImage.swift in Sources */,
 				FAC93C8B2891EDC100F317FF /* Register.swift in Sources */,
@@ -532,6 +540,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		FA74F47C28ABC66B000F4608 /* XCRemoteSwiftPackageReference "HalfASheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/franklynw/HalfASheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -544,6 +560,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA5CAEE228902D5B00757760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		FA74F47D28ABC66B000F4608 /* HalfASheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA74F47C28ABC66B000F4608 /* XCRemoteSwiftPackageReference "HalfASheet" */;
+			productName = HalfASheet;
 		};
 		FAA0C8D4289AA95900514618 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

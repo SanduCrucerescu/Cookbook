@@ -10,6 +10,8 @@ import SwiftUI
 struct CustomButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabeled
     var color: Color
+    var height: CGFloat?
+    var width: CGFloat?
     
     private struct DrawingConstants {
         static let cornerRadius: CGFloat = 15
@@ -23,10 +25,11 @@ struct CustomButton: ButtonStyle {
         ZStack{
             RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 .fill(configuration.isPressed ? Color.sageGreen.opacity(0.5) : Color.sageGreen)
-                .frame(height: DrawingConstants.frameHeight)
-                .frame(width: DrawingConstants.buttonWidth)
+                .frame(width: width ?? DrawingConstants.buttonWidth,
+                       height: height ?? DrawingConstants.frameHeight)
                 .scaleEffect(configuration.isPressed ? 1.2 : 1)
                 .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+                //.background(isEnabeled ? Color.sageGreen : Color.lightGrey)
                 
             configuration
                 .label

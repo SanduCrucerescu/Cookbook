@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import HalfASheet
 
 struct RecipePage: View {
     private(set) var recipe: Recipe
     @EnvironmentObject var firebase: FirebaseViewModel
     @ObservedObject var recipePageVM = RecipePageViewModel()
+    @State var text = ""
+    @FocusState var y: Bool
     
     
     var body: some View {
@@ -34,11 +37,39 @@ struct RecipePage: View {
                 
             }
             .edgesIgnoringSafeArea(.top)
+            
+            HalfASheet(isPresented: $recipePageVM.isReplying, title: "Replying to \(recipePageVM.authorReplyingTo)") {
+                
+                VStack(alignment: .trailing) {
+                    TextField("Comment", text: $text)
+                        .focused($y)
+                        .textFieldStyle(TextFieldDesign(image: "text.bubble",
+                                                        error: false,
+                                                        shadow: false,
+                                                        height: 100))
+                    Button {
+                        
+                    } label: {
+                        Text("Reply")
+                    }
+                    .buttonStyle(CustomButton(color: .white, height: 50, width: 100))
+
+                }
+                
+                
+            }
+            .height(.proportional(0.40))
+            .onAppear {
+                y = true
+            }
         }
         .background(Color.backgroundColor)
-        .sheet(isPresented: $recipePageVM.isReplying) {
-            Text("sheet")
-        }
+        //MARK: IOS 16 change
+//        .sheet(isPresented: $recipePageVM.isReplying) {
+//            TextField("Comment", text: $text)
+//                .textFieldStyle(TextFieldDesign(image: "", error: false, shadow: false))
+//                //.presentationDetents([.fraction(0.15)])
+//        }
     }
 }
 
@@ -116,13 +147,6 @@ struct CommentsSection: View {
                             recipePageVM: recipePageVM)
             }
             
-            if recipePageVM.isReplying {
-                Text("Replying to: \(recipePageVM.authorReplyingTo) ")
-                    .font(.custom("Welland",
-                                  size: 18))
-                    .foregroundColor(.lightBlack)
-            }
-            
             
             TextField("Comment", text: $text)
                 .textFieldStyle(TextFieldDesign(image: "text.bubble",
@@ -136,7 +160,6 @@ struct CommentsSection: View {
                 Text("Add Comment")
             }
             .buttonStyle(CustomButton(color: .white))
-
             
         }
         .padding()
@@ -165,21 +188,14 @@ struct CommentView: View {
                     .foregroundColor(.lightBlack)
             }
             Spacer()
-            if !recipePageVM.isReplying {
-                Image(systemName: "arrowshape.turn.up.left")
-                    .font(.system(size: 20))
-                    .onTapGesture {
-                        recipePageVM.isReplying = true
-                        recipePageVM.authorReplyingTo = comment.author
-                        //print(recipePageVM.isReplying)
-                    }
-            } else {
-                Image(systemName: "x.circle")
-                    .font(.system(size: 20))
-                    .onTapGesture {
-                        recipePageVM.isReplying = false
-                        recipePageVM.authorReplyingTo = comment.author
-                    }
+            Image(systemName: "arrowshape.turn.up.left")
+                .font(.system(size: 20))
+                .onTapGesture {
+                    recipePageVM.isReplying = true
+                    recipePageVM.authorReplyingTo = comment.author
+                    //print(recipePageVM.isReplying)
+                
+        
             }
         }
     }
