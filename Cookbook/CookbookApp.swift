@@ -26,7 +26,7 @@ struct CookbookApp: App {
         WindowGroup {
             //CreateRecipeView()
             //LoginView()
-            RecipePage(recipe: Recipe(
+            RecipePage(Recipe(
                 title: "",
                 description: "",
                 author: "",

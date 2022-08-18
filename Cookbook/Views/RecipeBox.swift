@@ -21,7 +21,7 @@ struct RecipeBox: View {
     
     var body: some View {
         NavigationLink {
-            RecipePage(recipe: recipe)
+            RecipePage(recipe)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)

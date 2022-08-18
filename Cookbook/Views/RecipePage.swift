@@ -13,7 +13,6 @@ struct RecipePage: View {
     private struct DrawingConstants {
         static var cornerRadius: CGFloat = 10
         static var menuOffSetY: CGFloat = -30.0
-        static var sheetHeight: CGFloat = 0.40
         static var titleSize: CGFloat = 30
         static var descriptionSize: CGFloat = 18
         static var subPartsTitleSize: CGFloat = 20
@@ -26,14 +25,19 @@ struct RecipePage: View {
     
     private(set) var recipe: Recipe
     @EnvironmentObject var firebase: FirebaseViewModel
-    @ObservedObject var recipePageVM = RecipePageViewModel()
+    @ObservedObject var recipePageVM: RecipePageViewModel
+    
+    init(_ recipe: Recipe) {
+        self.recipe = recipe
+        recipePageVM = RecipePageViewModel(recipe)
+    }
     
     
     
     var body: some View {
         ZStack{
             ScrollView(showsIndicators: false) {
-                CachedAsyncImage(url: URL(string: recipe.image), urlCache: .imageCache) { phase in
+                CachedAsyncImage(url: URL(string: recipePageVM.recipe.image), urlCache: .imageCache) { phase in
                     if let image = phase.image{
                         image
                             .resizable()
@@ -43,16 +47,14 @@ struct RecipePage: View {
                         ProgressView()
                     }
                 }
-                contents(recipe: recipe,
+                contents(recipe: recipePageVM.recipe,
                          firebase: firebase)
-                CommentsSection(recipe: recipe,
+                CommentsSection(
                                 firebase: firebase,
                                 recipePageVM: recipePageVM)
                 
             }
             .edgesIgnoringSafeArea(.top)
-            
-            //HalfSheet(recipePageVM: recipePageVM, recipe: recipe)
         }
         .background(Color.backgroundColor)
         //MARK: IOS 16 change
@@ -61,51 +63,6 @@ struct RecipePage: View {
 //                .textFieldStyle(TextFieldDesign(image: "", error: false, shadow: false))
 //                //.presentationDetents([.fraction(0.15)])
 //        }
-    }
-
-    struct HalfSheet: View {
-        @State var text = ""
-        @FocusState var y: Bool
-        @ObservedObject private(set) var recipePageVM: RecipePageViewModel
-        var recipe: Recipe
-        
-        var body: some View {
-            HalfASheet(isPresented: $recipePageVM.isReplying, title: "Replying to \(recipePageVM.authorReplyingTo)") {
-                
-                VStack(alignment: .trailing) {
-                    TextField("Comment", text: $text)
-                        .focused($y)
-                        .textFieldStyle(TextFieldDesign(image: "text.bubble",
-                                                        error: false,
-                                                        shadow: false,
-                                                        height: 100))
-                    Button {
-                        //recipePageVM.comment.replies.append(Comment(text: "new", author: "new"))
-                        
-//                        let data = recipe.comments.flatMap{ $0 }
-//                            .filter($0.text.range(of: recipePageVM.comment.text))
-//
-//                        print(recipe.comments.flatMap{ $0 }
-//                            .filter($0.text.range(of: recipePageVM.comment.text)))
-                        //print(recipePageVM.comment)
-                        recipePageVM.recipe = recipe
-                      //  recipePageVM.getCom()
-                    } label: {
-                        Text("Reply")
-                    }
-                    .buttonStyle(CustomButton(color: .white,
-                                              height: 50,
-                                              width: 100))
-                    
-                }
-                
-                
-            }
-            .height(.proportional(DrawingConstants.sheetHeight))
-            .onAppear {
-                y = true
-            }
-        }
     }
 
     struct contents: View {
@@ -171,7 +128,7 @@ struct RecipePage: View {
     struct CommentsSection: View {
         
         
-        @State var recipe: Recipe
+//        @State var recipe: Recipe
         private(set) var firebase: FirebaseViewModel
         @ObservedObject private(set) var recipePageVM: RecipePageViewModel
         @FocusState private var isReplying: Bool
@@ -186,11 +143,12 @@ struct RecipePage: View {
                 Divider()
                 
                 VStack {
-                    ForEach(recipe.comments) { comment in
+                    ForEach(recipePageVM.recipe.comments) { comment in
                         CommentView(comment: comment,
                                     recipePageVM: recipePageVM,
                                     isReply: false,
-                                    replyFocusState: $isReplying)
+                                    replyFocusState: $isReplying,
+                                    commentID: comment.id)
                         
                     }
                 }
@@ -212,6 +170,7 @@ struct RecipePage: View {
                     //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     //isReplying = .on
                     //}
+                    recipePageVM.addComent()
                     
                     
                     
@@ -232,6 +191,7 @@ struct RecipePage: View {
         @State var openSubComments: Bool = false
         @State var sizeIndendt: CGFloat = 35
         var replyFocusState: FocusState<Bool>.Binding
+        var commentID: String
         
             var body: some View {
                 VStack {
@@ -272,9 +232,14 @@ struct RecipePage: View {
                                     .foregroundColor(.lightGrey)
                                     .onTapGesture {
                                         replyFocusState.wrappedValue = true
+                                        recipePageVM.isReplying = true
                                         recipePageVM.commentText = "@\(comment.author)  "
+                                        recipePageVM.commentID = commentID
+                                        recipePageVM.authorReplyingTo = comment.author
+//                                        recipePageVM.replyToComment(commentID: comment.id, replyingTo: comment.author)
                                         
-                                        print(recipePageVM.commentText)
+                                        
+                                        print(recipePageVM.recipe.comments)
                                     }
                                 Spacer()
                                 }
@@ -289,7 +254,8 @@ struct RecipePage: View {
                             CommentView(comment: replie,
                                         recipePageVM: recipePageVM,
                                         isReply: true,
-                                        replyFocusState: replyFocusState)
+                                        replyFocusState: replyFocusState,
+                                        commentID: comment.id)
                         }
                     }
                     
@@ -322,7 +288,7 @@ struct RecipePage_Previews: PreviewProvider {
     static var previews: some View {
         let recipe = RecipeViewModel()
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
-        RecipePage(recipe: Recipe(
+        RecipePage(Recipe(
             title: "",
             description: "",
             author: "",
@@ -330,7 +296,7 @@ struct RecipePage_Previews: PreviewProvider {
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,
-            comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
+            comments: [Comment(id: "test", text: "testdsdsdsfsdffdfdsfds", author: "Author",
                                replies: [Comment(text: "subcommnet", author: "123", replyingTo: "test"),
                                          Comment(text: "subcommnet1", author: "123"),
                                          Comment(text: "subcommnet2", author: "123", replyingTo: "test")]),

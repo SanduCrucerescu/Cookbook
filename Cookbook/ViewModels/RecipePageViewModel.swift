@@ -8,10 +8,16 @@
 import Foundation
 
 class RecipePageViewModel: ObservableObject {
-    var recipe: Recipe?
-    @Published var isReplying: Bool = false
+    @Published var recipe: Recipe
+    @Published private(set) var _isReplying: Bool = false
     @Published private(set) var _authorReplyingTo: String = ""
-    private(set) var _text = ""
+    @Published private(set) var _text = ""
+    var commentID = ""
+    
+    
+    init(_ recipe: Recipe) {
+        self.recipe = recipe
+    }
     
     var commentText: String {
         set {
@@ -22,68 +28,41 @@ class RecipePageViewModel: ObservableObject {
     
     
 
-//    var isReplying: Bool {
-//        set { _isReplying = newValue }
-//        get { return _isReplying}
-//    }
+    var isReplying: Bool {
+        set { _isReplying = newValue }
+        get { return _isReplying}
+    }
     
     var authorReplyingTo: String {
         set { _authorReplyingTo = newValue }
         get { return _authorReplyingTo }
     }
-//
-//    var recipe: Recipe {
-//        set {
-//            _recipe = newValue
-//        }
-//        get { return _recipe }
-//    }
+
     // completion: @escaping (_ value: Bool) -> Void
-    func addCom(_ com: Comment) {
-//        for ( i, cc ) in recipe!.comments.enumerated() {
-//            if cc.text == com {
-//                var ccc: Comment = cc
-//                ccc.replies = com
-//                recipe?.comments[i].replies = ccc.replies
-//                print("3")
-//            }
-//        }
-        
-        if recipe!.comments.contains(com) {
-            print("e")
+    
+    func addComent() {
+        if isReplying {
+            print(commentID)
+            for (index, comment) in recipe.comments.enumerated() {
+                if comment.id == commentID {
+                    recipe.comments[index].replies.append(Comment(text: commentText, author: "test", replyingTo: authorReplyingTo))
+                    print(recipe.comments)
+                }
+            }
         } else {
-            
-            print("a")
+            recipe.comments.append(Comment(text: commentText, author: "tes2"))
+            print(recipe.comments)
         }
     }
     
-//    func getCom(_ commentsArray: Array<Comment>) -> Array<Comment> {
-//        
-//        var comm = commentsArray
-//    
-//        for (index, element) in comm.enumerated() {
-//            if element.text == "subsubcommnet" {
-//                var c = element
-//                c.append(Comment(text: "aaa", author: "aaa"))
-//                comm[index] = c
-//                print("here")
-//                //print(comm)
-////                comm.append(Comment(text: "ssds", author: "sdssddddd"))
-////                print(comm)
-//            } else {
-//                var array = getCom(element.replies)
-//                
-//                
-////                array.append(Comment(text: "t", author: "t"))
-//                
-//                return comm
-//            }
-//        }
-//        //comm.append(Comment(text: "", author: ""))
-//        return comm
-//    }
-//    
-//    func findID(_ c: Array<Comment>, completion: @escaping (_ value: Comment) -> Void){
-//        completion(c[0])
-//    }
+    func replyToComment(commentID: String, replyingTo: String){
+        for (index, comment) in recipe.comments.enumerated() {
+            if comment.id == commentID {
+                recipe.comments[index].replies.append(Comment(text: commentText, author: "test", replyingTo: replyingTo))
+                print(recipe.comments)
+            }
+        }
+       
+    }
+    
 }
