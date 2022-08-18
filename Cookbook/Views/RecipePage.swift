@@ -200,8 +200,10 @@ struct RecipePage: View {
                 Button {
 //                    self.recipe.comments.append(Comment(text: text, author: "text"))
 //                    firebase.addComment(recipe)
-                    recipePageVM.recipe = recipe
-                    recipePageVM.getCom(recipe.comments)
+//                    recipePageVM.recipe = recipe
+                    
+                    //var c = recipePageVM.getCom(recipe.comments)
+//                    recipe.comments = c
                     
                     
                     
@@ -239,10 +241,14 @@ struct RecipePage: View {
                             .font(.custom("Welland Bold",
                                           size: DrawingConstants.subPartsItemsSize))
                             .foregroundColor(.lightBlack)
-                        Text(comment.text)
-                            .font(.custom("Welland Semibol",
-                                          size: DrawingConstants.commentText))
-                            .foregroundColor(.lightBlack)
+                        HStack{
+                            Link("@\(comment.author)", destination: URL(string: "https://www.example.com")!)
+                                .foregroundColor(.blue)
+                            Text(comment.text)
+                                .font(.custom("Welland Semibol",
+                                              size: DrawingConstants.commentText))
+                                .foregroundColor(.lightBlack)
+                        }
                     }
                     Spacer()
                     Image(systemName: "arrowshape.turn.up.left")

@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Comment: Identifiable, Codable {
+struct Comment: Identifiable, Codable, Equatable {
+    
     var id = UUID().uuidString
     var text: String
     var author: String
@@ -19,4 +20,5 @@ struct Comment: Identifiable, Codable {
         dict["author"] = self.author
         return dict
     }
+
 }

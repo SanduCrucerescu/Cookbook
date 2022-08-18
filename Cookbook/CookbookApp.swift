@@ -35,12 +35,14 @@ struct CookbookApp: App {
                 directions: [Direction](),
                 prepTime: 0,
                 comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
-                                   replies: [Comment(text: "subcommnet", author: "123",
-                                                     replies: [Comment(text: "subsubcommnet", author: "123",
-                                                                       replies: [Comment(text: "subsubsubcommnet", author: "123")])]),
-                                             Comment(text: "ste", author: "ste")]),
+                                   replies: [Comment(text: "subcommnet", author: "123"),
+                                             Comment(text: "subcommnet1", author: "123"),
+                                             Comment(text: "subcommnet2", author: "123")]),
+                                                    
                            Comment(text: "test1233", author: "Author2",
-                                   replies: [Comment(text: "subcommnet", author: "1233")])])
+                                   replies: [Comment(text: "subcommnet", author: "1233"),
+                                             Comment(text: "subcommnet", author: "123"),
+                                             Comment(text: "subcommnet", author: "123")])])
             )
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)

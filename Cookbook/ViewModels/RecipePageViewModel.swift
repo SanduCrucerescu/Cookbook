@@ -23,21 +23,59 @@ class RecipePageViewModel: ObservableObject {
         set { _authorReplyingTo = newValue }
         get { return _authorReplyingTo }
     }
-    
-    func getCom(_ commentsArray: Array<Comment>) {
-        for coments in commentsArray {
-            if coments.text == "ste"{
-                print("here")
-            } else {
-                getCom(coments.replies)
-            }
-        }
+//
+//    var recipe: Recipe {
+//        set {
+//            _recipe = newValue
+//        }
+//        get { return _recipe }
+//    }
+    // completion: @escaping (_ value: Bool) -> Void
+    func addCom(_ com: Comment) {
+//        for ( i, cc ) in recipe!.comments.enumerated() {
+//            if cc.text == com {
+//                var ccc: Comment = cc
+//                ccc.replies = com
+//                recipe?.comments[i].replies = ccc.replies
+//                print("3")
+//            }
+//        }
+        
+        if recipe!.comments.contains(com) {
+            print("e")
+        } else {
             
+            print("a")
+        }
     }
     
-
-    
-    
-    
-    
+//    func getCom(_ commentsArray: Array<Comment>) -> Array<Comment> {
+//        
+//        var comm = commentsArray
+//    
+//        for (index, element) in comm.enumerated() {
+//            if element.text == "subsubcommnet" {
+//                var c = element
+//                c.append(Comment(text: "aaa", author: "aaa"))
+//                comm[index] = c
+//                print("here")
+//                //print(comm)
+////                comm.append(Comment(text: "ssds", author: "sdssddddd"))
+////                print(comm)
+//            } else {
+//                var array = getCom(element.replies)
+//                
+//                
+////                array.append(Comment(text: "t", author: "t"))
+//                
+//                return comm
+//            }
+//        }
+//        //comm.append(Comment(text: "", author: ""))
+//        return comm
+//    }
+//    
+//    func findID(_ c: Array<Comment>, completion: @escaping (_ value: Comment) -> Void){
+//        completion(c[0])
+//    }
 }
