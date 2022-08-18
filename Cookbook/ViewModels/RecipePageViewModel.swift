@@ -9,15 +9,23 @@ import Foundation
 
 class RecipePageViewModel: ObservableObject {
     var recipe: Recipe?
-    @Published private(set) var _isReplying: Bool = false
+    @Published var isReplying: Bool = false
     @Published private(set) var _authorReplyingTo: String = ""
-    @Published var comment: Comment = Comment(text: "", author: "")
+    private(set) var _text = ""
+    
+    var commentText: String {
+        set {
+            _text = newValue
+        }
+        get { return _text }
+    }
+    
     
 
-    var isReplying: Bool {
-        set { _isReplying = newValue }
-        get { return _isReplying}
-    }
+//    var isReplying: Bool {
+//        set { _isReplying = newValue }
+//        get { return _isReplying}
+//    }
     
     var authorReplyingTo: String {
         set { _authorReplyingTo = newValue }

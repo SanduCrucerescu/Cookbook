@@ -52,7 +52,7 @@ struct RecipePage: View {
             }
             .edgesIgnoringSafeArea(.top)
             
-            HalfSheet(recipePageVM: recipePageVM, recipe: recipe)
+            //HalfSheet(recipePageVM: recipePageVM, recipe: recipe)
         }
         .background(Color.backgroundColor)
         //MARK: IOS 16 change
@@ -166,11 +166,15 @@ struct RecipePage: View {
         }
     }
 
+    
+    
     struct CommentsSection: View {
+        
+        
         @State var recipe: Recipe
         private(set) var firebase: FirebaseViewModel
         @ObservedObject private(set) var recipePageVM: RecipePageViewModel
-        @State var text = ""
+        @FocusState private var isReplying: Bool
         
         
         var body: some View {
@@ -186,24 +190,28 @@ struct RecipePage: View {
                         CommentView(comment: comment,
                                     recipePageVM: recipePageVM,
                                     isReply: false,
-                                    sizeIndendt: 0)
+                                    replyFocusState: $isReplying)
                         
                     }
                 }
                 
                 
-                TextField("Comment", text: $text)
+                TextField("Comment", text: $recipePageVM.commentText)
+                    .focused($isReplying)
                     .textFieldStyle(TextFieldDesign(image: "text.bubble",
                                                     error: false,
                                                     shadow: false))
 
                 Button {
 //                    self.recipe.comments.append(Comment(text: text, author: "text"))
-//                    firebase.addComment(recipe)
+                    //firebase.addComment(recipe)
 //                    recipePageVM.recipe = recipe
                     
                     //var c = recipePageVM.getCom(recipe.comments)
 //                    recipe.comments = c
+                    //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    //isReplying = .on
+                    //}
                     
                     
                     
@@ -222,72 +230,88 @@ struct RecipePage: View {
         @ObservedObject private(set) var recipePageVM: RecipePageViewModel
         var isReply: Bool
         @State var openSubComments: Bool = false
-        @State var sizeIndendt: CGFloat
-        var body: some View {
-            VStack {
-                HStack {
-                    if isReply {
-                        Spacer()
-                            .frame(width: sizeIndendt)
+        @State var sizeIndendt: CGFloat = 35
+        var replyFocusState: FocusState<Bool>.Binding
+        
+            var body: some View {
+                VStack {
+                    HStack {
+                        if isReply {
+                            Spacer()
+                                .frame(width: sizeIndendt)
+                        }
+                        VStack {
+                            Image(systemName: "person.crop.circle")
+                                .font(.system(size: DrawingConstants.commentProfilePictureSize))
+                            Spacer()
+                        }
+                        VStack {
+                            HStack(alignment: .firstTextBaseline) {
+                                //Spacer()
+                                Text(comment.author)
+                                    .font(.custom("Welland Bold",
+                                                  size: DrawingConstants.subPartsItemsSize))
+                                    .foregroundColor(.lightBlack)
+                                HStack{
+                                    if comment.replyingTo != nil {
+                                        Link("@\(comment.replyingTo ?? "")", destination: URL(string: "https://www.example.com")!)
+                                            .foregroundColor(.blue)
+                                    }
+                                        
+                                    }
+                                    Text("  \(comment.text)")
+                                        .font(.custom("Welland Semibol",
+                                                      size: DrawingConstants.commentText))
+                                        .foregroundColor(.lightBlack)
+                                Spacer()
+                            }
+                            Spacer()
+                            
+                            HStack(alignment: .firstTextBaseline) {
+                                Text("Reply")
+                                    .foregroundColor(.lightGrey)
+                                    .onTapGesture {
+                                        replyFocusState.wrappedValue = true
+                                        recipePageVM.commentText = "@\(comment.author)  "
+                                        
+                                        print(recipePageVM.commentText)
+                                    }
+                                Spacer()
+                                }
+                            Spacer()
+                            }
+                            
+                        }
+                    
                     }
-                    VStack {
-                        Image(systemName: "person.crop.circle")
-                            .font(.system(size: DrawingConstants.commentProfilePictureSize))
-                        Spacer()
-                    }
-                    VStack(alignment: .leading) {
-                        Spacer()
-                        Text(comment.author)
-                            .font(.custom("Welland Bold",
-                                          size: DrawingConstants.subPartsItemsSize))
-                            .foregroundColor(.lightBlack)
-                        HStack{
-                            Link("@\(comment.author)", destination: URL(string: "https://www.example.com")!)
-                                .foregroundColor(.blue)
-                            Text(comment.text)
-                                .font(.custom("Welland Semibol",
-                                              size: DrawingConstants.commentText))
-                                .foregroundColor(.lightBlack)
+                    if openSubComments  {
+                        ForEach(comment.replies) { replie in
+                            CommentView(comment: replie,
+                                        recipePageVM: recipePageVM,
+                                        isReply: true,
+                                        replyFocusState: replyFocusState)
                         }
                     }
-                    Spacer()
-                    Image(systemName: "arrowshape.turn.up.left")
-                        .font(.system(size: DrawingConstants.replyImageSize))
-                        .onTapGesture {
-                            recipePageVM.isReplying = true
-                            recipePageVM.authorReplyingTo = comment.author
-                            recipePageVM.comment = comment
-                            print(comment)
+                    
+                    if openSubComments {
+                        Button {
+                            openSubComments = false
+                        } label: {
+                            Text("Hide")
+                        }
+                    } else if comment.replies.count > 0 {
+                        Button {
+                            openSubComments = true
+                            
+                            print(sizeIndendt)
+                        } label: {
+                            Text("- Load \(Int(comment.replies.count)) replies" as String)
+                        }
                     }
-                }
-                if openSubComments  {
-                    ForEach(comment.replies) { replie in
-                        CommentView(comment: replie,
-                                    recipePageVM: recipePageVM,
-                                    isReply: true,
-                                    sizeIndendt: sizeIndendt + 30)
-                    }
-                }
-                
-                if openSubComments {
-                    Button {
-                        openSubComments = false
-                    } label: {
-                        Text("Hide")
-                    }
-                } else if comment.replies.count > 0 {
-                    Button {
-                        openSubComments = true
-                        
-                        print(sizeIndendt)
-                    } label: {
-                        Text("- Load \(Int(comment.replies.count)) replies" as String)
-                    }
-                }
 
+                }
             }
-        }
-    }
+        
 }
 
 
@@ -307,11 +331,14 @@ struct RecipePage_Previews: PreviewProvider {
             directions: [Direction](),
             prepTime: 0,
             comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
-                               replies: [Comment(text: "subcommnet", author: "123",
-                                                 replies: [Comment(text: "subsubcommnet", author: "123")]),
-                                         Comment(text: "ste", author: "ste")]),
+                               replies: [Comment(text: "subcommnet", author: "123", replyingTo: "test"),
+                                         Comment(text: "subcommnet1", author: "123"),
+                                         Comment(text: "subcommnet2", author: "123", replyingTo: "test")]),
+                                                
                        Comment(text: "test1233", author: "Author2",
-                               replies: [Comment(text: "subcommnet", author: "1233")])])
+                               replies: [Comment(text: "subcommnet", author: "1233"),
+                                         Comment(text: "subcommnet", author: "123"),
+                                         Comment(text: "subcommnet", author: "123")])])
         )
             .environmentObject(firebase)
     }

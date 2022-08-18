@@ -13,6 +13,7 @@ struct Comment: Identifiable, Codable, Equatable {
     var text: String
     var author: String
     var replies: Array<Comment> = []
+    var replyingTo: String?
     
     func conveertToDict() -> Dictionary<String, String>{
         var dict = Dictionary<String, String>()
