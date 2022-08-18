@@ -159,6 +159,29 @@ struct RecipePage: View {
                     .textFieldStyle(TextFieldDesign(image: "text.bubble",
                                                     error: false,
                                                     shadow: false))
+                    .onChange(of: recipePageVM.commentText) { newValue in
+                        recipePageVM.commentText = newValue
+                        var commentTextArray = recipePageVM.commentText.components(separatedBy: " ")
+                        
+                        print(commentTextArray[0])
+//
+                        
+                        if commentTextArray[0].hasPrefix("@") {
+                            commentTextArray[0].remove(at: commentTextArray[0].startIndex)
+                            
+                            if commentTextArray[0] != recipePageVM.authorReplyingTo {
+                                recipePageVM.nonExistingUser = true
+                                recipePageVM.isReplying = false
+                            } else {
+                                recipePageVM.nonExistingUser = false
+                                recipePageVM.isReplying = true
+                            }
+                        } else {
+                            recipePageVM.isReplying = false
+                            recipePageVM.authorReplyingTo = ""
+                        }
+
+                    }
 
                 Button {
 //                    self.recipe.comments.append(Comment(text: text, author: "text"))
@@ -236,9 +259,7 @@ struct RecipePage: View {
                                         recipePageVM.commentText = "@\(comment.author)  "
                                         recipePageVM.commentID = commentID
                                         recipePageVM.authorReplyingTo = comment.author
-//                                        recipePageVM.replyToComment(commentID: comment.id, replyingTo: comment.author)
-                                        
-                                        
+                                                                                
                                         print(recipePageVM.recipe.comments)
                                     }
                                 Spacer()
