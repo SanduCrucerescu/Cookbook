@@ -128,20 +128,12 @@ import UIKit
                 let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
                 let comentsArray: [Comment] = comments.map{ comment in
                     
-                    let repliesDict = comment.value["replies"] as? [String: String]
+                    let repliesDict = comment.value["replies"] as? [String: [String: Any]] ?? [:]
                     
                     let repliesArray: [Comment] = repliesDict.map { replies in
-                        return Comment(text: replies["text"] ?? "",
-                                       author: replies["author"] ?? "")
-                        
+                        return Comment(text: replies.value["text"] as? String ?? "",
+                                       author: replies.value["author"] as? String ?? "")
                     }
-                    
-                    
-//                    repliesDict.map{ replies in
-//                        return Comment(text: replies["text"] ?? "",
-//                                       author: replies["author"] ?? "")
-//                    }
-//
                     
                     
                     return Comment(id: comment.key,
@@ -151,7 +143,7 @@ import UIKit
                     
                 }
                
-                
+                print(comments)
                 
                 return Recipe(id: id,
                               title: title,
