@@ -25,25 +25,25 @@ struct CookbookApp: App {
     var body: some Scene {
         WindowGroup {
             //CreateRecipeView()
-            //LoginView()
-            RecipePage(Recipe(
-                title: "",
-                description: "",
-                author: "",
-                image: "",
-                ingredients: [Ingredient](),
-                directions: [Direction](),
-                prepTime: 0,
-                comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
-                                   replies: [Comment(text: "subcommnet", author: "123", replyingTo: "test"),
-                                             Comment(text: "subcommnet1", author: "123"),
-                                             Comment(text: "subcommnet2", author: "123", replyingTo: "test")]),
-                                                    
-                           Comment(text: "test1233", author: "Author2",
-                                   replies: [Comment(text: "subcommnet", author: "1233"),
-                                             Comment(text: "subcommnet", author: "123"),
-                                             Comment(text: "subcommnet", author: "123")])])
-            )
+            LoginView()
+//            RecipePage(Recipe(
+//                title: "",
+//                description: "",
+//                author: "",
+//                image: "",
+//                ingredients: [Ingredient](),
+//                directions: [Direction](),
+//                prepTime: 0,
+//                comments: [Comment(text: "testdsdsdsfsdffdfdsfds", author: "Author",
+//                                   replies: [Comment(text: "subcommnet", author: "123", replyingTo: "test"),
+//                                             Comment(text: "subcommnet1", author: "123"),
+//                                             Comment(text: "subcommnet2", author: "123", replyingTo: "test")]),
+//
+//                           Comment(text: "test1233", author: "Author2",
+//                                   replies: [Comment(text: "subcommnet", author: "1233"),
+//                                             Comment(text: "subcommnet", author: "123"),
+//                                             Comment(text: "subcommnet", author: "123")])])
+//            )
                 .environmentObject(firebase)
                 .environmentObject(recipeViewModel)
         }

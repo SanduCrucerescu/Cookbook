@@ -49,9 +49,7 @@ struct RecipePage: View {
                 }
                 contents(recipe: recipePageVM.recipe,
                          firebase: firebase)
-                CommentsSection(
-                                firebase: firebase,
-                                recipePageVM: recipePageVM)
+                CommentsSection(recipePageVM: recipePageVM)
                 
             }
             .edgesIgnoringSafeArea(.top)
@@ -129,7 +127,7 @@ struct RecipePage: View {
         
         
 //        @State var recipe: Recipe
-        private(set) var firebase: FirebaseViewModel
+        @EnvironmentObject var firebase: FirebaseViewModel
         @ObservedObject private(set) var recipePageVM: RecipePageViewModel
         @FocusState private var isReplying: Bool
         
@@ -163,7 +161,7 @@ struct RecipePage: View {
                         recipePageVM.commentText = newValue
                         var commentTextArray = recipePageVM.commentText.components(separatedBy: " ")
                         
-                        print(commentTextArray[0])
+                        //print(commentTextArray[0])
 //
                         
                         if commentTextArray[0].hasPrefix("@") {
@@ -171,14 +169,22 @@ struct RecipePage: View {
                             
                             if commentTextArray[0] != recipePageVM.authorReplyingTo {
                                 recipePageVM.nonExistingUser = true
-                                recipePageVM.isReplying = false
+                                recipePageVM.error = true
+                                print("1")
+//                                if commentTextArray[0].isEmpty {
+//                                    recipePageVM.isReplying = false
+//                                    print("2")
+//                                }
                             } else {
                                 recipePageVM.nonExistingUser = false
                                 recipePageVM.isReplying = true
+                                print("3")
                             }
                         } else {
+                            recipePageVM.error = false
                             recipePageVM.isReplying = false
                             recipePageVM.authorReplyingTo = ""
+                            print("4")
                         }
 
                     }
@@ -193,8 +199,9 @@ struct RecipePage: View {
                     //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     //isReplying = .on
                     //}
-                    recipePageVM.addComent()
-                    
+                    Task {
+                        await recipePageVM.addComent(firebase)
+                    }
                     
                     
                 } label: {

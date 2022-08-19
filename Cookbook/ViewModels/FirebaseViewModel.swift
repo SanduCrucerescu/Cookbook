@@ -127,9 +127,27 @@ import UIKit
                 let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
                 let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
                 let comentsArray: [Comment] = comments.map{ comment in
+                    
+                    let repliesDict = comment.value["replies"] as? [String: String]
+                    
+                    let repliesArray: [Comment] = repliesDict.map { replies in
+                        return Comment(text: replies["text"] ?? "",
+                                       author: replies["author"] ?? "")
+                        
+                    }
+                    
+                    
+//                    repliesDict.map{ replies in
+//                        return Comment(text: replies["text"] ?? "",
+//                                       author: replies["author"] ?? "")
+//                    }
+//
+                    
+                    
                     return Comment(id: comment.key,
                                    text: comment.value["text"] as! String ,
-                                   author: comment.value["author"] as! String)
+                                   author: comment.value["author"] as! String,
+                                   replies: repliesArray)
                     
                 }
                
@@ -204,7 +222,7 @@ import UIKit
             return dict
          }
         
-        //print(recipe.comments)
+        //print(commentDict)
         
         db.collection("Recipes").document(recipe.id).updateData(["Comments": commentDict])
     }

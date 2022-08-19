@@ -13,6 +13,7 @@ class RecipePageViewModel: ObservableObject {
     @Published private(set) var _authorReplyingTo: String = ""
     @Published private(set) var _text = ""
     @Published private(set) var _nonExistingUser: Bool = false
+    @Published private(set) var _error: Bool = false
     var commentID = ""
     
     
@@ -23,6 +24,11 @@ class RecipePageViewModel: ObservableObject {
     var nonExistingUser: Bool {
         set { _nonExistingUser = newValue }
         get { return _nonExistingUser }
+    }
+    
+    var error: Bool {
+        set { _error = newValue }
+        get { return _error }
     }
     
     var commentText: String {
@@ -42,16 +48,26 @@ class RecipePageViewModel: ObservableObject {
 
     // completion: @escaping (_ value: Bool) -> Void
     
-    func addComent() {
-        if isReplying && !commentText.isEmpty && nonExistingUser == false {
-            print(commentID)
-            for (index, comment) in recipe.comments.enumerated() {
-                if comment.id == commentID {
-                    recipe.comments[index].replies.append(Comment(text: commentText, author: "test", replyingTo: authorReplyingTo))
+    func addComent(_ firebase: FirebaseViewModel) async {
+        if !error {
+            if isReplying && !commentText.isEmpty && nonExistingUser == false {
+                print(commentID)
+                for (index, comment) in recipe.comments.enumerated() {
+                    if comment.id == commentID {
+                        var commentTextArray = commentText.components(separatedBy: " ")
+                        
+                        commentTextArray.remove(at: commentTextArray.startIndex)
+                        
+                        let newCommentText = commentTextArray.joined(separator: " ")
+                        
+                        recipe.comments[index].replies.append(Comment(text: newCommentText, author: "test", replyingTo: authorReplyingTo))
+                        await firebase.addComment(recipe)
+                    }
                 }
+            } else {
+                recipe.comments.append(Comment(text: commentText, author: "tes2"))
+                await firebase.addComment(recipe)
             }
-        } else {
-            recipe.comments.append(Comment(text: commentText, author: "tes2"))
         }
     }
     
