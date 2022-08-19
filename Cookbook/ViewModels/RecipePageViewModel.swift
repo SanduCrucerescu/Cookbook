@@ -61,12 +61,12 @@ class RecipePageViewModel: ObservableObject {
                         let newCommentText = commentTextArray.joined(separator: " ")
                         
                         recipe.comments[index].replies.append(Comment(text: newCommentText, author: "test", replyingTo: authorReplyingTo))
-                        await firebase.addComment(recipe)
+                        firebase.addComment(recipe)
                     }
                 }
             } else {
                 recipe.comments.append(Comment(text: commentText, author: "tes2"))
-                await firebase.addComment(recipe)
+                firebase.addComment(recipe)
             }
         }
     }

@@ -13,7 +13,7 @@ import FirebaseStorage
 import FirebaseFirestoreSwift
 import UIKit
 
-@MainActor class FirebaseViewModel: ObservableObject {
+class FirebaseViewModel: ObservableObject {
     @Published private(set) var isLogedIn: Bool?
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
@@ -63,7 +63,7 @@ import UIKit
             
             self.isLogedIn = true
             
-            await self.getData()
+            self.getData()
             
         } catch {
             self.isLogedIn = false
@@ -108,53 +108,61 @@ import UIKit
     }
     
     //MARK: - Get data from firebase
-    func getData() async {
-        db.collection("Recipes").addSnapshotListener { snapshot, error in
-            self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
-                //getting the dict from firebase
-                let id = data.documentID
-                let title = data["Title"] as? String ?? ""
-                let description = data["Description"] as? String ?? ""
-                let author = data["Author"] as? String ?? ""
-                let image = data["imageURL"] as? String ?? ""
-                let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
-                let directions = data["Directions"] as? [String: String] ?? [:]
-                let prepTime = data["PrepTime"] as? Int ?? 0
-                let comments = data["Comments"] as? [String: [String: Any]] ?? [:]
-                
-                
-                //Converting firebase map to array
-                let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
-                let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
-                let comentsArray: [Comment] = comments.map{ comment in
+    func getData() {
+        
+        DispatchQueue.global(qos: .utility).async {
+            
+        
+            self.db.collection("Recipes").addSnapshotListener { snapshot, error in
+                DispatchQueue.main.async {
                     
-                    let repliesDict = comment.value["replies"] as? [String: [String: Any]] ?? [:]
-                    
-                    let repliesArray: [Comment] = repliesDict.map { replies in
-                        return Comment(text: replies.value["text"] as? String ?? "",
-                                       author: replies.value["author"] as? String ?? "")
-                    }
-                    
-                    
-                    return Comment(id: comment.key,
-                                   text: comment.value["text"] as! String ,
-                                   author: comment.value["author"] as! String,
-                                   replies: repliesArray)
-                    
+                    self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
+                        //getting the dict from firebase
+                        let id = data.documentID
+                        let title = data["Title"] as? String ?? ""
+                        let description = data["Description"] as? String ?? ""
+                        let author = data["Author"] as? String ?? ""
+                        let image = data["imageURL"] as? String ?? ""
+                        let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
+                        let directions = data["Directions"] as? [String: String] ?? [:]
+                        let prepTime = data["PrepTime"] as? Int ?? 0
+                        let comments = data["Comments"] as? [String: [String: Any]] ?? [:]
+                        
+                        
+                        //Converting firebase map to array
+                        let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
+                        let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
+                        let comentsArray: [Comment] = comments.map{ comment in
+                            
+                            let repliesDict = comment.value["replies"] as? [String: [String: Any]] ?? [:]
+                            
+                            let repliesArray: [Comment] = repliesDict.map { replies in
+                                return Comment(text: replies.value["text"] as? String ?? "",
+                                               author: replies.value["author"] as? String ?? "")
+                            }
+                            
+                            
+                            return Comment(id: comment.key,
+                                           text: comment.value["text"] as! String ,
+                                           author: comment.value["author"] as! String,
+                                           replies: repliesArray)
+                            
+                        }
+                       
+                       // print(comments)
+                        
+                        return Recipe(id: id,
+                                      title: title,
+                                      description: description,
+                                      author: author,
+                                      image: image,
+                                      ingredients: ingredientsArray,
+                                      directions: directionsArray,
+                                      prepTime: prepTime,
+                                      comments: comentsArray)
+                    }) ?? []
                 }
-               
-                print(comments)
-                
-                return Recipe(id: id,
-                              title: title,
-                              description: description,
-                              author: author,
-                              image: image,
-                              ingredients: ingredientsArray,
-                              directions: directionsArray,
-                              prepTime: prepTime,
-                              comments: comentsArray)
-            }) ?? []
+            }
         }
     }
     
@@ -187,7 +195,7 @@ import UIKit
         let fileRef = storageRef.child(path)
         
         
-        let _ = await fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        let _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
                 fileRef.downloadURL { url, error in
                     if error == nil && url != nil {

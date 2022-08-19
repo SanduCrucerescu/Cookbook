@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-@MainActor
+//@MainActor
 class RecipeViewModel: ObservableObject {
     @Published var showPicker: Bool = false
     @Published var image: UIImage?
