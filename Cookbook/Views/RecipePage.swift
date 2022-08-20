@@ -62,8 +62,9 @@ struct RecipePage: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text(recipe.title)
-                    .font(.custom("Welland",
-                                  size: DrawingConstants.titleSize))
+                    .font(.system(size: DrawingConstants.titleSize))
+//                    .font(.custom("Welland",
+//                                  size: DrawingConstants.titleSize))
                     .foregroundColor(.lightBlack)
                 Text("Author: \(recipe.author)")
                     .font(.custom("Welland Light",
@@ -71,8 +72,9 @@ struct RecipePage: View {
                      .foregroundColor(.lightBlack)
                 
                 Text(recipe.description)
-                    .font(.custom("Welland",
-                                  size: DrawingConstants.descriptionSize))
+                    .font(.system(size: DrawingConstants.descriptionSize))
+//                    .font(.custom("",
+//                                  size: DrawingConstants.descriptionSize))
                     .foregroundColor(.lightBlack)
                 
                 Spacer()
@@ -297,10 +299,10 @@ struct RecipePage_Previews: PreviewProvider {
         let recipe = RecipeViewModel()
         let firebase = FirebaseViewModel(recipeViewModel: recipe)
         RecipePage(Recipe(
-            title: "",
-            description: "",
+            title: "Test",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt ex vel velit malesuada venenatis. Morbi volutpat luctus metus, quis laoreet magna pellentesque in. Donec tristique porttitor bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
             author: "",
-            image: UIImage(imageLiteralResourceName: "köttbular"),
+            image: UIImage(imageLiteralResourceName: "köttbullar"),
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,
