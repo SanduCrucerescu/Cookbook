@@ -29,8 +29,9 @@ class RecipeViewModel: ObservableObject {
     var firebase: FirebaseViewModel = FirebaseViewModel()
 
     func addRecipe() async {
-                
-        guard !title.isEmpty && !description.isEmpty && !prepTime.isEmpty && image == nil else {
+        print("1")
+        
+        guard !title.isEmpty && !description.isEmpty && !prepTime.isEmpty && image != nil else {
             emptyTitle = title.isEmpty ? true : false
             emptyDescription = description.isEmpty ? true : false
             emptyPrepTime = prepTime.isEmpty ? true : false
@@ -38,9 +39,9 @@ class RecipeViewModel: ObservableObject {
             
             return
         }
+        print("2")
         
         let directionsDictionary =  directions.reduce([String: Any]()) { (dict, direction) -> [String: Any]  in
-           // var number = 1
             var dict = dict
             dict[direction.id] = direction.direction
             return dict
@@ -53,6 +54,7 @@ class RecipeViewModel: ObservableObject {
 
         }
 
-        await firebase.uploadRecipe(title, description, UUID().uuidString, image!, ingredientsDictionary, directionsDictionary)
+        print("here")
+        await firebase.uploadRecipe(title, description, "Alez", image!, ingredientsDictionary, directionsDictionary)
     }
 }

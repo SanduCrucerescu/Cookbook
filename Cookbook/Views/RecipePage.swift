@@ -37,16 +37,20 @@ struct RecipePage: View {
     var body: some View {
         ZStack{
             ScrollView(showsIndicators: false) {
-                CachedAsyncImage(url: URL(string: recipePageVM.recipe.image), urlCache: .imageCache) { phase in
-                    if let image = phase.image{
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .ignoresSafeArea(.all, edges: .top)
-                    } else {
-                        ProgressView()
-                    }
-                }
+//                CachedAsyncImage(url: URL(string: recipePageVM.recipe.image), urlCache: .imageCache) { phase in
+//                    if let image = phase.image{
+//                        image
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .ignoresSafeArea(.all, edges: .top)
+//                    } else {
+//                        ProgressView()
+//                    }
+//                }
+                Image(uiImage: recipe.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .ignoresSafeArea(.all, edges: .top)
                 contents(recipe: recipePageVM.recipe,
                          firebase: firebase)
                 CommentsSection(recipePageVM: recipePageVM)
@@ -320,7 +324,7 @@ struct RecipePage_Previews: PreviewProvider {
             title: "",
             description: "",
             author: "",
-            image: "",
+            image: UIImage(imageLiteralResourceName: "köttbular"),
             ingredients: [Ingredient](),
             directions: [Direction](),
             prepTime: 0,

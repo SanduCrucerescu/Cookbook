@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-struct Recipe: Identifiable, Codable {
+struct Recipe: Identifiable {
     var id = UUID().uuidString
     var title: String
     var description: String
     var author: String
-    var image: String
+    var image: UIImage
     var ingredients: Array<Ingredient>
     var directions: Array<Direction>
     var prepTime: Int

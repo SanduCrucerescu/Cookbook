@@ -27,19 +27,25 @@ struct RecipeBox: View {
                 RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                     .fill(.white)
                 VStack(alignment: .leading){
-                    CachedAsyncImage(url: URL(string: recipe.image), urlCache: .imageCache) { phase in
-                        if let image = phase.image{
-                            image
-                                .resizable()
-                                .frame(width: DrawingConstants.imageWidth,
-                                       height: DrawingConstants.imageHeight * (210/210))
-                                .cornerRadius(DrawingConstants.cornerRadius)
-                        } else {
-                            ProgressView()
-                                .frame(width: DrawingConstants.imageWidth,
-                                       height: DrawingConstants.imageHeight * (210/210))
-                        }
-                    }
+//                    CachedAsyncImage(url: URL(string: recipe.image), urlCache: .imageCache) { phase in
+//                        if let image = phase.image{
+//                            image
+//                                .resizable()
+//                                .frame(width: DrawingConstants.imageWidth,
+//                                       height: DrawingConstants.imageHeight * (210/210))
+//                                .cornerRadius(DrawingConstants.cornerRadius)
+//                        } else {
+//                            ProgressView()
+//                                .frame(width: DrawingConstants.imageWidth,
+//                                       height: DrawingConstants.imageHeight * (210/210))
+//                        }
+//                    }
+                    Image(uiImage: recipe.image)
+                        .resizable()
+                            .frame(width: DrawingConstants.imageWidth,
+                                   height: DrawingConstants.imageHeight * (210/210))
+                            .cornerRadius(DrawingConstants.cornerRadius)
+                    
                     Text(recipe.title)
                         .font(.custom("Welland Bold",
                                       size: DrawingConstants.textSize))
