@@ -142,86 +142,19 @@ class FirebaseViewModel: ObservableObject {
                                            author: comment.value["author"] as! String,
                                            replies: repliesArray)
                         }
-                        var img: UIImage?
-                        var finished = false
-//
-
                         self.getPhoto(url: image) { status, image in
-                           
-                        
-
-                        
-                        self.recipeViewModel?.recipes.append(Recipe(id: id,
-                                          title: title,
-                                          description: description,
-                                          author: author,
-                                          image: image,
-                                          ingredients: ingredientsArray,
-                                          directions: directionsArray,
-                                          prepTime: prepTime,
-                                          comments: comentsArray))
-
+                
+                            self.recipeViewModel?.recipes.append(Recipe(id: id,
+                                              title: title,
+                                              description: description,
+                                              author: author,
+                                              image: image,
+                                              ingredients: ingredientsArray,
+                                              directions: directionsArray,
+                                              prepTime: prepTime,
+                                              comments: comentsArray))
                         }
                     }
-                    
-                    
-                    
-//                    self.recipeViewModel!.recipes = snapshot?.documents.map({ data  in
-//                        //getting the dict from firebase
-//                        let id = data.documentID
-//                        let title = data["Title"] as? String ?? ""
-//                        let description = data["Description"] as? String ?? ""
-//                        let author = data["Author"] as? String ?? ""
-//                        let image = data["imageURL"] as? String ?? ""
-//                        let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
-//                        let directions = data["Directions"] as? [String: String] ?? [:]
-//                        let prepTime = data["PrepTime"] as? Int ?? 0
-//                        let comments = data["Comments"] as? [String: [String: Any]] ?? [:]
-//
-//
-//                        //Converting firebase map to array
-//                        let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
-//                        let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
-//                        let comentsArray: [Comment] = comments.map{ comment in
-//
-//                            let repliesDict = comment.value["replies"] as? [String: [String: Any]] ?? [:]
-//
-//                            let repliesArray: [Comment] = repliesDict.map { replies in
-//                                return Comment(text: replies.value["text"] as? String ?? "",
-//                                               author: replies.value["author"] as? String ?? "")
-//                            }
-//
-//                            return Comment(id: comment.key,
-//                                           text: comment.value["text"] as! String ,
-//                                           author: comment.value["author"] as! String,
-//                                           replies: repliesArray)
-//                        }
-//                        var img: UIImage?
-//                        var finished = false
-////
-//
-//                        self.getPhoto(url: image) { status, image in
-//                            img = image
-//                            finished = status
-//                            print(img)
-//                        }
-//
-//                        if finished {
-//                           return Recipe(id: id,
-//                                          title: title,
-//                                          description: description,
-//                                          author: author,
-//                                          image: img!,
-//                                          ingredients: ingredientsArray,
-//                                          directions: directionsArray,
-//                                          prepTime: prepTime,
-//                                          comments: comentsArray)
-//
-//                        }
-//
-//                        return Recipe(title: "", description: "", author: "", image: UIImage(imageLiteralResourceName: "köttbullar"), ingredients: [Ingredient](), directions: [Direction](), prepTime: 0, comments: [Comment]())
-//
-//                    }) ?? []
                 }
             }
         }
@@ -272,24 +205,24 @@ class FirebaseViewModel: ObservableObject {
     }
     
     //MARK: - Get Photos
-    //, completion: @escaping (_ image: UIImage) -> Void
     func getPhoto(url: String, completion: @escaping (_ finished: Bool, _ image: UIImage) -> Void)  {
-        db.collection("images").document(url).getDocument { snapshot, error in
-             if error == nil && snapshot != nil {
-                 let fileRef = self.storageRef.child(snapshot!["url"] as! String)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.db.collection("images").document(url).getDocument { snapshot, error in
+                 if error == nil && snapshot != nil {
+                     let fileRef = self.storageRef.child(snapshot!["url"] as! String)
 
-                  fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                     if error == nil && data != nil {
-                         print("yes")
-                         DispatchQueue.main.async {
-                             completion(true, UIImage(data: data!)!)
-                             //img = UIImage(data: data!)
+                      fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                         if error == nil && data != nil {
+                             print("yes")
+                             DispatchQueue.main.async {
+                                 completion(true, UIImage(data: data!)!)
+                             }
                          }
                      }
+    //                 }
                  }
-//                 }
              }
-         }
+        }
     }
 
     

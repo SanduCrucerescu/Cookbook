@@ -66,7 +66,7 @@ struct CreateRecipeView: View {
                     .disabled(recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime)
                     .buttonStyle(CustomButton(color: .white))
 
-                } // Uptdate this in IOS 16
+                } //TODO: Uptdate this in IOS 16
                 .onAppear{
                     UIScrollView.appearance().keyboardDismissMode = .onDrag
                 }

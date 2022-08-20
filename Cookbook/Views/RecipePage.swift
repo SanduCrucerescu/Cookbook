@@ -37,22 +37,11 @@ struct RecipePage: View {
     var body: some View {
         ZStack{
             ScrollView(showsIndicators: false) {
-//                CachedAsyncImage(url: URL(string: recipePageVM.recipe.image), urlCache: .imageCache) { phase in
-//                    if let image = phase.image{
-//                        image
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .ignoresSafeArea(.all, edges: .top)
-//                    } else {
-//                        ProgressView()
-//                    }
-//                }
                 Image(uiImage: recipe.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .ignoresSafeArea(.all, edges: .top)
-                contents(recipe: recipePageVM.recipe,
-                         firebase: firebase)
+                contents(recipe: recipePageVM.recipe)
                 CommentsSection(recipePageVM: recipePageVM)
                 
             }
@@ -69,7 +58,6 @@ struct RecipePage: View {
 
     struct contents: View {
         var recipe: Recipe
-        var firebase: FirebaseViewModel
         
         var body: some View {
             VStack(alignment: .leading) {
@@ -165,9 +153,6 @@ struct RecipePage: View {
                         recipePageVM.commentText = newValue
                         var commentTextArray = recipePageVM.commentText.components(separatedBy: " ")
                         
-                        //print(commentTextArray[0])
-//
-                        
                         if commentTextArray[0].hasPrefix("@") {
                             commentTextArray[0].remove(at: commentTextArray[0].startIndex)
                             
@@ -175,10 +160,6 @@ struct RecipePage: View {
                                 recipePageVM.nonExistingUser = true
                                 recipePageVM.error = true
                                 print("1")
-//                                if commentTextArray[0].isEmpty {
-//                                    recipePageVM.isReplying = false
-//                                    print("2")
-//                                }
                             } else {
                                 recipePageVM.nonExistingUser = false
                                 recipePageVM.isReplying = true
@@ -194,15 +175,6 @@ struct RecipePage: View {
                     }
 
                 Button {
-//                    self.recipe.comments.append(Comment(text: text, author: "text"))
-                    //firebase.addComment(recipe)
-//                    recipePageVM.recipe = recipe
-                    
-                    //var c = recipePageVM.getCom(recipe.comments)
-//                    recipe.comments = c
-                    //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    //isReplying = .on
-                    //}
                     Task {
                         await recipePageVM.addComent(firebase)
                     }
@@ -230,15 +202,18 @@ struct RecipePage: View {
             var body: some View {
                 VStack {
                     HStack {
+                        
                         if isReply {
                             Spacer()
                                 .frame(width: sizeIndendt)
                         }
+                        
                         VStack {
                             Image(systemName: "person.crop.circle")
                                 .font(.system(size: DrawingConstants.commentProfilePictureSize))
                             Spacer()
                         }
+                        
                         VStack {
                             HStack(alignment: .firstTextBaseline) {
                                 //Spacer()
@@ -259,6 +234,7 @@ struct RecipePage: View {
                                         .foregroundColor(.lightBlack)
                                 Spacer()
                             }
+                            
                             Spacer()
                             
                             HStack(alignment: .firstTextBaseline) {
