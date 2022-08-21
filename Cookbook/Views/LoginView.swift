@@ -95,6 +95,14 @@ struct LoginView: View {
                                                 isLogedI = firebaseViewModel.isLogedIn ?? false
                                                 print(isLogedI)
                                             }
+                                            for family: String in UIFont.familyNames
+                                                    {
+                                                        print(family)
+                                                        for names: String in UIFont.fontNames(forFamilyName: family)
+                                                        {
+                                                            print("== \(names)")
+                                                        }
+                                                    }
                                           print(isLogedI)
                                         }, label: {
                                             Text("Sign In")
@@ -113,7 +121,7 @@ struct LoginView: View {
         var body: some View {
             HStack{
                 Text("Don't have an account!")
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.bottomTextFont))
                         .foregroundColor(Color.sageGreen)
                 
@@ -123,7 +131,7 @@ struct LoginView: View {
                 } label: {
                     Text("Register now")
                         .underline()
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.bottomTextFont))
                         .foregroundColor(Color.sageGreen)
                 }

@@ -29,6 +29,14 @@
 		FA2CE4CE28B1238F00D33705 /* GothamLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2CE4B928B1238F00D33705 /* GothamLightItalic.ttf */; };
 		FA2CE4CF28B1238F00D33705 /* GothamMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2CE4BA28B1238F00D33705 /* GothamMedium.ttf */; };
 		FA3F4A022895974E00C5DBC6 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F4A012895974D00C5DBC6 /* MainPage.swift */; };
+		FA3FD57928B24D29004102B2 /* Proxima Nova Alt Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57128B24D29004102B2 /* Proxima Nova Alt Thin.otf */; };
+		FA3FD57A28B24D29004102B2 /* Proxima Nova Alt Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57228B24D29004102B2 /* Proxima Nova Alt Bold.otf */; };
+		FA3FD57B28B24D29004102B2 /* Proxima Nova Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57328B24D29004102B2 /* Proxima Nova Extrabold.otf */; };
+		FA3FD57C28B24D29004102B2 /* Proxima Nova Alt Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57428B24D29004102B2 /* Proxima Nova Alt Light.otf */; };
+		FA3FD57D28B24D29004102B2 /* Proxima Nova Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57528B24D29004102B2 /* Proxima Nova Black.otf */; };
+		FA3FD57E28B24D29004102B2 /* Proxima Nova Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57628B24D29004102B2 /* Proxima Nova Bold.otf */; };
+		FA3FD57F28B24D29004102B2 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57728B24D29004102B2 /* ProximaNova-Regular.otf */; };
+		FA3FD58028B24D29004102B2 /* Proxima Nova Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA3FD57828B24D29004102B2 /* Proxima Nova Thin.otf */; };
 		FA52954628A146F30046CACD /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954528A146F20046CACD /* Ingredient.swift */; };
 		FA52954828A161400046CACD /* IngredientTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954728A1613F0046CACD /* IngredientTextField.swift */; };
 		FA52954A28A169670046CACD /* RecipeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA52954928A169670046CACD /* RecipeBox.swift */; };
@@ -90,6 +98,14 @@
 		FA2CE4B928B1238F00D33705 /* GothamLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamLightItalic.ttf; sourceTree = "<group>"; };
 		FA2CE4BA28B1238F00D33705 /* GothamMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.ttf; sourceTree = "<group>"; };
 		FA3F4A012895974D00C5DBC6 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		FA3FD57128B24D29004102B2 /* Proxima Nova Alt Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Thin.otf"; sourceTree = "<group>"; };
+		FA3FD57228B24D29004102B2 /* Proxima Nova Alt Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Bold.otf"; sourceTree = "<group>"; };
+		FA3FD57328B24D29004102B2 /* Proxima Nova Extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Extrabold.otf"; sourceTree = "<group>"; };
+		FA3FD57428B24D29004102B2 /* Proxima Nova Alt Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Light.otf"; sourceTree = "<group>"; };
+		FA3FD57528B24D29004102B2 /* Proxima Nova Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Black.otf"; sourceTree = "<group>"; };
+		FA3FD57628B24D29004102B2 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
+		FA3FD57728B24D29004102B2 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		FA3FD57828B24D29004102B2 /* Proxima Nova Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Thin.otf"; sourceTree = "<group>"; };
 		FA52954528A146F20046CACD /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		FA52954728A1613F0046CACD /* IngredientTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTextField.swift; sourceTree = "<group>"; };
 		FA52954928A169670046CACD /* RecipeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBox.swift; sourceTree = "<group>"; };
@@ -140,7 +156,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FA2CE4A528B1238F00D33705 /* Gotham */ = {
+		FA2CE4A528B1238F00D33705 /* Gotham-Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				FA2CE4A728B1238F00D33705 /* JostItalicVariableFont_wght.ttf */,
@@ -165,7 +181,22 @@
 				FA2CE4B928B1238F00D33705 /* GothamLightItalic.ttf */,
 				FA2CE4BA28B1238F00D33705 /* GothamMedium.ttf */,
 			);
-			path = Gotham;
+			path = "Gotham-Fonts";
+			sourceTree = "<group>";
+		};
+		FA3FD57028B24D29004102B2 /* Proxima-Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FA3FD57128B24D29004102B2 /* Proxima Nova Alt Thin.otf */,
+				FA3FD57228B24D29004102B2 /* Proxima Nova Alt Bold.otf */,
+				FA3FD57328B24D29004102B2 /* Proxima Nova Extrabold.otf */,
+				FA3FD57428B24D29004102B2 /* Proxima Nova Alt Light.otf */,
+				FA3FD57528B24D29004102B2 /* Proxima Nova Black.otf */,
+				FA3FD57628B24D29004102B2 /* Proxima Nova Bold.otf */,
+				FA3FD57728B24D29004102B2 /* ProximaNova-Regular.otf */,
+				FA3FD57828B24D29004102B2 /* Proxima Nova Thin.otf */,
+			);
+			path = "Proxima-Fonts";
 			sourceTree = "<group>";
 		};
 		FA5CAEC628900EF600757760 = {
@@ -190,7 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				FAFDCBEB28A00D2800935A9E /* Info.plist */,
-				FA2CE4A528B1238F00D33705 /* Gotham */,
+				FA3FD57028B24D29004102B2 /* Proxima-Fonts */,
+				FA2CE4A528B1238F00D33705 /* Gotham-Fonts */,
 				FAFDCBE828A00C2E00935A9E /* Welland-Font */,
 				FAC93C772891EDC100F317FF /* Models */,
 				FAC93C832891EDC100F317FF /* ViewModels */,
@@ -353,6 +385,7 @@
 			files = (
 				FAFDCBF628A012F400935A9E /* Welland-Black.otf in Resources */,
 				FA2CE4CB28B1238F00D33705 /* GothamBook.ttf in Resources */,
+				FA3FD57D28B24D29004102B2 /* Proxima Nova Black.otf in Resources */,
 				FAFDCBF728A012F400935A9E /* Welland-Bold.otf in Resources */,
 				FA2CE4CE28B1238F00D33705 /* GothamLightItalic.ttf in Resources */,
 				FA2CE4C128B1238F00D33705 /* GothamThin.otf in Resources */,
@@ -361,6 +394,7 @@
 				FAFDCBF828A012F400935A9E /* Welland-Light.otf in Resources */,
 				FA2CE4C928B1238F00D33705 /* GothamBold.ttf in Resources */,
 				FAFDCBF928A012F400935A9E /* Welland-Semibold.otf in Resources */,
+				FA3FD57B28B24D29004102B2 /* Proxima Nova Extrabold.otf in Resources */,
 				FA2CE4C428B1238F00D33705 /* GothamBookItalic.ttf in Resources */,
 				FA2CE4C028B1238F00D33705 /* GothamUltraItalic.otf in Resources */,
 				FA2CE4CC28B1238F00D33705 /* JostVariableFont_wght.ttf in Resources */,
@@ -373,13 +407,19 @@
 				FA2CE4CA28B1238F00D33705 /* GothamBoldItalic.ttf in Resources */,
 				FA2CE4C728B1238F00D33705 /* GothamXLight.otf in Resources */,
 				FA2CE4CD28B1238F00D33705 /* GothamBlack.otf in Resources */,
+				FA3FD57E28B24D29004102B2 /* Proxima Nova Bold.otf in Resources */,
 				FA5CAED728900EF900757760 /* Assets.xcassets in Resources */,
 				FA2CE4BC28B1238F00D33705 /* JostItalicVariableFont_wght.ttf in Resources */,
+				FA3FD57928B24D29004102B2 /* Proxima Nova Alt Thin.otf in Resources */,
 				FA2CE4C628B1238F00D33705 /* GothamMedium_1.ttf in Resources */,
+				FA3FD57F28B24D29004102B2 /* ProximaNova-Regular.otf in Resources */,
 				FA5CAEE12890299700757760 /* GoogleService-Info.plist in Resources */,
 				FA2CE4BB28B1238F00D33705 /* GothamLight.otf in Resources */,
+				FA3FD57C28B24D29004102B2 /* Proxima Nova Alt Light.otf in Resources */,
+				FA3FD58028B24D29004102B2 /* Proxima Nova Thin.otf in Resources */,
 				FA2CE4C328B1238F00D33705 /* GothamBold.otf in Resources */,
 				FA2CE4BE28B1238F00D33705 /* GothamXLightItalic.otf in Resources */,
+				FA3FD57A28B24D29004102B2 /* Proxima Nova Alt Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

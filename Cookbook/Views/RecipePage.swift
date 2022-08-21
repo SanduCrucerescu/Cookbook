@@ -62,46 +62,46 @@ struct RecipePage: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text(recipe.title)
-                    .font(.system(size: DrawingConstants.titleSize))
-//                    .font(.custom("Welland",
-//                                  size: DrawingConstants.titleSize))
-                    .foregroundColor(.lightBlack)
+                    //.font(.system(size: DrawingConstants.titleSize))
+                    .font(.custom("ProximaNova-Regular",
+                                  size: DrawingConstants.titleSize))
+                    .foregroundColor(.textColor)
                 Text("Author: \(recipe.author)")
-                    .font(.custom("Welland Light",
+                    .font(.custom("ProximaNovaA-Light",
                                    size: 15))
                      .foregroundColor(.lightBlack)
                 
                 Text(recipe.description)
-                    .font(.system(size: DrawingConstants.descriptionSize))
-//                    .font(.custom("",
-//                                  size: DrawingConstants.descriptionSize))
-                    .foregroundColor(.lightBlack)
+                    //.font(.system(size: DrawingConstants.descriptionSize))
+                    .font(.custom("ProximaNova-Regular",
+                                  size: DrawingConstants.descriptionSize))
+                    .foregroundColor(.textColor)
                 
                 Spacer()
                 
                 Text("Ingredients")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subPartsTitleSize))
                     .foregroundColor(.sageGreen)
                 ForEach(recipe.ingredients) { ingredient in
                     Text(ingredient.description)
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.subPartsItemsSize))
-                        .foregroundColor(.lightBlack)
+                        .foregroundColor(.textColor)
                 }
                     
                 
                 Spacer()
 
                 Text("Description")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subPartsTitleSize))
                     .foregroundColor(.sageGreen)
                 ForEach(recipe.directions) { direction in
                     Text(direction.direction)
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.subPartsItemsSize))
-                        .foregroundColor(.lightBlack)
+                        .foregroundColor(.textColor)
                 }
             
                 
@@ -129,7 +129,7 @@ struct RecipePage: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text("Comments")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subPartsTitleSize))
                     .foregroundColor(.sageGreen)
                 Divider()
@@ -146,46 +146,49 @@ struct RecipePage: View {
                 }
                 
                 
-                TextField("Comment", text: $recipePageVM.commentText)
-                    .focused($isReplying)
-                    .textFieldStyle(TextFieldDesign(image: "text.bubble",
-                                                    error: false,
-                                                    shadow: false))
-                    .onChange(of: recipePageVM.commentText) { newValue in
-                        recipePageVM.commentText = newValue
-                        var commentTextArray = recipePageVM.commentText.components(separatedBy: " ")
-                        
-                        if commentTextArray[0].hasPrefix("@") {
-                            commentTextArray[0].remove(at: commentTextArray[0].startIndex)
+                HStack {
+                    TextField("Comment", text: $recipePageVM.commentText)
+                        .focused($isReplying)
+                        .textFieldStyle(TextFieldDesign(image: "text.bubble",
+                                                        error: false,
+                                                        shadow: false))
+                        .onChange(of: recipePageVM.commentText) { newValue in
+                            recipePageVM.commentText = newValue
+                            var commentTextArray = recipePageVM.commentText.components(separatedBy: " ")
                             
-                            if commentTextArray[0] != recipePageVM.authorReplyingTo {
-                                recipePageVM.nonExistingUser = true
-                                recipePageVM.error = true
-                                print("1")
+                            if commentTextArray[0].hasPrefix("@") {
+                                commentTextArray[0].remove(at: commentTextArray[0].startIndex)
+                                
+                                if commentTextArray[0] != recipePageVM.authorReplyingTo {
+                                    recipePageVM.nonExistingUser = true
+                                    recipePageVM.error = true
+                                    print("1")
+                                } else {
+                                    recipePageVM.nonExistingUser = false
+                                    recipePageVM.isReplying = true
+                                    print("3")
+                                }
                             } else {
-                                recipePageVM.nonExistingUser = false
-                                recipePageVM.isReplying = true
-                                print("3")
+                                recipePageVM.error = false
+                                recipePageVM.isReplying = false
+                                recipePageVM.authorReplyingTo = ""
+                                print("4")
                             }
-                        } else {
-                            recipePageVM.error = false
-                            recipePageVM.isReplying = false
-                            recipePageVM.authorReplyingTo = ""
-                            print("4")
+
+                    }
+                
+
+                    Button {
+                        Task {
+                            await recipePageVM.addComent(firebase)
                         }
-
+                        
+                        
+                    } label: {
+                        Text("Post")
                     }
-
-                Button {
-                    Task {
-                        await recipePageVM.addComent(firebase)
-                    }
-                    
-                    
-                } label: {
-                    Text("Add Comment")
+                    .buttonStyle(CustomButton(color: .white, height: 50, width: 80))
                 }
-                .buttonStyle(CustomButton(color: .white))
                 
             }
             .padding()
@@ -220,7 +223,7 @@ struct RecipePage: View {
                             HStack(alignment: .firstTextBaseline) {
                                 //Spacer()
                                 Text(comment.author)
-                                    .font(.custom("Welland Bold",
+                                    .font(.custom("ProximaNova-Bold",
                                                   size: DrawingConstants.subPartsItemsSize))
                                     .foregroundColor(.lightBlack)
                                 HStack{
@@ -231,9 +234,9 @@ struct RecipePage: View {
                                         
                                     }
                                     Text("  \(comment.text)")
-                                        .font(.custom("Welland Semibol",
+                                        .font(.custom("ProximaNova-Regular",
                                                       size: DrawingConstants.commentText))
-                                        .foregroundColor(.lightBlack)
+                                        .foregroundColor(.textColor)
                                 Spacer()
                             }
                             

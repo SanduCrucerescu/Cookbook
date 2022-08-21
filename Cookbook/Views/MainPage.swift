@@ -82,7 +82,7 @@ struct MainPage: View {
         
         var body: some View {
             Text("Popular Recipes")
-                .font(.custom("Welland",
+                .font(.custom("ProximaNova-Regular",
                               size: DrawingConstants.subcategoriesFontSize))
                 .frame(alignment: .leading)
                 .padding(.horizontal)
@@ -105,7 +105,7 @@ struct MainPage: View {
         var body: some View {
             Text("Lunch")
                 .foregroundColor(.sageGreen)
-                .font(.custom("Welland",
+                .font(.custom("ProximaNova-Regular",
                               size: DrawingConstants.subcategoriesFontSize))
                 .padding(.horizontal)
             

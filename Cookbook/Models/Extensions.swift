@@ -157,6 +157,8 @@ extension Color {
     static let darkSageGreen = Color("DarkSageGreen")
     
     static let lightBlack = Color("LightBlack")
+    
+    static let textColor = Color("textColor")
 }
 
 

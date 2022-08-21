@@ -33,7 +33,7 @@ struct CustomButton: ButtonStyle {
             configuration
                 .label
                 .foregroundColor(color)
-                .font(.custom("Welland",
+                .font(.custom("ProximaNova-Regular",
                               size: DrawingConstants.textSize))
         }
     }

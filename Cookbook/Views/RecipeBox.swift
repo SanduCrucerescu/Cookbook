@@ -34,20 +34,20 @@ struct RecipeBox: View {
                             .cornerRadius(DrawingConstants.cornerRadius)
                     
                     Text(recipe.title)
-                        .font(.custom("Welland Bold",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.textSize))
-                        .foregroundColor(.lightBlack)
+                        .foregroundColor(.textColor)
                     Spacer()
                     HStack(spacing: 2) {
                         ForEach(0 ..< 5) { item in
                             Image(systemName: "star")
-                                .foregroundColor(.lightBlack)
+                                .foregroundColor(.textColor)
                         }
                         Spacer()
                     Text("$1299")
                         .font(.custom("Welland Bold",
                                       size: DrawingConstants.textSize))
-                        .foregroundColor(.lightBlack)
+                        .foregroundColor(.textColor)
                         
                     }
                 }

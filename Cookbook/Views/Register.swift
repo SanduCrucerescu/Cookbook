@@ -74,6 +74,8 @@ struct Register: View {
                 VStack{
                     if !firebaseViewModel.isEmail {
                         Text("Not a valid email address")
+                            .font(.custom("ProximaNova-Regular",
+                                          size: DrawingConstants.passwordInformation))
                             .foregroundColor(.red)
                     }
                     VStack(spacing: DrawingConstants.VStackSpacing) {
@@ -95,9 +97,9 @@ struct Register: View {
                                     error: false,
                                     shadow: true))
                             Text("The password needs to be at least 6 characters long")
-                                .font(.custom("Welland",
+                                .font(.custom("ProximaNova-Regular",
                                               size: DrawingConstants.passwordInformation))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.textColor)
                         }
                     }
                         .padding(.horizontal)
@@ -153,11 +155,11 @@ struct Register: View {
 
 
 
-//struct Register_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let recipe = RecipeViewModel()
-//        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
-//        Register()
-//            .environmentObject(firebaseViewModel)
-//    }
-//}
+struct Register_Previews: PreviewProvider {
+    static var previews: some View {
+        let recipe = RecipeViewModel()
+        let firebaseViewModel = FirebaseViewModel(recipeViewModel: recipe)
+        Register()
+            .environmentObject(firebaseViewModel)
+    }
+}
