@@ -141,7 +141,6 @@ struct RecipePage: View {
                                     isReply: false,
                                     replyFocusState: $isReplying,
                                     commentID: comment.id)
-                        
                     }
                 }
                 
@@ -243,6 +242,8 @@ struct RecipePage: View {
                             Spacer()
                             
                             HStack(alignment: .firstTextBaseline) {
+                                Text("\(comment.likes) likes")
+                                    .foregroundColor(.lightGrey)
                                 Text("Reply")
                                     .foregroundColor(.lightGrey)
                                     .onTapGesture {
@@ -258,7 +259,8 @@ struct RecipePage: View {
                                 }
                             Spacer()
                             }
-                            
+                        
+                            Image(systemName: "heart")
                         }
                     
                     }

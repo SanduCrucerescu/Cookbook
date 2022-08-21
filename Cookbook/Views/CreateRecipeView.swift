@@ -24,7 +24,7 @@ struct CreateRecipeView: View {
 
         VStack {
             Text("Create a recipe")
-                .font(.custom("Welland",
+                .font(.custom("ProximaNova-Regular",
                               size: DrawingConstants.titleSize))
                 .ignoresSafeArea()
                 .foregroundColor(.sageGreen)
@@ -50,7 +50,7 @@ struct CreateRecipeView: View {
                     
                     if recipes.emptyTitle || recipes.emptyDescription || recipes.emptyPrepTime {
                         Text("Please fill all of the fields")
-                            .font(.custom("Welland",
+                            .font(.custom("ProximaNova-Regular",
                                           size: 20))
                             .ignoresSafeArea()
                             .foregroundColor(.red)
@@ -124,7 +124,7 @@ struct CreateRecipeView: View {
         var body: some View {
             VStack {
                 Text("Image")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 if recipes.image == nil {
@@ -141,7 +141,7 @@ struct CreateRecipeView: View {
                             }
                         }
                     Text("Tap to \nadd a image")
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.subcategoriesFontSize))
                         .foregroundColor(.white)
                     }
@@ -170,7 +170,7 @@ struct CreateRecipeView: View {
         var body: some View {
             VStack {
                 Text("Ingredients")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 
@@ -184,7 +184,7 @@ struct CreateRecipeView: View {
                 
                 
                 Text("Directions")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
                 
@@ -205,7 +205,7 @@ struct CreateRecipeView: View {
             VStack {
                 HStack {
                     Text("Prep Time")
-                        .font(.custom("Welland",
+                        .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.subcategoriesFontSize))
                         .foregroundColor(.sageGreen)
                     TextField("Minutes", text: $recipes.prepTime)
@@ -219,7 +219,7 @@ struct CreateRecipeView: View {
                 
                 
                 Text("Total time: \(recipes.prepTime)")
-                    .font(.custom("Welland",
+                    .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subcategoriesFontSize))
                     .foregroundColor(.sageGreen)
             }

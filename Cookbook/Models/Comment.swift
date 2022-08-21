@@ -12,6 +12,7 @@ struct Comment: Identifiable, Codable, Equatable {
     var id = UUID().uuidString
     var text: String
     var author: String
+    var likes: Int = 0
     var replies: Array<Comment> = []
     var replyingTo: String?
     
