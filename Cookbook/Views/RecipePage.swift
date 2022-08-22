@@ -39,7 +39,7 @@ struct RecipePage: View {
         GeometryReader { geo in
             ZStack{
                 ScrollView(showsIndicators: false) {
-                    VStack {
+                    LazyVStack {
                         if recipe.image != nil {
                             Image(uiImage: recipe.image!)
                                 .resizable()

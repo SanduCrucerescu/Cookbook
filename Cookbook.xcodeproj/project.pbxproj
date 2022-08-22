@@ -49,7 +49,9 @@
 		FA5CAEE628902D5B00757760 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FA5CAEE528902D5B00757760 /* FirebaseFirestore */; };
 		FA74F47B28ABB215000F4608 /* RecipePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */; };
 		FA74F47E28ABC66B000F4608 /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA74F47D28ABC66B000F4608 /* HalfASheet */; };
+		FA8A4ECE28B3CDE40099A4B5 /* HeightPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A4ECD28B3CDE40099A4B5 /* HeightPreferenceKey.swift */; };
 		FAA0C8D5289AA95900514618 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FAA0C8D4289AA95900514618 /* FirebaseStorage */; };
+		FAAEDB7C28B3B06100A4F106 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEDB7B28B3B06000A4F106 /* UserPageView.swift */; };
 		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
 		FAC93C762891ECB500F317FF /* CookbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC93C742891EBAF00F317FF /* CookbookApp.swift */; };
@@ -116,6 +118,8 @@
 		FA5CAED928900EF900757760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageViewModel.swift; sourceTree = "<group>"; };
+		FA8A4ECD28B3CDE40099A4B5 /* HeightPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPreferenceKey.swift; sourceTree = "<group>"; };
+		FAAEDB7B28B3B06000A4F106 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
 		FAC93C7B2891EDC100F317FF /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				FA52954728A1613F0046CACD /* IngredientTextField.swift */,
 				FA52954B28A170670046CACD /* DirectionsTextField.swift */,
 				FAF9FD8D289A985300D6A99F /* ImagePicker.swift */,
+				FAAEDB7B28B3B06000A4F106 /* UserPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 				FAC93C842891EDC100F317FF /* FirebaseViewModel.swift */,
 				FAF9FD8928995AC100D6A99F /* RecipeViewModel.swift */,
 				FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */,
+				FA8A4ECD28B3CDE40099A4B5 /* HeightPreferenceKey.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -430,10 +436,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8A4ECE28B3CDE40099A4B5 /* HeightPreferenceKey.swift in Sources */,
 				FAC93C872891EDC100F317FF /* CustomButton.swift in Sources */,
 				FA52954C28A170670046CACD /* DirectionsTextField.swift in Sources */,
 				FAC93C8A2891EDC100F317FF /* LoginView.swift in Sources */,
 				FAF9FD8828995A0300D6A99F /* Recipe.swift in Sources */,
+				FAAEDB7C28B3B06100A4F106 /* UserPageView.swift in Sources */,
 				FA52954828A161400046CACD /* IngredientTextField.swift in Sources */,
 				FACBEC8528A91B19009F561A /* Comment.swift in Sources */,
 				FAF9FD8E289A985300D6A99F /* ImagePicker.swift in Sources */,

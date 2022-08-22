@@ -167,50 +167,6 @@ class FirebaseViewModel: ObservableObject {
                          
  
                      }) ?? []
-                    
-                    
-//                    for data in snapshot!.documents {
-//                        let id = data.documentID
-//                        let title = data["Title"] as? String ?? ""
-//                        let description = data["Description"] as? String ?? ""
-//                        let author = data["Author"] as? String ?? ""
-//                        let image = data["imageURL"] as? String ?? ""
-//                        let ingredients =  data["Ingredients"] as? [String: String] ?? [:]
-//                        let directions = data["Directions"] as? [String: String] ?? [:]
-//                        let prepTime = data["PrepTime"] as? Int ?? 0
-//                        let comments = data["Comments"] as? [String: [String: Any]] ?? [:]
-//
-//
-//                        //Converting firebase map to array
-//                        let ingredientsArray: [Ingredient] = ingredients.map { Ingredient(id: $0.key,description: $0.value)}
-//                        let directionsArray: [Direction] = directions.map { Direction(id: $0.key, direction: $0.value) }
-//                        let comentsArray: [Comment] = comments.map{ comment in
-//
-//                            let repliesDict = comment.value["replies"] as? [String: [String: Any]] ?? [:]
-//
-//                            let repliesArray: [Comment] = repliesDict.map { replies in
-//                                return Comment(text: replies.value["text"] as? String ?? "",
-//                                               author: replies.value["author"] as? String ?? "")
-//                            }
-//
-//                            return Comment(id: comment.key,
-//                                           text: comment.value["text"] as! String ,
-//                                           author: comment.value["author"] as! String,
-//                                           replies: repliesArray)
-//                        }
-//                        self.getPhoto(url: image) { status, image in
-//
-//                            self.recipeViewModel?.recipes.append(Recipe(id: id,
-//                                              title: title,
-//                                              description: description,
-//                                              author: author,
-//                                              image: image,
-//                                              ingredients: ingredientsArray,
-//                                              directions: directionsArray,
-//                                              prepTime: prepTime,
-//                                              comments: comentsArray))
-//                        }
-//                    }
                 }
             }
         }

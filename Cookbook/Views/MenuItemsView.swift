@@ -34,17 +34,21 @@ struct MenuItemsView: View {
                 .foregroundColor(.white)
             VStack(alignment: .leading){
                 Divider()
-                HStack {
-                    Image(systemName: "person.fill")
-                        .imageScale(.large)
-                    Text("My profile")
-                        .font(.custom("Welland Semibold",
-                                      size: 17))
-                        .onTapGesture {
-                            print(recipe.recipes)
-                        }
+                
+                NavigationLink {
+                    UserPageView()
+                } label: {
+                    HStack {
+                        Image(systemName: "person.fill")
+                            .imageScale(.large)
+                        Text("My profile")
+                            .font(.custom("Welland Semibold",
+                                          size: 17))
+                    }
                 }
                 .padding(.top, DrawingConstants.itemsTopPadding)
+
+                
                 
             
                 NavigationLink(destination: {
