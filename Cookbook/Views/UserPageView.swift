@@ -13,24 +13,23 @@ struct UserPostSubMenu: View {
     @State var viewHeight: CGFloat = 0
     
     var body: some View{
-//        GeometryReader{ geo in
-            VStack{
-                ForEach(0..<50, id: \.self) {_ in
-                    Text("Posts")
-                }
+        VStack{
+            ForEach(0..<50, id: \.self) {_ in
+                Text("Posts")
             }
-                .background(
-                    GeometryReader { geo in
-                        Color.clear
-                            .preference(key: HeightPreferenceKey.self, value: geo.size.height)
-                    } .onPreferenceChange(HeightPreferenceKey.self, perform: { height in
-                        self.height = height
-                        self.viewHeight = height
-                        print("1 --- \(self.height)")
-                    }))
-                .onAppear {
-                    self.height = viewHeight
-                }
+        }
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: HeightPreferenceKey.self,
+                                value: geo.size.height)
+            } .onPreferenceChange(HeightPreferenceKey.self, perform: { height in
+                self.height = height
+                self.viewHeight = height
+            }))
+        .onAppear {
+            self.height = viewHeight
+        }
         
     }
 }
@@ -40,117 +39,107 @@ struct UserCommentsSubMenu: View {
     @State var viewHeight: CGFloat = 0
     
     var body: some View {
-//        GeometryReader { geo in
-            VStack {
-                ForEach(0..<25, id: \.self) { _ in
-                    Text("Comments")
-//                }
-                }
+        VStack {
+            ForEach(0..<25, id: \.self) { _ in
+                Text("Comments")
             }
-            .background(
-                GeometryReader { geo in
-                    Color.clear
-                        .preference(key: HeightPreferenceKey.self, value: geo.size.height)
-                } .onPreferenceChange(HeightPreferenceKey.self, perform: { height in
-                    self.height = height
-                    self.viewHeight = height
-                    print("2 --- \(self.height)")
-                }))
-            
-            .onAppear {
-                self.height = viewHeight
-            }
+        }
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: HeightPreferenceKey.self,
+                                value: geo.size.height)
+            } .onPreferenceChange(HeightPreferenceKey.self, perform: { height in
+                self.height = height
+                self.viewHeight = height
+            }))
+        .onAppear {
+            self.height = viewHeight
+        }
     }
 }
 
 struct UserPageView: View {
-    @State var showComents = false
     @State var index: CGFloat = 0
-//    @State var offset: CGFloat = 0
+
     
     var body: some View {
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width < -100 {
-                    withAnimation {
-                        showComents = true
-                    }
-                }
-//                } else {
-//                    withAnimation {
-//                        showComents = false
-//                    }
-//                }
-                
-            }
-        
-        
         GeometryReader { geo in
             ZStack {
                ScrollView(showsIndicators: false) {
-                    Image("ThumbnailPhoto")
-                        .resizable()
-                        .aspectRatio(CGSize(width: 2, height: 1.4),contentMode: .fit)
+                   
+                   ZStack {
+                       Image("ThumbnailPhoto")
+                            .resizable()
+                            .aspectRatio(CGSize(width: 2, height: 1.4),contentMode: .fit)
                         .ignoresSafeArea(.all, edges: .top)
+                       Image(systemName: "person.crop.circle")
+                           .font(.system(size: 150))
+                           .offset(y: 45.0)
+                   }
                     // Contents
+                    
                     VStack {
-                        Image(systemName: "person.crop.circle")
-                            .font(.system(size: 100))
-                            //.offset(y: -210.0)
-                        VStack {
-                            Text("User NickName")
-                                .font(.custom("ProximaNova-Regular",
-                                              size: 30))
-                                .foregroundColor(.textColor)
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consequat tincidunt mauris et efficitur. Donec in sem purus. Aliquam erat volutpat. Aenean et scelerisque elit, nec rutrum nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec a est non urna auctor scelerisque at eu ante. Etiam faucibus ligula at nibh molestie viverra.")
-                                .font(.custom("ProximaNova-Regular",
-                                              size: 15))
-                                .foregroundColor(.textColor)
-                            HStack{
-                                Button {
-                                    
-                                } label: {
-                                    Text("Posts")
-                                        .font(.custom("ProximaNova-Regular",
-                                                      size: 20))
-                                        .foregroundColor(.textColor)
-                                }
-                                .frame(maxWidth: .infinity)
+                        Spacer()
+                        Text("User NickName")
+                            .font(.custom("ProximaNova-Regular",
+                                          size: 30))
+                            .foregroundColor(.textColor)
+                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consequat tincidunt mauris et efficitur. Donec in sem purus. Aliquam erat volutpat. Aenean et scelerisque elit, nec rutrum nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec a est non urna auctor scelerisque at eu ante. Etiam faucibus ligula at nibh molestie viverra.")
+                            .font(.custom("ProximaNova-Regular",
+                                          size: 15))
+                            .foregroundColor(.textColor)
+                        HStack{
+                            Button {
                                 
-                                Divider()
-                                    .frame(height: 30)
-                                
-                                Button {
-                                    print(index)
-                                } label: {
-                                    Text("Comments")
-                                        .font(.custom("ProximaNova-Regular",
-                                                      size: 20))
-                                        .foregroundColor(.textColor)
-                                }
-                                .frame(maxWidth: .infinity)
+                            } label: {
+                                Text("Posts")
+                                    .font(.custom("ProximaNova-Regular",
+                                                  size: 20))
+                                    .foregroundColor(.textColor)
                             }
-                            Divider()
+                            .frame(maxWidth: .infinity)
                             
-                            TabView {
-                                UserPostSubMenu(height: $index)
-                                UserCommentsSubMenu(height: $index)
-
+                            Divider()
+                                .frame(height: 30)
+                            
+                            Button {
+                                print(index)
+                            } label: {
+                                Text("Comments")
+                                    .font(.custom("ProximaNova-Regular",
+                                                  size: 20))
+                                    .foregroundColor(.textColor)
                             }
-                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                            .frame(height: index)
+                            .frame(maxWidth: .infinity)
                         }
-                        .padding()
-                        .background(Color.backgroundColor)
-                        .cornerRadius(10)
+                        Divider()
                         
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                        .gesture(drag)
-                        //.offset(y: -20.0)
+                        TabView {
+                            UserPostSubMenu(height: $index)
+                            UserCommentsSubMenu(height: $index)
+
+                        }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .frame(height: index)
                     }
+                    .padding()
+                    .background(Color.backgroundColor)
+                    .cornerRadius(10)
+                    
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .offset(y: -20.0)
+                    
+                    
+//                        Image(systemName: "person.crop.circle")
+//                            .font(.system(size: 100))
+//                            .offset(y: -700.0)
+                    
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
+            .navigationBarTitle(Text(""),
+                                displayMode: .inline)
+            .edgesIgnoringSafeArea(.vertical)
             .onAppear {
                 index = geo.size.height
             }
