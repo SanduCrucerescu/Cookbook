@@ -35,17 +35,20 @@ struct RecipePage: View {
     
     
     var body: some View {
-        ZStack{
-            ScrollView(showsIndicators: false) {
-                Image(uiImage: recipe.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .ignoresSafeArea(.all, edges: .top)
-                contents(recipe: recipePageVM.recipe)
-                CommentsSection(recipePageVM: recipePageVM)
-                
+        GeometryReader { geo in
+            ZStack{
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        Image(uiImage: recipe.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .ignoresSafeArea(.all, edges: .top)
+                        contents(recipe: recipePageVM.recipe, geo: geo)
+                        CommentsSection(recipePageVM: recipePageVM)
+                    }
+                }
+                .edgesIgnoringSafeArea(.top)
             }
-            .edgesIgnoringSafeArea(.top)
         }
         .background(Color.backgroundColor)
         //MARK: IOS 16 change
@@ -58,11 +61,10 @@ struct RecipePage: View {
 
     struct contents: View {
         var recipe: Recipe
-        
+        var geo: GeometryProxy
         var body: some View {
             VStack(alignment: .leading) {
                 Text(recipe.title)
-                    //.font(.system(size: DrawingConstants.titleSize))
                     .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.titleSize))
                     .foregroundColor(.textColor)
@@ -70,15 +72,15 @@ struct RecipePage: View {
                     .font(.custom("ProximaNovaA-Light",
                                    size: 15))
                      .foregroundColor(.lightBlack)
-                
+
                 Text(recipe.description)
-                    //.font(.system(size: DrawingConstants.descriptionSize))
+                    .frame(width: geo.size.width / 1.09)
                     .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.descriptionSize))
                     .foregroundColor(.textColor)
-                
+
                 Spacer()
-                
+
                 Text("Ingredients")
                     .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.subPartsTitleSize))
@@ -89,8 +91,8 @@ struct RecipePage: View {
                                       size: DrawingConstants.subPartsItemsSize))
                         .foregroundColor(.textColor)
                 }
-                    
-                
+
+
                 Spacer()
 
                 Text("Description")
@@ -103,7 +105,6 @@ struct RecipePage: View {
                                       size: DrawingConstants.subPartsItemsSize))
                         .foregroundColor(.textColor)
                 }
-            
                 
             }
             .padding()
@@ -111,6 +112,7 @@ struct RecipePage: View {
             .cornerRadius(DrawingConstants.cornerRadius)
             .edgesIgnoringSafeArea(.bottom)
             .frame(maxHeight: .infinity, alignment: .bottom)
+//            .frame(maxWidth:.infinity, maxHeight: .infinity, alignment: .bottom)
             .offset(x: 0, y: DrawingConstants.menuOffSetY)
         }
     }
@@ -321,7 +323,8 @@ struct RecipePage_Previews: PreviewProvider {
                                          Comment(text: "subcommnet", author: "123"),
                                          Comment(text: "subcommnet", author: "123")])])
         )
-            .environmentObject(firebase)
+        .environmentObject(firebase)
+            
     }
 }
 

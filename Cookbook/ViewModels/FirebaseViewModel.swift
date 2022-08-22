@@ -206,7 +206,7 @@ class FirebaseViewModel: ObservableObject {
     
     //MARK: - Get Photos
     func getPhoto(url: String, completion: @escaping (_ finished: Bool, _ image: UIImage) -> Void)  {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self.db.collection("images").document(url).getDocument { snapshot, error in
                  if error == nil && snapshot != nil {
                      let fileRef = self.storageRef.child(snapshot!["url"] as! String)
