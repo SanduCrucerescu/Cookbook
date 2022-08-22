@@ -20,6 +20,7 @@ struct RecipePage: View {
         static var commentProfilePictureSize: CGFloat = 30
         static var replyImageSize: CGFloat = 20
         static var commentText: CGFloat = 16
+        static var contentsWidthMultiplier: CGFloat = 1.09
     }
     
     
@@ -74,7 +75,7 @@ struct RecipePage: View {
                      .foregroundColor(.lightBlack)
 
                 Text(recipe.description)
-                    .frame(width: geo.size.width / 1.09)
+                    .frame(width: geo.size.width / DrawingConstants.contentsWidthMultiplier)
                     .font(.custom("ProximaNova-Regular",
                                   size: DrawingConstants.descriptionSize))
                     .foregroundColor(.textColor)

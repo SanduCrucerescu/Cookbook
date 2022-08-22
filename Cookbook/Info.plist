@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Welland.otf</string>
+		<string>Welland-Semibold.otf</string>
+		<string>Welland-Light.otf</string>
+		<string>Welland-Bold.otf</string>
+		<string>Welland-Black.otf</string>
+		<string>CarneroBold.ttf</string>
+		<string>GothamBlack.otf</string>
+		<string>GothamBold.otf</string>
+		<string>GothamBoldItalic.ttf</string>
+		<string>GothamBook.ttf</string>
+		<string>GothamBookItalic.otf</string>
+		<string>GothamBookItalic.ttf</string>
+		<string>GothamLight.otf</string>
+		<string>GothamLight.ttf</string>
+		<string>GothamLightItalic.ttf</string>
+		<string>GothamMedium_1.ttf</string>
+		<string>GothamMedium.ttf</string>
+		<string>GothamMediumItalic.ttf</string>
+		<string>GothamThin.otf</string>
+		<string>GothamThinItalic.otf</string>
+		<string>GothamUltraItalic.otf</string>
+		<string>GothamXLight.otf</string>
+		<string>GothamXLightItalic.otf</string>
+		<string>JostItalicVariableFont_wght.ttf</string>
+		<string>JostVariableFont_wght.ttf</string>
+		<string>Proxima Nova Alt Bold.otf</string>
+		<string>Proxima Nova Alt Light.otf</string>
+		<string>Proxima Nova Alt Thin.otf</string>
+		<string>Proxima Nova Black.otf</string>
+		<string>Proxima Nova Bold.otf</string>
+		<string>Proxima Nova Extrabold.otf</string>
+		<string>Proxima Nova Thin.otf</string>
+		<string>ProximaNova-Regular.otf</string>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string></string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict/>
+	</array>
+</dict>
+</plist>
