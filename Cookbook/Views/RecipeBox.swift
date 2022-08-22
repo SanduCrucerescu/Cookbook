@@ -27,12 +27,18 @@ struct RecipeBox: View {
                 RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                     .fill(.white)
                 VStack(alignment: .leading){
-                    Image(uiImage: recipe.image)
-                        .resizable()
+                    if recipe.image != nil {
+                        Image(uiImage: recipe.image!)
+                            .resizable()
+                                .frame(width: DrawingConstants.imageWidth,
+                                       height: DrawingConstants.imageHeight * (210/210))
+                                .cornerRadius(DrawingConstants.cornerRadius)
+                    } else {
+                        ProgressView()
                             .frame(width: DrawingConstants.imageWidth,
                                    height: DrawingConstants.imageHeight * (210/210))
-                            .cornerRadius(DrawingConstants.cornerRadius)
-                    
+                    }
+                        
                     Text(recipe.title)
                         .font(.custom("ProximaNova-Regular",
                                       size: DrawingConstants.textSize))

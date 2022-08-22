@@ -40,10 +40,17 @@ struct RecipePage: View {
             ZStack{
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        Image(uiImage: recipe.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .ignoresSafeArea(.all, edges: .top)
+                        if recipe.image != nil {
+                            Image(uiImage: recipe.image!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .ignoresSafeArea(.all, edges: .top)
+                        } else {
+                            ProgressView()
+                        }
+                        
+                        
+                        
                         contents(recipe: recipePageVM.recipe, geo: geo)
                         CommentsSection(recipePageVM: recipePageVM)
                     }
