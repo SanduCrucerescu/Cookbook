@@ -61,7 +61,7 @@ struct UserCommentsSubMenu: View {
 
 struct UserPageView: View {
     @State var index: CGFloat = 0
-
+    @EnvironmentObject var firebase: FirebaseViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -73,19 +73,22 @@ struct UserPageView: View {
                             .resizable()
                             .aspectRatio(CGSize(width: 2, height: 1.4),contentMode: .fit)
                         .ignoresSafeArea(.all, edges: .top)
-                       Image(systemName: "person.crop.circle")
-                           .font(.system(size: 150))
-                           .offset(y: 45.0)
+                       Image(uiImage: firebase.user.imageURL!)//systemName: "person.crop.circle")
+                           .resizable()
+                           .frame(width: 200, height: 210, alignment: .center)
+//                           .font(.system(size: 150))
+                           
+                          // .offset(y: 45.0)
                    }
                     // Contents
                     
                     VStack {
                         Spacer()
-                        Text("User NickName")
+                        Text(firebase.user.username)
                             .font(.custom("ProximaNova-Regular",
                                           size: 30))
                             .foregroundColor(.textColor)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consequat tincidunt mauris et efficitur. Donec in sem purus. Aliquam erat volutpat. Aenean et scelerisque elit, nec rutrum nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec a est non urna auctor scelerisque at eu ante. Etiam faucibus ligula at nibh molestie viverra.")
+                        Text(firebase.user.description)
                             .font(.custom("ProximaNova-Regular",
                                           size: 15))
                             .foregroundColor(.textColor)

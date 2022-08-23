@@ -51,6 +51,7 @@
 		FA74F47E28ABC66B000F4608 /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = FA74F47D28ABC66B000F4608 /* HalfASheet */; };
 		FA8A4ECE28B3CDE40099A4B5 /* HeightPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A4ECD28B3CDE40099A4B5 /* HeightPreferenceKey.swift */; };
 		FAA0C8D5289AA95900514618 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FAA0C8D4289AA95900514618 /* FirebaseStorage */; };
+		FAA1FDBD28B50004001929DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1FDBC28B50004001929DE /* User.swift */; };
 		FAAEDB7C28B3B06100A4F106 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEDB7B28B3B06000A4F106 /* UserPageView.swift */; };
 		FAC335E62896D914009AE5A2 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC335E52896D914009AE5A2 /* TopBar.swift */; };
 		FAC93C6828917F6700F317FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FAC93C6728917F6700F317FF /* FirebaseFirestoreSwift */; };
@@ -119,6 +120,7 @@
 		FA5CAEE02890299700757760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA74F47A28ABB215000F4608 /* RecipePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageViewModel.swift; sourceTree = "<group>"; };
 		FA8A4ECD28B3CDE40099A4B5 /* HeightPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeightPreferenceKey.swift; sourceTree = "<group>"; };
+		FAA1FDBC28B50004001929DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FAAEDB7B28B3B06000A4F106 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		FAC335E52896D914009AE5A2 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FAC93C742891EBAF00F317FF /* CookbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookbookApp.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				FA52954528A146F20046CACD /* Ingredient.swift */,
 				FA52954D28A170990046CACD /* Direction.swift */,
 				FACBEC8428A91B19009F561A /* Comment.swift */,
+				FAA1FDBC28B50004001929DE /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA1FDBD28B50004001929DE /* User.swift in Sources */,
 				FA8A4ECE28B3CDE40099A4B5 /* HeightPreferenceKey.swift in Sources */,
 				FAC93C872891EDC100F317FF /* CustomButton.swift in Sources */,
 				FA52954C28A170670046CACD /* DirectionsTextField.swift in Sources */,

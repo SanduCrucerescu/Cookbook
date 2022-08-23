@@ -18,14 +18,25 @@ class FirebaseViewModel: ObservableObject {
     @Published private(set) var registerSuccessfull: Bool?
     @Published private(set) var passwordsAreNotEqual: Bool = false
     @Published private(set) var isEmail:Bool = true
+    @Published private var recipes: Array<Recipe> = []
+    @Published private(set) var _user: User?
+    var recipeViewModel: RecipeViewModel?
     
+    var user: User {
+        set { _user = newValue }
+        get { return _user! }
+    }
+    
+
+    //Firebase variables
     private var auth = Auth.auth()
     private var db = Firestore.firestore()
     private var storageRef = Storage.storage().reference()
+
     
-    @Published private var recipes: Array<Recipe> = []
     
-    var recipeViewModel: RecipeViewModel?
+    
+    
     
     init(recipeViewModel: RecipeViewModel?=nil) {
         self.recipeViewModel = recipeViewModel
@@ -54,12 +65,33 @@ class FirebaseViewModel: ObservableObject {
     }
     
     // MARK: - SignIn
+    
     @MainActor
     func signIn(_ email: String, _ passwordProvided: String) async -> Void {
         do {
             let authDataResults = try await auth.signIn(withEmail: email, password: passwordProvided)
             
-            _ = authDataResults.user
+            let userID = authDataResults.user.uid
+            
+            
+            
+            await self.db.collection("Users").document(userID).getDocument { snapshot, error in
+                if snapshot != nil && error == nil {
+                    self.user = (snapshot?.data().map({ user in
+                        var img: UIImage?
+                        self.getPhoto(url: user["profileImageURL"] as? String ?? "") { finished, image in
+                            img = image
+                            self.user.imageURL = img
+                        }
+//                        print(user["username"])
+                        return User(id: userID,
+                                    username: user["Username"] as? String ?? "",
+                                    description: user["Description"] as? String ?? "")
+                    }))!
+                }
+            }
+            
+            //print(user)
             
             self.isLogedIn = true
             
