@@ -82,6 +82,7 @@ class FirebaseViewModel: ObservableObject {
                         self.getPhoto(url: user["profileImageURL"] as? String ?? "") { finished, image in
                             img = image
                             self.user.imageURL = img
+                            //print(self.user)
                         }
 //                        print(user["username"])
                         return User(id: userID,
